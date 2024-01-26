@@ -1,0 +1,215 @@
+[
+    {
+        "id": "image",
+        "name": "Image de Stock ・ GIF",
+        "name_plural": "Images ・ GIFs",
+        "name_short": "Image",
+        "name_short_plural": "Image",
+        "code": "image",
+        "name_seo": "Image de Stock ・ GIF",
+        "name_seo_plural": "Image de Stock ・ GIF"
+    },
+    {
+        "id": "video",
+        "name": "Vidéo Libre de Droits",
+        "name_plural": "Vidéos",
+        "name_short": "Vidéo",
+        "name_short_plural": "Vidéo",
+        "code": "video",
+        "name_seo": "Vidéo Libre de Droits",
+        "name_seo_plural": "Vidéo Libre de Droits"
+    },
+    {
+        "id": "ae",
+        "name": "After Effects",
+        "name_plural": "After Effects",
+        "name_short": "AE",
+        "name_short_plural": "AE",
+        "code": "ae",
+        "name_seo": "After Effects",
+        "name_seo_plural": "After Effects"
+    },
+    {
+        "id": "pr",
+        "name": "Premiere Pro",
+        "name_plural": "Premiere Pro",
+        "name_short": "Premiere",
+        "name_short_plural": "Premiere",
+        "code": "pr",
+        "name_seo": "Premiere Pro",
+        "name_seo_plural": "Premiere Pro"
+    },
+    {
+        "id": "3d",
+        "name": "Modèles 3D Pour RV\/RA",
+        "name_plural": "3D",
+        "name_short": "3D",
+        "name_short_plural": "3D",
+        "code": "3d",
+        "name_seo": "Modèles 3D Pour RV\/RA",
+        "name_seo_plural": "Modèles 3D Pour RV\/RA"
+    },
+    {
+        "id": "fcp",
+        "name": "Modèles Apple Motion \/ Final Cut Pro X",
+        "name_plural": "Modèles Apple Motion",
+        "name_short": "Apple Motion",
+        "name_short_plural": "Apple Motion",
+        "code": "fcp",
+        "name_seo": "Modèles Apple Motion \/ Final Cut Pro X",
+        "name_seo_plural": "Modèles Apple Motion \/ Final Cut Pro X"
+    },
+    {
+        "id": 1,
+        "name": "Photo de Stock",
+        "name_short": "Photo",
+        "code": "photo",
+        "name_plural": "Photos",
+        "name_seo": "Photo de Stock",
+        "name_seo_plural": "Photo de Stock"
+    },
+    {
+        "id": 2,
+        "name": "Image Vectorielle de Stock",
+        "name_short": "Image Vectorielle",
+        "code": "vector",
+        "name_plural": "Images Vectorielles",
+        "name_seo": "Image Vectorielle de Stock",
+        "name_seo_plural": "Image Vectorielle de Stock"
+    },
+    {
+        "id": 3,
+        "name": "Vidéos Animées Libres de Droits",
+        "name_short": "Animation",
+        "code": "animation",
+        "name_plural": "Animations",
+        "name_seo": "Vidéos Animées Libres de Droits",
+        "name_seo_plural": "Vidéos Animées Libres de Droits"
+    },
+    {
+        "id": 4,
+        "name": "Vidéo Libre de Droits",
+        "name_short": "Film Live",
+        "code": "video_live",
+        "name_plural": "Vidéos",
+        "name_seo": "Vidéo Libre de Droits",
+        "name_seo_plural": "Vidéo Libre de Droits"
+    },
+    {
+        "id": 5,
+        "name": "Modèles 3D Pour RV\/RA",
+        "name_short": "3D",
+        "code": "3d_model",
+        "name_plural": "Modèles 3D",
+        "name_seo": "Modèles 3D Pour RV\/RA",
+        "name_seo_plural": "Modèles 3D Pour RV\/RA"
+    },
+    {
+        "id": 6,
+        "name": "Musique Libre de Droits",
+        "name_short": "Musique",
+        "code": "music",
+        "name_plural": "Musique",
+        "name_seo": "Musique Libre de Droits",
+        "name_seo_plural": "Musique Libre de Droits"
+    },
+    {
+        "id": 7,
+        "name": "Effets Sonores Pour Vidéos",
+        "name_short": "SFX",
+        "code": "sfx",
+        "name_plural": "Effets Sonores",
+        "name_seo": "Effets Sonores Pour Vidéos",
+        "name_seo_plural": "Effets Sonores Pour Vidéos"
+    },
+    {
+        "id": 8,
+        "name": "Modèles After Effects",
+        "name_short": "Template AE",
+        "code": "ae_template",
+        "name_plural": "Modèles After Effects",
+        "name_seo": "Modèles After Effects",
+        "name_seo_plural": "Modèles After Effects"
+    },
+    {
+        "id": 9,
+        "name": "Modèles Apple Motion \/ Final Cut Pro X",
+        "name_short": "Apple Motion",
+        "code": "motion_template",
+        "name_plural": "Modèles Apple Motion",
+        "name_seo": "Modèles Apple Motion \/ Final Cut Pro X",
+        "name_seo_plural": "Modèles Apple Motion \/ Final Cut Pro X"
+    },
+    {
+        "id": 11,
+        "name": "Photo 360°",
+        "name_short": "Photo 360°",
+        "code": "photo_vr",
+        "name_plural": "Photos RV 360°",
+        "name_seo": "Photo 360°",
+        "name_seo_plural": "Photo 360°"
+    },
+    {
+        "id": 12,
+        "name": "Vidéo 360°",
+        "name_short": "Vidéo 360°",
+        "code": "video_vr",
+        "name_plural": "Vidéos RV 360°",
+        "name_seo": "Vidéo 360°",
+        "name_seo_plural": "Vidéo 360°"
+    },
+    {
+        "id": 14,
+        "name": "GIF",
+        "name_short": "GIF",
+        "code": "gif",
+        "name_plural": "GIFs",
+        "name_seo": "GIF",
+        "name_seo_plural": "GIF"
+    },
+    {
+        "id": 15,
+        "name": "Modèle Premiere Pro",
+        "name_short": "Template Premiere",
+        "code": "pr_template",
+        "name_plural": "Modèles Premiere Pro",
+        "name_seo": "Modèle Premiere Pro",
+        "name_seo_plural": "Modèle Premiere Pro"
+    },
+    {
+        "id": 16,
+        "name": "ModèleMotion Graphics",
+        "name_short": "Motion Graphics",
+        "code": "mg_template",
+        "name_plural": "Modèles Motion Graphics",
+        "name_seo": "ModèleMotion Graphics",
+        "name_seo_plural": "ModèleMotion Graphics"
+    },
+    {
+        "id": 19,
+        "name": "Préréglage Animation After Effects",
+        "name_short": "Préréglage AE",
+        "code": "ae_preset",
+        "name_plural": "Préréglages After Effects",
+        "name_seo": "Préréglage Animation After Effects",
+        "name_seo_plural": "Préréglage Animation After Effects"
+    },
+    {
+        "id": 20,
+        "name": "Préréglage Effet Premiere Pro",
+        "name_short": "Préréglage Premiere",
+        "code": "pr_preset",
+        "name_plural": "Préréglages Premiere Pro",
+        "name_seo": "Préréglage Effet Premiere Pro",
+        "name_seo_plural": "Préréglage Effet Premiere Pro"
+    },
+    {
+        "id": 21,
+        "name": "Animation Lottie",
+        "name_short": "Lottie",
+        "code": "lottie",
+        "name_plural": "Lottie",
+        "name_seo": "Animation Lottie",
+        "name_seo_plural": "Animation Lottie"
+    }
+]

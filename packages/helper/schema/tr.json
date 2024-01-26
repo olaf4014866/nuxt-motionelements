@@ -1,0 +1,74 @@
+{
+  "home": {
+    "title": "Stok videolar, After Effects şablonları, Telifsiz müzik",
+              "description": "Telifsiz 4,000,000 telifsiz stok videoları, müzikleri FCP / After Effects şablonlarını US$198 ücretinden indirin. Yapay zekalı pazar yeri. Haftalık 30 ücretsiz indirmeye kadar! [MotionElements]"
+  },
+  "animation": {
+    "title": "En iyi 10 anime edilmiş arka plan, stok animasyon, hareketli arka plan",
+              "description": "US$198 fiyatından anime edilmiş arka planları, video döngülerini, parçacıkları, hareketli arka planları indirin. Yapay Zekalı Arama. Haftalık ücretsiz stok animasyon! [MotionElements]"
+  },
+  "video": {
+    "title": "En iyi 10 ücretsiz HD stok video görüntüsü, video arka planları, telifsiz",
+              "description": "Telifsiz 4,000,000 4K / HD stok video görüntüsünü, video arka planlarını US$198 ücretinden indirin. Yapay Zeka Araması. Haftalık 30 ücretsiz indirmeye kadar! [MotionElements]"
+  },
+  "3d": {
+    "title": "VR/AR için 3D modeller",
+              "description": "3D moel indirme, ücretsiz 3D model indirme. Telifsiz 3ds Max Modelleri, Maya Modelleri, Cinema 3D Modelleri US$198'den başlayan fiyatlarla. [MotionElements]"
+  },
+  "ae": {
+    "title": "En iyi 10 ücretsiz After Effects şablonu, CS6/CC AE şablonları",
+              "description": "İş, düğün vb. de dahil olmak üzere 20,000 After Effects şablonlarını US$198'den başlayan fiyatlarla indirin. Sınırsız AE projelerinde sonsuza kadar kullanın. Haftalık ücretsiz indirme! [MotionElements]"
+  },
+  "motion": {
+    "title": "En iyi 10 Apple Motion şablonu, Final Cut Pro şablonları",
+              "description": "Final Cut Pro şablonları, düğün şablonları da dahil olmak üzere Apple Motion şablonlarını US$198'dan başlayan fiyatlarla indirin! Sınırsız FCP projelerinde sonsuza kadar kullanın. [MotionElements]"
+  },
+  "music": {
+    "title": "Video için en iyi 5 fon müziği, telifsiz müzik kütüphanesi",
+              "description": "Video için 500,000 fon müziğini US$198'den başlayan fiyatlarla indirin! Ticari kullanım, Fon müziği, tıngırtı vb. için Non-P.R.I. parçalar! Ses Aramayı deneyin: Daha fazla şarkı bulmak için şarkıları kullanın! [MotionElements]"
+  },
+  "sfx": {
+    "title": "Video için en iyi 5 ses efekti, telifsiz sound fx kütüphanesi",
+              "description": "Video için 150,000+ ses efektini US$198'den başlayan fiyatlarla indirin! [MotionElements]"
+  },
+  "image": {
+    "title": "Stok Görsel + İş için Anime Edilmiş GİF",
+              "description": "Çevrimiçi medya için tasarlanan görsel kütüphanesine sadece US$198'den başlayan fiyatlarla abone olun. 2,000,000+ stok görselleri, anime edilmiş GİF'leri, Facebook ve Instagram için görselleri indirin. [MotionElements]"
+  },
+  "pr": {
+    "title": "En iyi 10 Premiere Pro şablonu, motion graphics şablonları (MOGRT)",
+              "description": "Başlıklarınızı, girişinizi, slayt gösterinizi yapmak için Adobe Premiere Pro ön ayarlarını, Motion Graphics (.MOGRT) şablonlarını US$198'den başlayan fiyatlarla indirin. Sınırsız Premiere Pro projelerinde kullanın. [MotionElements]"
+  },
+  "lottie": {
+    "title": "Lottie Animasyon",
+              "description": "Lottie, web ve mobil üzerinden gerçek zamanlı olarak After Effects'ten çıkartılan SVG animasyonlarını çeviren bir Android, iOS, React Native ve Web kütüphanesidir. Native uygulamaların mikro etkileşim animasyonlarını Javascript'te statik görsellerde kullandıkları kadar kolay kullanılmasını sağlar. [MotionElements]"
+  },
+  "resolve": {
+    "title": "En iyi 10 DaVinci Resolve şablonu, DaVinci Resolve makroları",
+              "description": "Makroların, düğün şablonlarının aktarımı dahil olmak üzere DaVinci Resolve şablonlarını US$198'den başlayan fiyatlarla indirin! Sınırsız DaVinci Resolve projelerinde sonsuza kadar kullanın. [MotionElements]"
+  },
+  "free-ae": {
+    "title": "100+ ücretsiz After Effects şablonları",
+              "description": "Ücretsiz 100+ After Effects şablonlarını Yapay Zekalı pazar yerimizden 4,000,000 telifsiz videolar, AE şablonları ve müzik ile indirin. [MotionElements]"
+  },
+  "free-pr": {
+    "title": "Ücretsiz Premiere Pro şablonları ve ticari kullanım için önayarlar",
+              "description": "Yapay Zekalı pazar yerimizden 4,000,000'den fazla telifsiz stok videolar, şablonlar ve müzikle Ücretsiz Motion Graphics şablonlarını (.MOGRT), ücretsiz Adobe Premiere Pro şablonlarını ve ön ayarlarını indirin. [MotionElements]"
+  },
+  "free-fcp": {
+    "title": "Ücretsiz FCPX, Motion şablonları, telifsiz!",
+              "description": "Yapay Zekalı pazar yerimizden ticari kullanım için 4,000,000'den fazla ücretsiz stok videolar, şablonlar ve müzikle Ücretsiz Final Cut Pro ve Motion 5 şablonlarını indirin. [MotionElements]"
+  },
+  "free-music": {
+    "title": "1500+ video için ücretsiz fon müziği, telifsiz müzik",
+              "description": "Yapay Zekalı pazar yerimizden 4,000,000 telifsiz müzik, videolar ve şablonlarla video için 1500+ ücretsiz fon müziği indirin. [MotionElements]"
+  },
+  "free-sfx": {
+    "title": "Ücretsiz ses efektleri, ücretsiz SFX",
+              "description": "Yapay Zekalı pazar yerimizden 4,000,000'den fazla telifsiz stok videolar, şablonlar ve müzikle Ücretsiz SFX ve ses efektlerini indirin. [MotionElements]"
+  },
+  "free-gif": {
+    "title": "Ticari kullanım için ücretsiz anime edilmiş GİF'ler",
+              "description": "Yapay Zekalı pazar yerimizden 4,000,000'den fazla telifsiz stok videolar, şablonlar ve müzikle Ücretsiz Anime edilmiş GİF'leri haftalık olarak indirin. [MotionElements]"
+  }
+}

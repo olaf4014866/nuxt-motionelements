@@ -1,0 +1,75 @@
+$icomoon-font-path: "https://static.moele.me/fonts/me/200519";
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?2d1ix2');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?2d1ix2#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?2d1ix2') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?2d1ix2') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?2d1ix2') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?2d1ix2##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class*="me-resolve icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-davinci-resolve {
+  &:before {
+    content: $icon-davinci-resolve; 
+  }
+}
+.icon-davinci-resolve-outline {
+  &:before {
+    content: $icon-davinci-resolve-outline; 
+  }
+}
+.icon-dr-15 {
+  &:before {
+    content: $icon-dr-15; 
+  }
+}
+.icon-dr-16 {
+  &:before {
+    content: $icon-dr-16; 
+  }
+}
+.icon-dr-17 {
+  &:before {
+    content: $icon-dr-17; 
+  }
+}
+.icon-dr-18 {
+  &:before {
+    content: $icon-dr-18; 
+  }
+}
+.icon-frame-rate-alt {
+  &:before {
+    content: $icon-frame-rate-alt; 
+  }
+}
+.icon-frame-rate {
+  &:before {
+    content: $icon-frame-rate; 
+  }
+}
+.icon-software-ver {
+  &:before {
+    content: $icon-software-ver; 
+  }
+}
+

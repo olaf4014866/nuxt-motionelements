@@ -1,0 +1,60 @@
+// Table backgrounds
+//
+// Exact selectors below required to override `.table-striped` and prevent
+// inheritance to nested tables.
+
+@each $color, $value in $theme-colors {
+  @include table-row-variant(
+    $color,
+    theme-color-level($color, $table-bg-level),
+    theme-color-level($color, $table-contextual-border)
+  );
+}
+
+@include table-row-variant(active, $table-active-bg);
+
+// Dark styles
+//
+// Same table markup, but inverted color scheme: dark background and light text.
+
+// .table-hover tbody {
+//   tr {
+//     &.table-dark, &.table-black {
+//       &:hover {
+//         color: $table-dark-color;
+//       }
+//     }
+//   }
+// }
+.table-dark {
+  color: $table-dark-color;
+  background-color: $table-dark-bg;
+
+  .table-hover tbody &:hover {
+    color: $table-dark-color
+  }
+
+  th,
+  td,
+  thead th {
+    border-color: $table-dark-border-color;
+  }
+
+  &.table-bordered {
+    border: 0;
+  }
+
+  &.table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: $table-dark-accent-bg;
+    }
+  }
+
+  &.table-hover {
+    tbody tr {
+      @include hover {
+        background-color: $table-dark-hover-bg;
+      }
+    }
+  }
+}

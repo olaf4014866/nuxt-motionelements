@@ -1,0 +1,9 @@
+// Contextual colors
+
+@each $color, $value in $theme-text-colors {
+  @include text-emphasis-variant(".text-#{$color}", $value);
+}
+
+.text-white-muted {
+  color: $text-muted-dark !important;
+}

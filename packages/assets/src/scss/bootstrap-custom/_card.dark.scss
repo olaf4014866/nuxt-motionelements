@@ -1,0 +1,31 @@
+.ui-dark {
+
+  //
+  // Base styles
+  //
+
+  .card {
+    background-color: $card-bg-dark;
+    border: $card-border-width solid $card-border-color-dark;
+  }
+
+  .card-body {
+    color: $card-color; // null
+  }
+
+  //
+  // Optional textual caps
+  //
+
+  .card-header {
+    color: $card-cap-color; // null
+    background-color: $card-cap-bg-dark;
+    border-bottom: $card-border-width solid $card-border-color-dark;
+  }
+
+  .card-footer {
+    padding: $card-spacer-y $card-spacer-x;
+    background-color: $card-cap-bg-dark;
+    border-top: $card-border-width solid $card-border-color-dark;
+  }
+}

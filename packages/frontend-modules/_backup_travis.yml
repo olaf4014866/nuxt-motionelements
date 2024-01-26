@@ -1,0 +1,30 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - lts/*
+
+install:
+  - WORK_DIR=$(pwd)
+  - npm install;
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests (master, dev)"
+      if: branch IN (master, develop)
+      # script: pwd
+      script: npm run test:unit || exit 1;
+
+# notifications:
+#   slack:
+#     rooms:
+#       secure: "Th1kZz1vqF0r5j14pdd6jj7COyKyudDdltz6XXLriSD2zEoGC9UwxqZ4dK929l+4lEQ6/GQumbcTV9QwFFrX0qU5OVrirgPbX8gdJFj1X9JVN3U5xOfnuU9/wML2qp4gu+WnWwmehoBpxiz5O8G3R+aWatQYJkZPxGnBY9wFVLVNWLeq//pLMhpgdga1CpdimdJEcUbvErQUhBpVVWeBV35RzpOKAGUbvzgP2JIIrLwtgmOphnZqZ1rOCRw6bK2EQbKl04+Qqte9f1rd5IWZwUkT3jxkKkH5ch3YjjXARBQscGcwTlggjdEXCWL+3T7sQYQIDV0Ycxilj2Hk6C6RVLSYVjkci7LjMm/3wfV+XK65hO0S3fLLzc6Ivi2vsH0sEszvBhnypO8EoXU4HwemhOoR9ctVjcL6klzt7Sf82r7oiAuaPEqHef08+3h3WrzeWx5F+RCHxMTcrVjmBiYqBH9du02VXWtvOSmlRjotvBdiv0NUUHDQBgq0Dz9911ry8hOCP1muc+dnNhOVwyenVj98aHGxB6FrXqM/vl/JhEZCwEpMHXN6Y6rCyx5gRmVfijxyaGeR9lLLFPgxddodQF34hD0CblO90w62Zgr/3uanN4J7Tn05WfyQdOKkfoWdJkG/BvqiU5GQtZAdp7OtMit1gsUJlCkdEOdY1csVKho="
+#     on_success: always
+#     on_failure: always
+#   email:
+#     recipients:
+#       - wico+travis@motionelements.com
+#       - steve+travis@motionelements.com
+#     on_success: change
+#     on_failure: always

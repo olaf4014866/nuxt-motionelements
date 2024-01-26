@@ -1,0 +1,50 @@
+{
+  "home": {
+    "title": "Stock videos, After Effects templates, Royalty-free music - MotionElements",
+    "description": "Download 3,000,000+ royalty-free stock videos, music, FCP / After Effects templates from $5. AI-driven marketplace. Up to 30 free downloads weekly! [MotionElements]"
+  },
+  "ae": {
+    "title": "Top 10 free After Effects templates, CS6/CC AE templates",
+    "description": "Download 10,000+ After Effects templates, including business, wedding, etc from $5. Use forever in unlimited AE projects. Free downloads weekly! [MotionElements]"
+  },
+  "pr": {
+    "title": "Top 10 Premiere Pro templates, motion graphics templates",
+    "description": "Download Adobe Premiere Pro presets, Motion Graphics templates to do your titles, intro, slideshow for $9. Use in unlimited Premiere Pro projects. [MotionElements]"
+  },
+  "video": {
+    "title": "Top 10 free HD stock video footage, video backgrounds, royalty-free",
+    "description": "Download 3,000,000+ royalty-free 4K / HD stock video footage, video backgrounds from $5. Unique Asian clips. AI Search. Up to 30 free downloads weekly! [MotionElements]"
+  },
+  "animation": {
+    "title": "Top 10 animated backgrounds, stock animation, motion backgrounds",
+    "description": "Download 3,000,000+ animated backgrounds, video loops, particles, motion backgrounds from $5. AI Search. Free stock animation weekly! [MotionElements]"
+  },
+  "music": {
+    "title": "Top 5 background music for video, royalty-free music library",
+    "description": "Download 500,000+ background music for video from $5! Non-PRO tracks for commercial use, BGM, jingles, etc! Try AudioSearch: Use songs to find more songs! [MotionElements]"
+  },
+  "motion": {
+    "title": "Top 10 Apple Motion templates, Final Cut Pro templates",
+    "description": "Download Apple Motion templates including Final Cut Pro templates, wedding templates from $5! Use forever in unlimited FCP projects. [MotionElements]"
+  },
+  "3d": {
+    "title": "3D models for VR/AR",
+    "description": "3D model download, 3D model download free. Royalty free 3ds Max Models, Maya Models, Cinema 3D Models from $5. [MotionElements]"
+  },
+  "image": {
+    "title": "Stock Image + Animated GIF for work",
+    "description": "Subscribe to the image library designed for online media for just $9. Download 1,500,000+ stock images, animated GIFs, images for Facebook and Instagram. [MotionElements]"
+  },
+  "sfx": {
+    "title": "Sound Effects",
+    "description": "Download sound effects from $1. 30 free downloads weekly! [MotionElements]"
+  },
+  "lottie": {
+    "title": "Lottie Animation",
+    "description": "Lottie is an Android, iOS, React Native & Web library that renders SVG animation exported from After Effects in real time on mobile and on the web, allowing native apps to use microinteraction animations in javascript as easily as they use static images. [MotionElements]"
+  },
+  "resolve": {
+    "title": "Top 10 DaVinci Resolve templates, DaVinci Resolve macros",
+    "description": "Download DaVinci Resolve templates including transition macros, wedding templates from US$198! Use forever in unlimited DaVinci Resolve projects. [MotionElements]"
+  }
+}

@@ -1,0 +1,256 @@
+// Embedded icons from Open Iconic.
+// Released under MIT and copyright 2014 Waybury.
+// https://useiconic.com/open
+
+.ui-dark {
+
+  // Checkboxes and radios
+  //
+  // Base class takes care of all the key behavioral aspects.
+
+  .custom-control-input {
+    &:checked ~ .custom-control-label::before {
+      color: $custom-control-indicator-checked-color-dark;
+      border-color: $custom-control-indicator-checked-border-color-dark;
+      @include gradient-bg($custom-control-indicator-checked-bg-dark);
+    }
+
+    &:focus:not(:checked) ~ .custom-control-label::before {
+      border-color: $custom-control-indicator-focus-border-color-dark;
+    }
+
+    &:not(:disabled):active ~ .custom-control-label::before {
+      color: $custom-control-indicator-active-color-dark;
+      background-color: $custom-control-indicator-active-bg-dark;
+      border-color: $custom-control-indicator-active-border-color-dark;
+    }
+
+    &:disabled {
+      ~ .custom-control-label {
+        color: $custom-control-label-disabled-color-dark;
+
+        &::before {
+          background-color: $custom-control-indicator-disabled-bg-dark;
+        }
+      }
+    }
+  }
+
+  // Custom control indicators
+  //
+  // Build the custom controls out of pseudo-elements.
+
+  .custom-control-label {
+    // Background-color and (when enabled) gradient
+    &::before {
+      background-color: $custom-control-indicator-bg-dark;
+      border: $custom-control-indicator-border-color-dark solid $custom-control-indicator-border-width;
+    }
+  }
+
+
+  // Checkboxes
+  //
+  // Tweak just a few things for checkboxes.
+
+  .custom-checkbox {
+    .custom-control-input:checked ~ .custom-control-label {
+      &::after {
+        background-image: $custom-checkbox-indicator-icon-checked-dark;
+      }
+    }
+
+    .custom-control-input:indeterminate ~ .custom-control-label {
+      &::before {
+        border-color: $custom-checkbox-indicator-indeterminate-border-color-dark;
+        @include gradient-bg($custom-checkbox-indicator-indeterminate-bg-dark);
+      }
+      &::after {
+        background-image: $custom-checkbox-indicator-icon-indeterminate-dark;
+      }
+    }
+
+    .custom-control-input:disabled {
+      &:checked ~ .custom-control-label::before {
+        background-color: $custom-control-indicator-checked-disabled-bg-dark;
+      }
+      &:indeterminate ~ .custom-control-label::before {
+        background-color: $custom-control-indicator-checked-disabled-bg-dark;
+      }
+    }
+  }
+
+  // Radios
+  //
+  // Tweak just a few things for radios.
+
+  .custom-radio {
+    .custom-control-input:checked ~ .custom-control-label {
+      &::after {
+        background-image: $custom-radio-indicator-icon-checked-dark;
+      }
+    }
+
+    .custom-control-input:disabled {
+      &:checked ~ .custom-control-label::before {
+        background-color: $custom-control-indicator-checked-disabled-bg-dark;
+      }
+    }
+  }
+
+
+  // switches
+  //
+  // Tweak a few things for switches
+
+  .custom-switch {
+    .custom-control-label {
+      &::after {
+        background-color: $custom-control-indicator-border-color-dark;
+      }
+    }
+
+    .custom-control-input:checked ~ .custom-control-label {
+      &::after {
+        background-color: $custom-control-indicator-bg-dark;
+      }
+    }
+
+    .custom-control-input:disabled {
+      &:checked ~ .custom-control-label::before {
+        background-color: $custom-control-indicator-checked-disabled-bg-dark;
+      }
+    }
+  }
+
+
+  // Select
+  //
+  // Replaces the browser default select with a custom one, mostly pulled from
+  // https://primer.github.io/.
+  //
+
+  .custom-select {
+    color: $custom-select-color-dark;
+    background: $custom-select-background;
+    background-color: $custom-select-bg-dark;
+    border: $custom-select-border-width solid $custom-select-border-color-dark;
+
+    &:focus {
+      border-color: $custom-select-focus-border-color-dark;
+      @if $enable-shadows {
+        box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow-dark;
+      } @else {
+        box-shadow: $custom-select-focus-box-shadow-dark;
+      }
+
+      &::-ms-value {
+        // For visual consistency with other platforms/browsers,
+        // suppress the default white text on blue background highlight given to
+        // the selected option text when the (still closed) <select> receives focus
+        // in IE and (under certain conditions) Edge.
+        // See https://github.com/twbs/bootstrap/issues/19398.
+        color: $input-color-dark;
+        background-color: $input-bg-dark;
+      }
+    }
+
+    &:disabled {
+      color: $custom-select-disabled-color-dark;
+      background-color: $custom-select-disabled-bg-dark;
+    }
+
+    // Hides the default caret in IE11
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  // File
+  //
+  // Custom file input.
+
+  .custom-file-input {
+    &:focus ~ .custom-file-label {
+      border-color: $custom-file-focus-border-color-dark;
+      box-shadow: $custom-file-focus-box-shadow-dark;
+    }
+
+    &:disabled ~ .custom-file-label {
+      background-color: $custom-file-disabled-bg-dark;
+    }
+  }
+
+  .custom-file-label {
+    color: $custom-file-color-dark;
+    background-color: $custom-file-bg-dark;
+    border: $custom-file-border-width solid $custom-file-border-color-dark;
+
+    &::after {
+      color: $custom-file-button-color-dark;
+      @include gradient-bg($custom-file-button-bg-dark);
+    }
+  }
+
+  // Range
+  //
+  // Style range inputs the same across browsers. Vendor-specific rules for pseudo
+  // elements cannot be mixed. As such, there are no shared styles for focus or
+  // active states on prefixed selectors.
+
+  .custom-range {
+    &::-webkit-slider-runnable-track {
+      background-color: $custom-range-track-bg-dark;
+    }
+
+    &::-moz-range-thumb {
+      @include gradient-bg($custom-range-thumb-bg-dark);
+
+      &:active {
+        @include gradient-bg($custom-range-thumb-active-bg-dark);
+      }
+    }
+
+    &::-moz-range-track {
+      background-color: $custom-range-track-bg-dark;
+    }
+
+    &::-ms-thumb {
+      @include gradient-bg($custom-range-thumb-bg-dark);
+
+      &:active {
+        @include gradient-bg($custom-range-thumb-active-bg-dark);
+      }
+    }
+
+    &::-ms-fill-lower {
+      background-color: $custom-range-track-bg-dark;
+    }
+
+    &::-ms-fill-upper {
+      background-color: $custom-range-track-bg-dark;
+    }
+
+    &:disabled {
+      &::-webkit-slider-thumb {
+        background-color: $custom-range-thumb-disabled-bg; // $gray-500
+      }
+
+      &::-webkit-slider-runnable-track {
+        cursor: default;
+      }
+
+      &::-moz-range-thumb {
+        background-color: $custom-range-thumb-disabled-bg; // $gray-500
+      }
+
+      &::-moz-range-track {
+        cursor: default;
+      }
+
+      &::-ms-thumb {
+        background-color: $custom-range-thumb-disabled-bg; // $gray-500
+      }
+    }
+  }
+}

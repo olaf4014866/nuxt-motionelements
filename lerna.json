@@ -1,0 +1,18 @@
+{
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "independent",
+  "packages": [
+    "app/",
+    "search/",
+    "pages/",
+    "artist/",
+    "channels/",
+    "packages/*"
+  ],
+  "command": {
+    "version": {
+      "allowBranch": ["master"]
+    }
+  }
+}

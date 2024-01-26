@@ -1,0 +1,15 @@
+// stylelint-disable selector-no-qualifying-type
+
+.ui-dark {
+
+  // Textual addons
+  //
+  // Serves as a catch-all element for any text or radio/checkbox input you wish
+  // to prepend or append to an input.
+
+  .input-group-text {
+    color: $input-group-addon-color-dark;
+    background-color: $input-group-addon-bg-dark;
+    border: $input-border-width solid $input-group-addon-border-color-dark;
+  }
+}

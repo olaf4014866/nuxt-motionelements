@@ -1,0 +1,290 @@
+[
+    {
+        "id": "image",
+        "name": "画像 ・ GIF",
+        "name_plural": "画像 ・ GIF画像",
+        "name_short": "画像",
+        "name_short_plural": "画像",
+        "code": "image",
+        "name_seo": "画像",
+        "name_seo_plural": "画像"
+    },
+    {
+        "id": "video",
+        "name": "動画",
+        "name_plural": "動画",
+        "name_short": "動画",
+        "name_short_plural": "動画",
+        "code": "video",
+        "name_seo": "動画素材",
+        "name_seo_plural": "動画素材"
+    },
+    {
+        "id": "ae",
+        "name": "After Effects",
+        "name_plural": "After Effects",
+        "name_short": "AE",
+        "name_short_plural": "AE",
+        "code": "ae",
+        "name_seo": "After Effects",
+        "name_seo_plural": "After Effects"
+    },
+    {
+        "id": "pr",
+        "name": "Premiere Pro",
+        "name_plural": "Premiere Pro",
+        "name_short": "Premiere",
+        "name_short_plural": "Premiere",
+        "code": "pr",
+        "name_seo": "Premiere Pro",
+        "name_seo_plural": "Premiere Pro"
+    },
+    {
+        "id": "3d",
+        "name": "3Dモデル",
+        "name_plural": "CG動画素材",
+        "name_short": "CG動画",
+        "name_short_plural": "CG動画",
+        "code": "3d",
+        "name_seo": "3D<wbr>モデル",
+        "name_seo_plural": "3D<wbr>モデル"
+    },
+    {
+        "id": "fcp",
+        "name": "素材",
+        "name_plural": "Apple<wbr> Motion<wbr>テンプレート",
+        "name_short": "Apple<wbr> Motion<wbr>",
+        "name_short_plural": "Apple<wbr> Motion<wbr>",
+        "code": "fcp",
+        "name_seo": "Apple<wbr> Motion<wbr>テンプレート",
+        "name_seo_plural": "Apple<wbr> Motion<wbr>テンプレート"
+    },
+    {
+        "id": 1,
+        "name": "フォト",
+        "name_short": "フォト",
+        "code": "photo",
+        "name_plural": "写真",
+        "name_short_plural": "フォト",
+        "name_seo": "写真素材",
+        "name_seo_plural": "写真素材"
+    },
+    {
+        "id": 2,
+        "name": "ベクター",
+        "name_short": "ベクター",
+        "code": "vector",
+        "name_plural": "ベクター",
+        "name_short_plural": "ベクター",
+        "name_seo": "ベクター素材",
+        "name_seo_plural": "ベクター素材"
+    },
+    {
+        "id": 3,
+        "name": "CG動画",
+        "name_short": "CG動画",
+        "code": "animation",
+        "name_plural": "CG動画素材",
+        "name_short_plural": "CG動画",
+        "name_seo": "CG<wbr>動画素材",
+        "name_seo_plural": "CG<wbr>動画素材"
+    },
+    {
+        "id": 4,
+        "name": "ビデオ",
+        "name_short": "動画",
+        "code": "video_live",
+        "name_plural": "動画",
+        "name_short_plural": "動画",
+        "name_seo": "動画素材",
+        "name_seo_plural": "動画素材"
+    },
+    {
+        "id": 5,
+        "name": "3Dモデル",
+        "name_short": "3D",
+        "code": "3d_model",
+        "name_plural": "VR 360°<wbr> 動画",
+        "name_short_plural": "3D",
+        "name_seo": "3D<wbr>モデル",
+        "name_seo_plural": "3D<wbr>モデル"
+    },
+    {
+        "id": 6,
+        "name": "音楽",
+        "name_short": "音楽",
+        "code": "music",
+        "name_plural": "音楽",
+        "name_short_plural": "音楽",
+        "name_seo": "ロイヤリティ<wbr>フリー<wbr>音楽素材",
+        "name_seo_plural": "ロイヤリティ<wbr>フリー<wbr>音楽素材"
+    },
+    {
+        "id": 7,
+        "name": "音響効果",
+        "name_short": "効果音",
+        "code": "sfx",
+        "name_plural": "効果音",
+        "name_short_plural": "効果音",
+        "name_seo": "効果音",
+        "name_seo_plural": "効果音"
+    },
+    {
+        "id": 8,
+        "name": "After Effectsテンプレート",
+        "name_short": "AE",
+        "code": "ae_template",
+        "name_plural": "After Effects<wbr>テンプレート",
+        "name_short_plural": "AE",
+        "name_seo": "After Effects<wbr>テンプレート",
+        "name_seo_plural": "After Effects<wbr>テンプレート"
+    },
+    {
+        "id": 9,
+        "name": "Apple Motionテンプレート",
+        "name_short": "Apple<wbr> Motion<wbr>",
+        "code": "motion_template",
+        "name_plural": "Apple<wbr> Motion<wbr>テンプレート",
+        "name_short_plural": "Apple<wbr> Motion<wbr>",
+        "name_seo": "Apple<wbr> Motion<wbr>テンプレート",
+        "name_seo_plural": "Apple<wbr> Motion<wbr>テンプレート"
+    },
+    {
+        "id": 11,
+        "name": "VR 360° 写真",
+        "name_short": "VR 360°<wbr> 写真",
+        "code": "photo_vr",
+        "name_plural": "VR 360°<wbr> 写真",
+        "name_short_plural": "VR 360°<wbr> 写真",
+        "name_seo": "VR 360°<wbr> 写真",
+        "name_seo_plural": "VR 360°<wbr> 写真"
+    },
+    {
+        "id": 12,
+        "name": "VR 360° 動画",
+        "name_short": "VR 360°<wbr> 動画",
+        "code": "video_vr",
+        "name_plural": "VR 360°<wbr> 動画",
+        "name_short_plural": "VR 360°<wbr> 動画",
+        "name_seo": "VR 360°<wbr> 動画",
+        "name_seo_plural": "VR 360°<wbr> 動画"
+    },
+    {
+        "id": 14,
+        "name": "GIF",
+        "name_short": "GIF",
+        "code": "gif",
+        "name_plural": "GIF画像",
+        "name_short_plural": "GIF",
+        "name_seo": "GIF<wbr>画像",
+        "name_seo_plural": "GIF<wbr>画像"
+    },
+    {
+        "id": 15,
+        "name": "Premiere Proテンプレート",
+        "name_short": "Premiere",
+        "code": "pr_template",
+        "name_plural": "Premiere Pro<wbr>テンプレート",
+        "name_short_plural": "Premiere",
+        "name_seo": "Adobe<wbr> Premiere<wbr>テンプレート",
+        "name_seo_plural": "Adobe<wbr> Premiere<wbr>テンプレート"
+    },
+    {
+        "id": 16,
+        "name": "モーショングラフィックステンプレート",
+        "name_short": "モーション<wbr>グラフィックス",
+        "code": "mg_template",
+        "name_plural": "モーション<wbr>グラフィックス<wbr>テンプレート",
+        "name_short_plural": "モーション<wbr>グラフィックス",
+        "name_seo": "モーション<wbr>グラフィックス<wbr>テンプレート",
+        "name_seo_plural": "モーション<wbr>グラフィックス<wbr>テンプレート"
+    },
+    {
+        "id": 19,
+        "name": "After Effectsアニメーションプリセット",
+        "name_short": "AE<wbr>プリセット",
+        "code": "ae_preset",
+        "name_plural": "After Effects<wbr>プリセット",
+        "name_short_plural": "AE<wbr>プリセット",
+        "name_seo": "After Effects<wbr>プリセット",
+        "name_seo_plural": "After Effects<wbr>プリセット"
+    },
+    {
+        "id": 20,
+        "name": "Premiere Proエフェクトプリセット",
+        "name_short": "Premiere<wbr>プリセット",
+        "code": "pr_preset",
+        "name_plural": "Premiere Pro<wbr>プリセット",
+        "name_short_plural": "Premiere<wbr>プリセット",
+        "name_seo": "Premiere<wbr>プリセット",
+        "name_seo_plural": "Premiere<wbr>プリセット"
+    },
+    {
+        "id": 21,
+        "name": "Lottie",
+        "name_short": "Lottie",
+        "code": "lottie",
+        "name_plural": "Lottie",
+        "name_short_plural": "Lottie",
+        "name_seo": "Lottie",
+        "name_seo_plural": "Lottie"
+    },
+    {
+        "name": "無料 After Effects テンプレート",
+        "name_seo": "After Effects<wbr>テンプレート 無料",
+        "code": "ae_free",
+        "name_plural": "After Effects<wbr>テンプレート",
+        "name_short_plural": "AE",
+        "name_seo_plural": "After Effects<wbr>テンプレート 無料"
+    },
+    {
+        "name": "Free After Effects Plugin",
+        "name_short": "Free AE Plugin",
+        "name_seo": "Free After Effects Plugin",
+        "code": "ae_plugin_free"
+    },
+    {
+        "name": "無料GIF",
+        "name_short": "無料GIF",
+        "name_seo": "無料GIF",
+        "code": "gifs_free"
+    },
+    {
+        "name": "BGMフリー",
+        "name_short": "BGMフリー",
+        "name_seo": "BGMフリー",
+        "code": "music_free"
+    },
+    {
+        "name": "動画素材無料",
+        "name_short": "無料動画",
+        "name_short_plural": "動画",
+        "name_seo": "動画素材無料",
+        "name_seo_plural": "動画素材",
+        "code": "video_free"
+    },
+    {
+        "name": "無料効果音",
+        "name_short": "無料効果音",
+        "name_seo": "無料効果音",
+        "code": "sfx_free",
+        "name_plural": "無料効果音",
+        "name_short_plural": "無料効果音",
+        "name_seo_plural": "無料効果音"
+    },
+    {
+        "name": "無料 Final Cut Pro<wbr>/Motion テンプレート",
+        "name_short": "無料 FCPX テンプレート",
+        "name_seo": "無料 Final Cut Pro<wbr>/ Motion テンプレート",
+        "code": "fcp_free"
+    },
+    {
+        "name": "無料 Premiere Pro テンプレート",
+        "name_short": "無料 Premiere テンプレート",
+        "code": "pr_free",
+        "name_plural": "Premiere Pro<wbr>テンプレート",
+        "name_short_plural": "Premiere",
+        "name_seo": "Adobe<wbr> Premiere<wbr>無料テンプレート",
+        "name_seo_plural": "Adobe<wbr> Premiere<wbr>無料テンプレート"
+    }
+]

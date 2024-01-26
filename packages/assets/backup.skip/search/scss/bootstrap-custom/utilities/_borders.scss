@@ -1,0 +1,24 @@
+@each $color, $value in $theme-text-colors {
+  .border-#{$color} {
+    border-color: $value !important;
+  }
+}
+
+$border-widths: 1 0.0625rem, 2 0.125rem, 4 0.25rem, 8 0.5rem;
+
+@each $border-width in $border-widths {
+  $key: nth($border-width, 1);
+  $value: nth($border-width, 2);
+
+  .border-#{$key} {
+    border-width: $value !important;
+  }
+}
+
+$border-styles: dotted dashed solid;
+
+@each $style in $border-styles {
+  .border-#{$style} {
+    border-style: $style !important;
+  }
+}

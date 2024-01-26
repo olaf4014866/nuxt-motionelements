@@ -1,0 +1,40 @@
+.ui-dark {
+  // Base class
+  .bs-tooltip-top {
+    .arrow {
+      &::before {
+        border-top-color: $tooltip-arrow-color-dark;
+      }
+    }
+  }
+
+  .bs-tooltip-right {
+    .arrow {
+      &::before {
+        border-right-color: $tooltip-arrow-color-dark;
+      }
+    }
+  }
+
+  .bs-tooltip-bottom {
+    .arrow {
+      &::before {
+        border-bottom-color: $tooltip-arrow-color-dark;
+      }
+    }
+  }
+
+  .bs-tooltip-left {
+    .arrow {
+      &::before {
+        border-left-color: $tooltip-arrow-color-dark;
+      }
+    }
+  }
+
+  // Wrapper for the tooltip content
+  .tooltip-inner {
+    color: $tooltip-color-dark;
+    background-color: $tooltip-bg-dark;
+  }
+}

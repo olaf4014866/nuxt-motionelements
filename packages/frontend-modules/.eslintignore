@@ -1,0 +1,3 @@
+**/*.vue
+src/**/*.js
+library/**/*.js

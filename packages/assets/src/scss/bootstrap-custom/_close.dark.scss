@@ -1,0 +1,10 @@
+.ui-dark {
+  .close {
+    color: $close-color-dark;
+
+    // Override <a>'s hover style
+    @include hover {
+      color: $close-color-dark;
+    }
+  }
+}

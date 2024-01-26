@@ -1,0 +1,46 @@
+// BOOTSTRAP FUNCTIONS, VARIABLES & MIXINS IMPORTS
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// VARIABLE OVERRIDES
+
+@import "@motionelements/assets/src/scss/bootstrap-custom/_variables.scss";
+
+// Import font file
+$font-family-ja: "tbudrgothic-std";
+
+// FONT-FACE AND FONT-FAMILY
+
+$font-family-sans-serif: $font-family-ja, $font-family-fallback;
+$font-family-base: $font-family-sans-serif;
+
+[lang="ja"] {
+  &,
+  body {
+    font-family: $font-family-base;
+    font-variant-ligatures: common-ligatures;
+    -moz-font-feature-settings: "liga", "clig";
+    -webkit-font-feature-settings: "liga", "clig";
+    font-feature-settings: "liga", "clig";
+    font-variant-east-asian: proportional-width;
+    -moz-font-feature-settings: "pwid";
+    -webkit-font-feature-settings: "pwid";
+    font-feature-settings: "pwid";
+    -moz-font-feature-settings: "palt";
+    -webkit-font-feature-settings: "palt";
+    font-feature-settings: "palt";
+  }
+
+  h1, h2 {
+    -moz-font-feature-settings: "pkna";
+    -webkit-font-feature-settings: "pkna";
+    font-feature-settings: "pkna";
+  }
+
+  .cjk-word-break {
+    line-break:strict;
+    word-break: keep-all;
+  }
+}

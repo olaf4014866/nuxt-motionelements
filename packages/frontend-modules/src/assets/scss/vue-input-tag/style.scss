@@ -1,0 +1,89 @@
+/* ADDITIONAL STYLE FOR INPUT-TAG */
+.vue-input-tag-wrapper {
+  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: $input-border-radius;
+  line-height: 1;
+
+  // border-radius: $input-border-radius;
+  padding: $input-padding-y $input-padding-x-sm;
+  -webkit-appearance: none;
+
+  &.vue-input-tag-wrapper--active {
+    border: none;
+  }
+
+  > .new-tag {
+    display: inline-block;
+    padding: 0.125rem 0;
+    margin: 0;
+    font-size: $input-font-size-sm;
+    width: 0;
+
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+
+  // &.vue-input-tag-wrapper--active {
+  //   > .new-tag {
+  //     display: block;
+  //   }
+  // }
+
+  .input-tag {
+    display:        inline-flex;
+    align-items:    center;
+    font-size:      $badge-font-size;
+    font-weight:    $badge-font-weight;
+    padding:        $badge-padding-y $badge-pill-padding-x;
+    border:         none;
+    border-radius:  $badge-pill-border-radius;
+    margin:         map-get($spacers,1) map-get($spacers,1) map-get($spacers,1) 0;
+
+    > span {
+      margin-right: map-get($spacers,1);
+    }
+  }
+}
+
+// COLORS
+.vue-input-tag-wrapper {
+  // background-color: $transparent;
+  background:     map-get(map-get($theme-colors-variants,"light"),"1");
+
+  &.vue-input-tag-wrapper--active {
+    background-color: $input-bg;
+  }
+
+  > .new-tag {
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+  }
+
+  .input-tag {
+    background:     map-get(map-get($theme-colors-variants,"light"),"0");
+    color:          $body-color;
+  }
+}
+
+.ui-dark {
+  .vue-input-tag-wrapper {
+
+    &.vue-input-tag-wrapper--active {
+      background-color: $input-bg-dark;
+    }
+
+    > .new-tag {
+      &::placeholder {
+        color: $input-placeholder-color-dark;
+      }
+    }
+
+    .input-tag {
+      background:     map-get(map-get($theme-colors-variants,"dark"),"0");
+      color:          $body-color-dark;
+    }
+  }
+}

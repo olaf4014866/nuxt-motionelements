@@ -1,0 +1,60 @@
+.navbar {
+  &.navbar-masthead,
+  &.navbar-top {
+    font-size: $font-size-sm;
+    line-height: $font-size-base * 2;
+
+    .nav-link {
+      cursor: pointer;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-weight: $font-weight-normal;
+
+      &.nav-user {
+        height: 3rem;
+      }
+
+      .nav-img-wrapper {
+        height: 2rem;
+        width: 2rem;
+        overflow: hidden;
+      }
+
+      .nav-img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+
+      .nav-user-avatar {
+        max-height: 2rem;
+        overflow: hidden;
+      }
+    }
+
+    .dropdown-menu {
+      font-size: $font-size-sm;
+      line-height: $font-size-sm * 2;
+    }
+  }
+
+  .no-caret {
+    &:after {
+      display: none;
+    }
+  }
+}
+.navbar-brand {
+  line-height: $navbar-brand-height;
+  padding-left: $spacer;
+  padding-right: $spacer;
+
+  @include media-breakpoint-down(md) {
+    line-height: $navbar-brand-height-sm;
+    padding-left: $spacer * 0.5;
+    padding-right: $spacer * 0.5;
+
+    img {
+      height: $navbar-brand-font-size-sm;
+    }
+  }
+}

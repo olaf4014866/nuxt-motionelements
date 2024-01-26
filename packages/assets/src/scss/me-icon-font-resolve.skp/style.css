@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "me-resolve";
+  src: url("https://static.moele.me/fonts/me/200519/me-resolve.eot?2d1ix2");
+  src: url("https://static.moele.me/fonts/me/200519/me-resolve.eot?2d1ix2#iefix") format("embedded-opentype"), url("https://static.moele.me/fonts/me/200519/me-resolve.woff2?2d1ix2") format("woff2"), url("https://static.moele.me/fonts/me/200519/me-resolve.ttf?2d1ix2") format("truetype"), url("https://static.moele.me/fonts/me/200519/me-resolve.woff?2d1ix2") format("woff"), url("https://static.moele.me/fonts/me/200519/me-resolve.svg?2d1ix2#me-resolve") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class*="me-resolve icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "me-resolve" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-davinci-resolve:before {
+  content: "";
+}
+
+.icon-davinci-resolve-outline:before {
+  content: "";
+}
+
+.icon-dr-15:before {
+  content: "";
+}
+
+.icon-dr-16:before {
+  content: "";
+}
+
+.icon-dr-17:before {
+  content: "";
+}
+
+.icon-dr-18:before {
+  content: "";
+}
+
+.icon-frame-rate-alt:before {
+  content: "";
+}
+
+.icon-frame-rate:before {
+  content: "";
+}
+
+.icon-software-ver:before {
+  content: "";
+}
+/*# sourceMappingURL=style.css.map */

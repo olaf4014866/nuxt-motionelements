@@ -1,0 +1,44 @@
+@each $name, $colors in $theme-color-gradients {
+  // .bg-gradient-#{$name}, .text-gradient-#{$name} {
+  //   background: nth($colors,1);
+  //   background: linear-gradient(135deg,nth($colors,1),nth($colors,2));
+  // }
+
+  // .text-gradient-#{$name} {
+  //   background-clip: text;
+  //   -webkit-text-fill-color: transparent;
+
+  //   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  //     /* IE10+ CSS styles go here */
+  //     background: $transparent;
+  //     color: nth($colors, 1);
+  //   }
+  // }
+
+  .bg-gradient-#{$name} {
+    background: nth($colors,1);
+    background: linear-gradient(135deg,nth($colors,1),nth($colors,2));
+  }
+
+  .text-gradient-#{$name} {
+    color: nth($colors, 1);
+
+    &:not(i):not(svg) {
+      padding-bottom: .5em;
+      margin-bottom: -.5em;
+    }
+
+    @supports (background-clip: text) {
+      background: linear-gradient(135deg,nth($colors,1),nth($colors,2));
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    path {
+      &, &.fa-secondary, &.fa-primary {
+      $fill-url: '#linear-#{$name}';
+      fill: url(#{$fill-url});
+      }
+    }
+  }
+}

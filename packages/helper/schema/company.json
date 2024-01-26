@@ -1,0 +1,40 @@
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "MotionElements",
+  "legalName": "MotionElements Pte Ltd",
+  "url": "https://www.motionelements.com",
+  "logo": "https://static.motionelements.com/img/logo/MotionElements-logomark-square-256x256.png",
+  "email": "contact@motionelements.com",
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Mark Sun",
+      "sameAs": [
+        "https://www.linkedin.com/in/marksun093"
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Joanne Chua"
+    }
+  ],
+  "address": [{
+    "@type": "PostalAddress",
+    "addressCountry": "SG",
+    "postalCode": "039190",
+    "streetAddress": "3 Temasek Avenue, Level 21 Centennial Tower"
+  }],
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "email": "contact@motionelements.com",
+    "url": "https://www.motionelements.com/contact",
+    "contactType": "customer support"
+  }],
+  "sameAs": [
+    "http://www.facebook.com/motionelements",
+    "https://twitter.com/motionelements",
+    "https://www.youtube.com/user/MotionElements",
+    "https://www.linkedin.com/company/motionelements"
+  ]
+}

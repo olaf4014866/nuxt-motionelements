@@ -1,0 +1,27 @@
+@mixin badge-outline-variant($bg, $name) {
+  $text-color: map-get($theme-text-colors, $name);
+  border: 1px solid $bg;
+  color: $text-color;
+  background-color: transparent;
+
+  @at-root a#{&} {
+    @include hover-focus {
+      border: 1px solid darken($bg, 10%);
+      color: $text-color;
+      //   color: color-yiq($bg);
+      //   background-color: darken($bg, 10%);
+    }
+  }
+}
+
+.badge {
+  &.badge-outline {
+    padding: ($badge-padding-y - 0.0625rem) ($badge-padding-x - 0.0625rem);
+
+    @each $color, $value in $theme-colors {
+      &.badge-#{$color} {
+        @include badge-outline-variant($value, $color);
+      }
+    }
+  }
+}

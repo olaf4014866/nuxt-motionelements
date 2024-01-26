@@ -1,0 +1,77 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+//
+// @include button-variant(
+//   $background,
+//   $border,
+//   $hover-background: darken($background, 7.5%),
+//   $hover-border: darken($border, 10%),
+//   $active-background: darken($background, 10%),
+//   $active-border: darken($border, 12.5%)
+// )
+//
+// @include button-outline-variant(
+//   $color,
+//   $color-hover: color-yiq($color),
+//   $active-background: $color,
+//   $active-border: $color
+// )
+//
+// @include button-text-variant(
+//   $background,
+//   $border,
+//   $color: choose-contrast-color($background),
+//   $hover-background: darken($background, 7.5%),
+//   $hover-border: darken($border, 10%),
+//   $hover-color: lighten($color, 7.5%),
+//   $active-background: darken($background, 10%),
+//   $active-border: darken($border, 12.5%),
+//   $active-color: lighten($color, 10%)
+// )
+
+@import "src/assets/scss/bootstrap-custom/mixins/buttons"; // import custom mixin button-text-variant
+
+@each $color, $value in $theme-text-colors {
+  @if $color != "muted" {
+    .btn-outline-#{$color} {
+      @include button-outline-variant (
+        $value, // text and border color
+        choose-contrast-color(map-get(map-get($theme-colors-variants,$color),"0")), // hover text color
+        map-get(map-get($theme-colors-variants,$color),"0"), // active background color
+        map-get(map-get($theme-colors-variants,$color),"0") // active border color
+      )
+    }
+
+    .btn-simple-#{$color} {
+      @include button-text-variant(
+        $white, // background color
+        $light, // border color
+        $value, // text color
+        $white, // hover background color
+        map-get(map-get($theme-colors-variants,"light"),"-1"), // hover border color
+        map-get(map-get($theme-colors-variants,$color),"-2"), // hover text color
+        $white, // active background color
+        map-get(map-get($theme-colors-variants,"light"),"-2"), // active border color
+        map-get(map-get($theme-colors-variants,$color),"-2"), // active text color
+        $value // focus shadow color
+      );
+    }
+
+    .btn-white-#{$color} {
+      @include button-text-variant(
+        $white, // background color
+        $white, // border color
+        $value, // text color
+        $white, // hover background color
+        $white, // hover border color
+        map-get(map-get($theme-colors-variants,$color),"-2"), // hover text color
+        $white, // active background color
+        $white, // active border color
+        map-get(map-get($theme-colors-variants,$color),"-2"), // active text color
+        $value // focus shadow color
+      );
+    }
+  }
+}

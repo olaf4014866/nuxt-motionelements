@@ -1,0 +1,17 @@
+{
+  "name": "motionelements-frontend-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "frontend site monorepo",
+  "workspaces": [
+    "packages/*",
+    "search/",
+  ],
+  "scripts": {
+    "lerna": "lerna bootstrap",
+    "new-version": "lerna version --conventional-commits --yes"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

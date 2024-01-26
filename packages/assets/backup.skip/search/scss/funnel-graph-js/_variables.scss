@@ -1,0 +1,24 @@
+@import 'src/assets/scss/font-load/style-en.scss';
+
+// colors
+$shadow-light: $box-shadow-sm;
+$shadow-medium: $box-shadow;
+$shadow-dark: $box-shadow-lg;
+$shadow-white-medium: rgba(255, 255, 255, 0.32);
+$shadow-white-dark: rgba(255, 255, 255, 0.62);
+// $percentage-hover: rgba(8, 7, 48, 0.8);
+
+$font-family: $font-family-sans-serif;
+
+$label-value-color: $body-color;
+$label-value-color-dark: $body-color-dark;
+$label-title-color: $headings-color;
+$label-title-color-dark: $headings-color-dark;
+$label-percentage-color: $text-muted;
+$label-percentage-color-dark: $text-muted-dark;
+
+$label-segment-percentages-bg: rgba(map-get(map-get($theme-colors-variants,"light"),"1"), 0.8);
+$label-segment-percentages-bg-dark: rgba(map-get(map-get($theme-colors-variants,"dark"),"0"), 0.8);
+
+// $border-color
+// $border-color-dark

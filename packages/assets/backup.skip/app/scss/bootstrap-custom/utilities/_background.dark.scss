@@ -1,0 +1,19 @@
+.ui-dark {
+  @each $color, $value in $theme-colors-dark {
+    @include bg-variant(".bg-#{$color}", $value);
+  }
+
+  @each $color, $value in $theme-colors-dark {
+    @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
+  }
+
+  @each $color-group, $color-levels in $theme-colors-dark-variants {
+    @each $color-level, $value in $color-levels {
+      @if $color-level != "0" {
+        .bg-#{$color-group}.#{map-get($color-levels-map,$color-level)} {
+          background-color: $value !important;
+        }
+      }
+    }
+  }
+}

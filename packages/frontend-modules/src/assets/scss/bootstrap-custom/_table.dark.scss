@@ -1,0 +1,164 @@
+.ui-dark {
+
+  //
+  // Basic Bootstrap table
+  //
+
+  .table {
+    color: $table-dark-color;
+    background-color: $table-dark-bg; // Reset for nesting within parents with `background-color`.
+
+    th,
+    td {
+      border-top: $table-border-width solid $table-dark-border-color;
+    }
+
+    thead th {
+      border-bottom: (2 * $table-border-width) solid $table-dark-border-color;
+    }
+
+    tbody + tbody {
+      border-top: (2 * $table-border-width) solid $table-dark-border-color;
+    }
+  }
+
+
+  // Border versions
+  //
+  // Add or remove borders all around the table and between all the columns.
+
+  .table-bordered {
+    border: $table-border-width solid $table-dark-border-color;
+
+    th,
+    td {
+      border: $table-border-width solid $table-dark-border-color;
+    }
+  }
+
+  // Zebra-striping
+  //
+  // Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
+  .table-striped {
+    tbody tr:nth-of-type(#{$table-striped-order}) {
+      background-color: $table-dark-accent-bg;
+    }
+  }
+
+
+  // Hover effect
+  //
+  // Placed here since it has to come after the potential zebra striping
+
+  .table-hover {
+    tbody tr {
+      @include hover {
+        color: $table-dark-hover-color;
+        background-color: $table-dark-hover-bg;
+      }
+    }
+  }
+
+
+  // Table backgrounds
+  //
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+
+  @mixin table-row-variant-custom($state, $background, $border: null) {
+    // Exact selectors below required to override `.table-striped` and prevent
+    // inheritance to nested tables.
+    .table-#{$state} {
+      color: choose-contrast-color($background);
+      &,
+      > th,
+      > td {
+        background-color: $background;
+      }
+
+      @if $border != null {
+        th,
+        td,
+        thead th,
+        tbody + tbody {
+          border-color: $border;
+        }
+      }
+    }
+
+    // Hover states for `.table-hover`
+    // Note: this is not available for cells or rows within `thead` or `tfoot`.
+    .table-hover {
+      $hover-background: lighten($background, 5%);
+
+      .table-#{$state} {
+        @include hover {
+          background-color: $hover-background;
+
+          > td,
+          > th {
+            background-color: $hover-background;
+          }
+        }
+      }
+    }
+  }
+
+  @each $color, $value in $theme-colors-dark {
+    @include table-row-variant-custom($color, theme-color-level-dark($color, $table-bg-level-dark), theme-color-level-dark($color, $table-border-level-dark));
+  }
+
+  @include table-row-variant(active, $table-dark-active-bg);
+
+
+  // Dark styles
+  //
+  // Same table markup, but inverted color scheme: dark background and light text.
+
+  // stylelint-disable-next-line no-duplicate-selectors
+  .table {
+    .thead-dark {
+      th {
+        color: $table-head-color;
+        background-color: $table-head-bg;
+        border-color: $table-border-color;
+      }
+    }
+
+    .thead-light {
+      th {
+        color: $table-dark-color;
+        background-color: $table-dark-bg;
+        border-color: $table-dark-border-color;
+      }
+    }
+  }
+
+  .table-dark {
+    color: $table-color;
+    background-color: $white;
+
+    th,
+    td,
+    thead th {
+      border-color: $table-border-color;
+    }
+
+    &.table-striped {
+      tbody tr:nth-of-type(odd) {
+        background-color: $table-accent-bg;
+      }
+    }
+
+    &.table-hover {
+      tbody tr {
+        @include hover {
+          color: $table-hover-color;
+          background-color: $table-hover-bg;
+        }
+      }
+    }
+  }
+
+}

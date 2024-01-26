@@ -1,0 +1,14 @@
+.ui-dark {
+  .toast {
+    color: $toast-color-dark;
+    background-color: $toast-background-color-dark;
+    border: $toast-border-width solid $toast-border-color-dark;
+  }
+
+  .toast-header {
+    color: $toast-header-color-dark;
+    background-color: $toast-header-background-color-dark;
+    background-clip: padding-box;
+    border-bottom: $toast-border-width solid $toast-header-border-color-dark;
+  }
+}

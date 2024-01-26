@@ -1,0 +1,215 @@
+[
+    {
+        "id": "image",
+        "name": "Banco de imágenes ・ GIF",
+        "name_plural": "Imágenes ・ GIFs",
+        "name_short": "Imagen",
+        "name_short_plural": "Imagen",
+        "code": "image",
+        "name_seo": "Banco de imágenes ・ GIF",
+        "name_seo_plural": "Banco de imágenes ・ GIF"
+    },
+    {
+        "id": "video",
+        "name": "Banco de Videos",
+        "name_plural": "Videos",
+        "name_short": "Video",
+        "name_short_plural": "Video",
+        "code": "video",
+        "name_seo": "Banco de Videos",
+        "name_seo_plural": "Banco de Videos"
+    },
+    {
+        "id": "ae",
+        "name": "After Effects",
+        "name_plural": "After Effects",
+        "name_short": "AE",
+        "name_short_plural": "AE",
+        "code": "ae",
+        "name_seo": "After Effects",
+        "name_seo_plural": "After Effects"
+    },
+    {
+        "id": "pr",
+        "name": "Premiere Pro",
+        "name_plural": "Premiere Pro",
+        "name_short": "Premiere",
+        "name_short_plural": "Premiere",
+        "code": "pr",
+        "name_seo": "Premiere Pro",
+        "name_seo_plural": "Premiere Pro"
+    },
+    {
+        "id": "3d",
+        "name": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)",
+        "name_plural": "3D",
+        "name_short": "3D",
+        "name_short_plural": "3D",
+        "code": "3d",
+        "name_seo": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)",
+        "name_seo_plural": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)"
+    },
+    {
+        "id": "fcp",
+        "name": "Plantillas de Apple Motion \/ Final Cut Pro X",
+        "name_plural": "Plantillas de Apple Motion",
+        "name_short": "Apple Motion",
+        "name_short_plural": "Apple Motion",
+        "code": "fcp",
+        "name_seo": "Plantillas de Apple Motion \/ Final Cut Pro X",
+        "name_seo_plural": "Plantillas de Apple Motion \/ Final Cut Pro X"
+    },
+    {
+        "id": 1,
+        "name": "Banco de imágenes",
+        "name_short": "Fotografía",
+        "code": "photo",
+        "name_plural": "Fotografías",
+        "name_seo": "Banco de imágenes",
+        "name_seo_plural": "Banco de imágenes"
+    },
+    {
+        "id": 2,
+        "name": "Banco de vectores",
+        "name_short": "Vector",
+        "code": "vector",
+        "name_plural": "Vectores",
+        "name_seo": "Banco de vectores",
+        "name_seo_plural": "Banco de vectores"
+    },
+    {
+        "id": 3,
+        "name": "Banco de Videos Animados",
+        "name_short": "Videos animados",
+        "code": "animation",
+        "name_plural": "Animación",
+        "name_seo": "Banco de Videos Animados",
+        "name_seo_plural": "Banco de Videos Animados"
+    },
+    {
+        "id": 4,
+        "name": "Banco de Videos",
+        "name_short": "Acción en vivo",
+        "code": "video_live",
+        "name_plural": "Videos",
+        "name_seo": "Banco de Videos",
+        "name_seo_plural": "Banco de Videos"
+    },
+    {
+        "id": 5,
+        "name": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)",
+        "name_short": "3D",
+        "code": "3d_model",
+        "name_plural": "Modelos 3D",
+        "name_seo": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)",
+        "name_seo_plural": "Modelo 3D Para Realidad Virtual y Aumentada (RV\/RA)"
+    },
+    {
+        "id": 6,
+        "name": "Música de Fondo Para Videos",
+        "name_short": "Música",
+        "code": "music",
+        "name_plural": "Música",
+        "name_seo": "Música de Fondo Para Videos",
+        "name_seo_plural": "Música de Fondo Para Videos"
+    },
+    {
+        "id": 7,
+        "name": "Efectos de Sonido Para Videos",
+        "name_short": "Efectos especiales",
+        "code": "sfx",
+        "name_plural": "Efectos de sonido",
+        "name_seo": "Efectos de Sonido Para Videos",
+        "name_seo_plural": "Efectos de Sonido Para Videos"
+    },
+    {
+        "id": 8,
+        "name": "Plantillas de After Effects",
+        "name_short": "Plantilla de AE",
+        "code": "ae_template",
+        "name_plural": "Plantillas de After Effects",
+        "name_seo": "Plantillas de After Effects",
+        "name_seo_plural": "Plantillas de After Effects"
+    },
+    {
+        "id": 9,
+        "name": "Plantillas de Apple Motion \/ Final Cut Pro X",
+        "name_short": "Apple Motion",
+        "code": "motion_template",
+        "name_plural": "Plantillas de Apple Motion",
+        "name_seo": "Plantillas de Apple Motion \/ Final Cut Pro X",
+        "name_seo_plural": "Plantillas de Apple Motion \/ Final Cut Pro X"
+    },
+    {
+        "id": 11,
+        "name": "Fotografía en 360°",
+        "name_short": "Fotografía en 360°",
+        "code": "photo_vr",
+        "name_plural": "Fotografías de realidad virtual (RV) en 360°",
+        "name_seo": "Fotografía en 360°",
+        "name_seo_plural": "Fotografía en 360°"
+    },
+    {
+        "id": 12,
+        "name": "Video en 360°",
+        "name_short": "Video en 360°",
+        "code": "video_vr",
+        "name_plural": "Videos de realidad virtual (RV) en 360°",
+        "name_seo": "Video en 360°",
+        "name_seo_plural": "Video en 360°"
+    },
+    {
+        "id": 14,
+        "name": "GIF",
+        "name_short": "GIF",
+        "code": "gif",
+        "name_plural": "GIFs",
+        "name_seo": "GIF",
+        "name_seo_plural": "GIF"
+    },
+    {
+        "id": 15,
+        "name": "Plantillas de Premiere Pro",
+        "name_short": "Plantilla de Premiere",
+        "code": "pr_template",
+        "name_plural": "Plantillas de Premiere Pro",
+        "name_seo": "Plantillas de Premiere Pro",
+        "name_seo_plural": "Plantillas de Premiere Pro"
+    },
+    {
+        "id": 16,
+        "name": "Plantillas de Motion Graphics",
+        "name_short": "Motion Graphics",
+        "code": "mg_template",
+        "name_plural": "Plantillas de Motion Graphics",
+        "name_seo": "Plantillas de Motion Graphics",
+        "name_seo_plural": "Plantillas de Motion Graphics"
+    },
+    {
+        "id": 19,
+        "name": "Ajuste preestablecido de animación de After Effects",
+        "name_short": "Ajuste preestablecido de AE",
+        "code": "ae_preset",
+        "name_plural": "Ajustes preestablecidos de After Effects",
+        "name_seo": "Ajuste preestablecido de animación de After Effects",
+        "name_seo_plural": "Ajuste preestablecido de animación de After Effects"
+    },
+    {
+        "id": 20,
+        "name": "Ajuste preestablecido de Premiere Pro Effect",
+        "name_short": "Ajuste preestablecido de Premiere",
+        "code": "pr_preset",
+        "name_plural": "Ajustes preestablecidos de Premiere Pro",
+        "name_seo": "Ajuste preestablecido de Premiere Pro Effect",
+        "name_seo_plural": "Ajuste preestablecido de Premiere Pro Effect"
+    },
+    {
+        "id": 21,
+        "name": "Animación de Lottie",
+        "name_short": "Lottie",
+        "code": "lottie",
+        "name_plural": "Lottie",
+        "name_seo": "Animación de Lottie",
+        "name_seo_plural": "Animación de Lottie"
+    }
+]

@@ -1,0 +1,67 @@
+// stylelint-disable selector-no-qualifying-type
+
+.ui-dark {
+
+  //
+  // Textual form controls
+  //
+
+  .form-control {
+    color: $input-color-dark;
+    background-color: $input-bg-dark;
+    border: $input-border-width solid $input-border-color-dark;
+
+    // Placeholder
+    &::placeholder {
+      color: $input-placeholder-color-dark;
+      // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+      opacity: 1;
+    }
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &:disabled,
+    &[readonly] {
+      background-color: $input-disabled-bg-dark;
+      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+      opacity: 1;
+    }
+  }
+
+  select.form-control {
+    &:focus::-ms-value {
+      // Suppress the nested default white text on blue background highlight given to
+      // the selected option text when the (still closed) <select> receives focus
+      // in IE and (under certain conditions) Edge, as it looks bad and cannot be made to
+      // match the appearance of the native widget.
+      // See https://github.com/twbs/bootstrap/issues/19398.
+      color: $input-color-dark;
+      background-color: $input-bg-dark;
+    }
+  }
+
+  // Readonly controls as plain text
+  //
+  // Apply class to a readonly input to make it appear like regular plain
+  // text (without any border, background color, focus indicator)
+
+  .form-control-plaintext {
+    color: $input-plaintext-color-dark;
+    background-color: transparent;
+  }
+
+
+  // Checkboxes and radios
+  //
+  // Indent the labels to position radios/checkboxes as hanging controls.
+
+  .form-check-input {
+
+    &:disabled ~ .form-check-label {
+      color: $text-muted-dark;
+    }
+  }
+}

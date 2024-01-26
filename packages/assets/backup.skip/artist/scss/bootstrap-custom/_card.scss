@@ -1,0 +1,5 @@
+@each $color, $value in $theme-text-colors {
+  .card.border-#{$color} .card-header {
+    border-bottom-color: $value;
+  }
+}

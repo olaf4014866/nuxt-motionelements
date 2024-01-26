@@ -1,0 +1,388 @@
+<template>
+  <footer id="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+    <div class="container py-5">
+
+      <div class="row mb-3">
+
+        <div class="col-12 col-md-3 col-lg-4 mb-3">
+          <div class="row">
+            <div class="col-12 col-lg-9 col-xl-8">
+
+              <!-- menu for language -->
+              <div class="form-group">
+                <MenuLanguage
+                  v-model="currentLanguageCode"
+                  @change="onChangeLanguage"
+                  :isFooter="true"
+                  class="bg-black border-gray text-white"
+                />
+              </div>
+              <!-- menu for language -->
+
+              <!-- menu for currency -->
+              <div class="form-group">
+                <MenuCurrency
+                  v-model="currentCurrencyCode"
+                  @change="onChangeCurrency"
+                  class="bg-black border-gray text-white"
+                />
+              </div>
+              <!-- menu for currency -->
+
+              <p class="h4">
+                <font-awesome-icon :icon="['fab','cc-visa']" title="Visa" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-mastercard']" title="Mastercard" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-amex']" title="American Express" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-discover']" title="Discover" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-jcb']" title="JCB" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-paypal']" title="Paypal" class="fab-payment"></font-awesome-icon>
+                <font-awesome-icon :icon="['fab','cc-stripe']" title="Stripe" class="fab-payment"></font-awesome-icon>
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <div class="col-6 col-md-4">
+              <h3 class="h6 list-title">{{ $t('footer.discover') }}</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    :href="`$link('/legal/license').url()`"
+                    rel="license"
+                    v-html="$t('footer.eula')"
+                  ></a> <!-- Originally labelled 'Royalty-Free End User License Agreement' -->
+                </li>
+                <li>
+                  <a
+                    :href="`$link('/begin').url()`"
+                  >{{ $t('header.user_guide') }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    :href="`$link('/pricing').url()`"
+                  >{{ $t('header.pricing') }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                      :href="`$link('/subscribe').url()`"
+                  >{{ $t('header.subscription') }}
+                  </a>
+                </li>
+                <li v-show="this.$i18n.locale === 'ja'">
+                  <a
+                    :href="`$link('https://go.motionelements.com').url()`"
+                  >{{ $t('footer.events') }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    :href="`$link('https://tuts.motionelements.com').url()`"
+                  >{{ $t('footer.tutorials') }}</a>
+                </li>
+                <!--
+                <li>
+                  <a
+                    :href="$link('/covid19').url()"
+                  >
+                    {{ $t('footer.covid_19_resources') }}
+                    <span
+                      class="badge badge-pill badge-success"
+                    >{{ $t('footer.new') }}</span>
+                  </a>
+                </li>
+                -->
+              </ul>
+              <h3 class="h6 list-title">{{ $t('footer.free') }}</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    :href="`$link('/free/stock-footage').url()`"
+                  >{{ $t('footer.free_downloads') }}</a>
+                </li>
+                <li>
+                  <a
+                    :href="`$link('/banner').url()`"
+                    v-html="$t('footer.banner_generator')"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    :href="`$link('/video-converter').url()`"
+                  >{{ $t('footer.video_converter') }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-8">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <h3
+                    class="h6 list-title">{{ $t('footer.contribute_earn') }}</h3>
+                  <ul class="list-unstyled">
+                    <li v-if="this.isArtist">
+                      <a
+                        :href="`$link('https://artists.zendesk.com/hc/').url()`"
+                        v-html="$t('footer.artist_faqs')"
+                        target="_blank"
+                      >
+                      </a>
+                    </li>
+                    <li v-else>
+                      <a
+                        :href="`$link('/artists').url()`"
+                        v-html="$t('footer.artist_signup_headline')"
+                      >
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        :href="`$link('/referral').url()`"
+                        :title="$t('footer.affiliate_program')"
+                        v-html="`${ $t('footer.affiliate_program') } <span class='badge badge-pill badge-warning'>30%</span>`"
+                      >
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-12 col-md-6">
+                  <h3 class="h6 list-title">MotionElements<sup>®</sup></h3>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a
+                        :href="`$link('/about').url()`"
+                      >{{ $t('footer.about') }}</a>
+                    </li>
+                    <li>
+                      <a
+                        :href="`$link('/blog').url()`"
+                      >{{ $t('footer.blog') }}</a>
+                    </li>
+                    <li>
+                      <a
+                        :href="`$link('/careers').url()`"
+                        :title="$t('footer.careers')"
+                      >
+                        {{ $t('footer.careers') }}
+                        <span
+                          class="badge badge-pill badge-success"
+                        >{{ $t('footer.careers_hiring') }}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        :href="`$link('/partners').url()`"
+                      >{{ $t('footer.partners') }} ・ {{ $t('footer.api') }}</a>
+                    </li>
+                    <li>
+                      <a
+                        :href="`$link('https://help.motionelements.com/hc').url()`"
+                      >{{ $t('footer.help_center') }}</a>
+                    </li>
+                  </ul>
+                  <p>
+                    <a
+                      class="btn btn-dark btn-sm mr-1"
+                      href="https://www.facebook.com/motionelements"
+                      target="_blank"
+                    >
+                      <font-awesome-icon :icon="['fab','facebook-f']" fixed-width size="lg" title="Facebook"/>
+                    </a>
+                    <a
+                      class="btn btn-dark btn-sm mr-1"
+                      :href="youtubeUrl"
+                      target="_blank"
+                    >
+                      <font-awesome-icon :icon="['fab','youtube']" fixed-width size="lg" title="YouTube"/>
+                    </a>
+                    <a v-if="twitterUrl"
+                      class="btn btn-dark btn-sm"
+                      :href="twitterUrl"
+                       target="_blank"
+                    >
+                      <font-awesome-icon :icon="['fab','twitter']" fixed-width size="lg" title="Twitter"/>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row py-3 border-top border-dark copyright-info">
+        <div class="col">
+          <p class="text-muted small mb-0">
+            © MotionElements<sup data-v-7ee355ab="">®</sup> Pte Ltd.
+            {{$t('footer.trademark_legal_notice')}}
+          </p>
+          <ul class="list-inline small">
+            <!-- TODO: to add when available
+            <li class="list-inline-item">
+              <a href="#">{{$t('footer.site_map')}}</a>
+            </li>
+            -->
+            <li class="list-inline-item">
+              <a
+                :href="`$link('/legal/privacy').url()`"
+              >{{$t('footer.privacy_policy')}}</a> <!-- ORIGINALLY LABELLED: Privacy Policy -->
+            </li>
+            <li class="list-inline-item">
+              <a
+                :href="`$link('/legal/terms').url()`"
+              >{{$t('footer.terms_of_use')}}</a> <!-- ORIGINALLY LABELLED: Terms of Use -->
+            </li>
+            <li class="list-inline-item">
+              <a
+                :href="`$link('/legal/copyright').url()`"
+              >{{$t('footer.copyright_policy_dmca')}}</a> <!-- ORIGINALLY LABELLED: Copyright Policy / DMCA -->
+            </li>
+            <li v-if="currentLanguageCode === 'ja'" class="list-inline-item">
+              <a
+                :href="`$link('/legal/ecommerce').url()`"
+              >特定商取引法に基づく表示</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+import { mapState, mapGetters } from 'vuex';
+
+import MenuLanguage from './modules/common/MenuLanguage.vue';
+import MenuCurrency from './modules/common/MenuCurrency.vue';
+
+export default {
+  name: 'the-footer',
+  components: {
+    MenuLanguage,
+    MenuCurrency,
+  },
+  computed: {
+    ...mapState({
+      supportedCurrencies: state => state.site.supportedCurrencies,
+      userCurrency: state => state.user.currencyCode,
+    }),
+    ...mapGetters({
+      isArtist: 'user/isArtist',
+      userLanguage: 'user/getLanguageCode',
+      // userCurrency: 'user/getCurrencyCode',
+    }),
+    currentLanguageCode: {
+      get() {
+        return this.userLanguage;
+      },
+    },
+    currentCurrencyCode: {
+      get() {
+        return this.userCurrency;
+      },
+    },
+    youtubeUrl() {
+      switch (this.currentLanguageCode) {
+        case 'ja':
+          return 'https://www.youtube.com/channel/UCoM7M80fQE6XoVFo4NaiaGg';
+        case 'ko':
+          return 'https://www.youtube.com/channel/UCX9KBkXg2GreyfSmvQvpc4g';
+        case 'zh-hant':
+          return 'https://www.youtube.com/channel/UCPucpqnRR-T5VEuehJgwiYg';
+        default:
+          return 'https://www.youtube.com/c/motionelements';
+      }
+    },
+    twitterUrl() {
+      switch (this.currentLanguageCode) {
+        case 'ja':
+          return 'https://twitter.com/motionelements';
+        default:
+          return false;
+      }
+    },
+  },
+  data() {
+    return {
+      form: {
+        language: this.currentLanguage,
+        currency: this.currentCurrencyCode,
+      },
+    };
+  },
+  methods: {
+    onChangeLanguage(languageCode) {
+      console.log('onChangeLanguage', languageCode);
+      this.$store.dispatch('user/changeLanguage', languageCode);
+    },
+    onChangeCurrency(currencyCode) {
+      console.log('onChangeCurrency', currencyCode);
+      this.$store.dispatch('user/changeCurrency', currencyCode);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.list-title, .copyright-info {
+  @media (max-width: 350px) {
+    font-size: $font-size-sm;
+  }
+}
+
+.list-unstyled {
+  font-size: $font-size-sm;
+  line-height: $font-size-sm * 1.5;
+
+  li {
+    margin-bottom: $font-size-sm * 0.5;
+  }
+
+  @media (max-width: 350px) {
+    font-size: $font-size-base * .6;
+    line-height: $font-size-sm * 1.5;
+  }
+}
+
+.fab-payment {
+  margin-right: 2px;
+}
+
+.list-inline.small {
+  .list-inline-item {
+    margin-right: 1rem;
+  }
+}
+
+//
+// COLORS
+//
+
+footer {
+  background-color: $black;
+  color: $body-color-dark;
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: $headings-color-dark;
+  }
+
+  a {
+    color: $light;
+
+    @include hover {
+      color: $gray-300;
+      text-decoration: $link-hover-decoration;
+    }
+  }
+}
+
+.ui-dark {
+  .border-top.border-dark {
+    border-color: $dark !important;
+  }
+}
+</style>

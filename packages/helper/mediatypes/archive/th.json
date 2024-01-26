@@ -1,0 +1,215 @@
+[
+  {
+    "id": "image",
+    "name": "ภาพสต็อก ・ GIF",
+    "name_plural": "ภาพ ・ GIF",
+    "name_short": "ภาพไม่มีลิขสิทธิ์",
+    "name_short_plural": "ภาพไม่มีลิขสิทธิ์",
+    "code": "image",
+    "name_seo": "ภาพสต็อก ・ GIF",
+    "name_seo_plural": "ภาพสต็อก ・ GIF"
+  },
+  {
+    "id": "video",
+    "name": "Stock Video",
+    "name_plural": "วิดีโอ",
+    "name_short": "วิดีโอ",
+    "name_short_plural": "วิดีโอ",
+    "code": "video",
+    "name_seo": "Stock Video",
+    "name_seo_plural": "Stock Video"
+  },
+  {
+    "id": "ae",
+    "name": "After Effects",
+    "name_plural": "After Effects",
+    "name_short": "AE",
+    "name_short_plural": "AE",
+    "code": "ae",
+    "name_seo": "After Effects",
+    "name_seo_plural": "After Effects"
+  },
+  {
+    "id": "pr",
+    "name": "Premiere Pro",
+    "name_plural": "Premiere Pro",
+    "name_short": "Premiere",
+    "name_short_plural": "Premiere",
+    "code": "pr",
+    "name_seo": "Premiere Pro",
+    "name_seo_plural": "Premiere Pro"
+  },
+  {
+    "id": "3d",
+    "name": "Model 3D",
+    "name_plural": "3D",
+    "name_short": "3D",
+    "name_short_plural": "3D",
+    "code": "3d",
+    "name_seo": "Model 3D",
+    "name_seo_plural": "Model 3D"
+  },
+  {
+    "id": "fcp",
+    "name": "Template FCP\/Motion",
+    "name_plural": "แม่แบบ Apple Motion",
+    "name_short": "Apple Motion",
+    "name_short_plural": "Apple Motion",
+    "code": "fcp",
+    "name_seo": "Template FCP\/Motion",
+    "name_seo_plural": "Template FCP\/Motion"
+  },
+  {
+    "id": 1,
+    "name": "ภาพสต็อก",
+    "name_short": "ภาพถ่าย",
+    "code": "photo",
+    "name_plural": "ภาพถ่าย",
+    "name_seo": "ภาพสต็อก",
+    "name_seo_plural": "ภาพสต็อก"
+  },
+  {
+    "id": 2,
+    "name": "เวกเตอร์สต็อก",
+    "name_short": "เวกเตอร์",
+    "code": "vector",
+    "name_plural": "เวกเตอร์",
+    "name_seo": "เวกเตอร์สต็อก",
+    "name_seo_plural": "เวกเตอร์สต็อก"
+  },
+  {
+    "id": 3,
+    "name": "ภาพเคลื่อนไหว",
+    "name_short": "ภาพเคลื่อนไหว",
+    "code": "animation",
+    "name_plural": "ภาพเคลื่อนไหว",
+    "name_seo": "ภาพเคลื่อนไหว",
+    "name_seo_plural": "ภาพเคลื่อนไหว"
+  },
+  {
+    "id": 4,
+    "name": "Stock Video",
+    "name_short": "การเคลื่อนไหวแบบสด",
+    "code": "video_live",
+    "name_plural": "วิดีโอ",
+    "name_seo": "Stock Video",
+    "name_seo_plural": "Stock Video"
+  },
+  {
+    "id": 5,
+    "name": "Model 3D",
+    "name_short": "3D",
+    "code": "3d_model",
+    "name_plural": "โมเดล 3D",
+    "name_seo": "Model 3D",
+    "name_seo_plural": "Model 3D"
+  },
+  {
+    "id": 6,
+    "name": "เพลงไม่มีลิขสิทธิ์",
+    "name_short": "เพลง",
+    "code": "music",
+    "name_plural": "เพลง",
+    "name_seo": "เพลงไม่มีลิขสิทธิ์",
+    "name_seo_plural": "เพลงไม่มีลิขสิทธิ์"
+  },
+  {
+    "id": 7,
+    "name": "เสียงเอฟเฟค",
+    "name_short": "เสียงเอฟเฟค",
+    "code": "sfx",
+    "name_plural": "เสียงเอฟเฟค",
+    "name_seo": "เสียงเอฟเฟค",
+    "name_seo_plural": "เสียงเอฟเฟค"
+  },
+  {
+    "id": 8,
+    "name": "Template After Effect",
+    "name_short": "เทมเพลจ AE",
+    "code": "ae_template",
+    "name_plural": "Template After Effect",
+    "name_seo": "Template After Effect",
+    "name_seo_plural": "Template After Effect"
+  },
+  {
+    "id": 9,
+    "name": "Template FCP\/Motion",
+    "name_short": "Apple Motion",
+    "code": "motion_template",
+    "name_plural": "แม่แบบ Apple Motion",
+    "name_seo": "Template FCP\/Motion",
+    "name_seo_plural": "Template FCP\/Motion"
+  },
+  {
+    "id": 11,
+    "name": "ภาพ 360°",
+    "name_short": "ภาพ 360°",
+    "code": "photo_vr",
+    "name_plural": "ภาพ VR 360°",
+    "name_seo": "ภาพ 360°",
+    "name_seo_plural": "ภาพ 360°"
+  },
+  {
+    "id": 12,
+    "name": "วิดีโอ 360°",
+    "name_short": "วิดีโอ 360°",
+    "code": "video_vr",
+    "name_plural": "วิดีโอ VR 360°",
+    "name_seo": "วิดีโอ 360°",
+    "name_seo_plural": "วิดีโอ 360°"
+  },
+  {
+    "id": 14,
+    "name": "GIF",
+    "name_short": "GIF",
+    "code": "gif",
+    "name_plural": "GIF",
+    "name_seo": "GIF",
+    "name_seo_plural": "GIF"
+  },
+  {
+    "id": 15,
+    "name": "เทมเพลต Premiere Pro ",
+    "name_short": "เทมเพลจ Premiere",
+    "code": "pr_template",
+    "name_plural": "เทมเพลต Premiere Pro ",
+    "name_seo": "เทมเพลต Premiere Pro ",
+    "name_seo_plural": "เทมเพลต Premiere Pro "
+  },
+  {
+    "id": 16,
+    "name": "เทมเพลตกราฟิกเคลื่อนไหว",
+    "name_short": "กราฟิกเคลื่อนไหว",
+    "code": "mg_template",
+    "name_plural": "เทมเพลตกราฟิกเคลื่อนไหว",
+    "name_seo": "เทมเพลตกราฟิกเคลื่อนไหว",
+    "name_seo_plural": "เทมเพลตกราฟิกเคลื่อนไหว"
+  },
+  {
+    "id": 19,
+    "name": "พรีเซ็ตภาพเคลื่อนไหว After Effects",
+    "name_short": "พรีเซ็ต AE",
+    "code": "ae_preset",
+    "name_plural": "พรีเซ็ต After Effects",
+    "name_seo": "พรีเซ็ตภาพเคลื่อนไหว After Effects",
+    "name_seo_plural": "พรีเซ็ตภาพเคลื่อนไหว After Effects"
+  },
+  {
+    "id": 20,
+    "name": "พรีเซ็ตเอฟเฟค Premiere Pro",
+    "name_short": "พรีเซ็ต Premiere",
+    "code": "pr_preset",
+    "name_plural": "พรีเซ็ต Premiere Pro",
+    "name_seo": "พรีเซ็ตเอฟเฟค Premiere Pro",
+    "name_seo_plural": "พรีเซ็ตเอฟเฟค Premiere Pro"
+  },
+  {
+    "id": 21,
+    "name": "ภาพเคลื่อนไหว Lottie",
+    "name_short": "Lottie",
+    "code": "lottie",
+    "name_plural": "Lottie",
+    "name_seo": "ภาพเคลื่อนไหว Lottie",
+    "name_seo_plural": "ภาพเคลื่อนไหว Lottie"
+  }
+]

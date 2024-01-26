@@ -1,0 +1,122 @@
+// FP Brand Color
+.flowplayer .fp-color {
+  background-color: $primary;
+}
+
+.flowplayer.fp-me {
+  border-radius: 0;
+
+  // FP change Controls area height
+  .fp-controls {
+    height: 1rem;
+  }
+
+  // FP hide UI on mounted ...
+  &.is-splash {
+    .fp-ui {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    // ... and only show on hover
+    &:hover {
+      .fp-ui {
+        opacity: 1;
+      }
+    }
+  }
+
+  // FP remove gradient background
+  &.fp-ui-shown,
+  &.is-paused,
+  &.is-mouseover,
+  &.is-loading,
+  &.is-playing {
+    .fp-ui {
+      background-image: none;
+    }
+  }
+
+  &.is-playing {
+    // FP show progress bar when playing
+    .fp-ui > * {
+      opacity: 1;
+    }
+
+    // FP hide pause button when mouse is out
+    &.is-mouseout {
+      .fp-pause {
+        svg.fp-pause-rounded-fill {
+          opacity: 0;
+        }
+      }
+    }
+
+    &.is-mouseover {
+      // FP show pause button on hover when playing
+      .fp-pause {
+        svg.fp-pause-rounded-fill {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+      .fp-play {
+        svg.fp-play-rounded-fill {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &.is-paused {
+    &.is-mouseover:hover {
+      .fp-play {
+        svg.fp-play-rounded-fill {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
+
+  // FP Hide Header
+  .fp-header {
+    display: none;
+  }
+
+  // FP Hide Controls ...
+  .fp-controls > * {
+    display: none;
+  }
+
+  // ... except for Timeline
+  .fp-timeline {
+    display: block;
+    bottom: 0;
+
+    // FP Hide Timestamp on Timeline hover
+    .fp-timestamp,
+    &:hover .fp-timestamp {
+      display: none;
+    }
+  }
+
+  // FP Remove rounded edges within Timeline
+  .fp-timeline,
+  .fp-timeline > * {
+    border-radius: 0;
+  }
+
+  // FP Timeline on hover
+  .fp-controls {
+    .fp-timeline {
+      height: 0.5em;
+    }
+
+    &:hover {
+      .fp-timeline {
+        height: 1rem;
+      }
+    }
+  }
+}

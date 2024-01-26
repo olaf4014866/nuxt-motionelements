@@ -1,0 +1,32 @@
+.nav-link {
+  font-weight: $nav-tabs-link-font-weight;
+  color: $nav-tabs-link-color;
+
+  &:not(.active):hover {
+    color: $nav-tabs-link-hover-color;
+  }
+
+  &.active, .nav-item.show & {
+    color: $nav-tabs-link-active-color;
+  }
+
+  @include media-breakpoint-down(md) {
+    font-size: $font-size-sm;
+    padding-left: $spacer *.75;
+    padding-right: $spacer *.75;
+  }
+}
+
+.ui-dark {
+  .nav-link {
+    color: $nav-tabs-link-color-dark;
+
+    &:not(.active):hover {
+      color: $nav-tabs-link-hover-color-dark;
+    }
+
+    &.active, .nav-item.show & {
+      color: $nav-tabs-link-active-color-dark;
+    }
+  }
+}

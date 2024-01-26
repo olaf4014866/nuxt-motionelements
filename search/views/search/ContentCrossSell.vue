@@ -1,0 +1,187 @@
+<template>
+  <div
+    class="div-inset p-3 bg-gradient-credits"
+  >
+    <h4 class="h6 font-weight-bold">
+      {{ $t('search.recommend_on_demand_heading') }}
+    </h4>
+    <div>
+        <template v-if="isNormalLayout">
+          <ProductWrapper
+            v-for="element in allCrossSellElements"
+            :key="`item-video-${element.id}`"
+            :value="element.id"
+            :element="element"
+            :options="{
+              cardType: 'card',
+              expand: false,
+              favorites: true,
+              enablePlayer: true,
+              hoverEvent: true,
+            }"
+          />
+        </template>
+
+        <template v-if="isAudioLayout && !isSearchFreeElement">
+          <ProductWrapper
+            v-for="element in allCrossSellElements"
+            :key="`item-audio-${element.id}`"
+            :value="element.id"
+            :element="element"
+            :options="{
+              cardType: 'list',
+              expand: false,
+              favorites: true,
+              fullWidth: true,
+              enablePlayer: true,
+              hoverEvent: true,
+            }"
+          ></ProductWrapper>
+        </template>
+
+        <template v-if="isAudioLayout && isSearchFreeElement">
+          <ProductWrapper
+            v-for="element in allCrossSellElements"
+            :key="`item-audio-${element.id}`"
+            :value="element.id"
+            :element="element"
+            :options="{
+              cardType: 'list-min',
+              favorites: true,
+              fullWidth: true,
+              enablePlayer: true,
+              hoverEvent: true,
+            }"
+          />
+        </template>
+
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState, mapGetters } from 'vuex';
+import { isProductType } from '@motionelements/core/src/services/catalog.service.js';
+
+export default {
+  name: 'content-cross-sell',
+  props: {
+    isNormalLayout: Boolean,
+    isAudioLayout: Boolean,
+    isLoadingSearch: Boolean,
+  },
+  components: {
+    // ProductWrapper: () => import('frontend-modules/shared/modules/common/product/ProductWrapper.vue'),
+    ProductWrapper: () => import('@motionelements/core/src/components/product/ProductWrapper.vue'),
+  },
+  computed: {
+    ...mapState({
+      // currentMediaType: state => state.site.currentMediaType,
+      currentMediaType: state => state.search.mediaType,
+      filters: state => state.search.filter,
+    }),
+    ...mapGetters({
+      elements: 'search/allSearchCrossSellElements',
+    }),
+    isSearchFreeElement() {
+      return _.get(this.filters, 'priceRange') === '-1';
+    },
+    resultCount() {
+      let count = 0;
+
+      // if music or sfx, return 5 results always
+      if (this.isAudioLayout) {
+        count = 5;
+      } else {
+        const currentWindowWidth = this.$store.getters['site/windowWidth'];
+        let breakpoints = [];
+        let rowElementCount = 0;
+
+        // const largeCardType = [
+        //   'ae',
+        //   'ae-template',
+        //   'ae-preset',
+        //   'pr',
+        //   'pr-template',
+        //   'mg-template',
+        //   'pr-preset',
+        //   'motion-template',
+        // ];
+
+        // large card type
+        if (isProductType('video_template', this.currentMediaType)) {
+        // if (largeCardType.indexOf(this.currentMediaType.id) >= 0) {
+          breakpoints = [
+            0,
+            416,
+            784,
+            1435,
+            1819,
+            2203,
+          ];
+        } else {
+          breakpoints = [
+            0,
+            304,
+            576,
+            832,
+            1371,
+            1643,
+          ];
+        }
+
+        for (let i = 0; i < breakpoints.length; i += 1) {
+          if (_.inRange(currentWindowWidth, breakpoints[i], breakpoints[i + 1])) {
+            // index of breakpoints[] will indicate number of elements in each row
+            rowElementCount = i + 1;
+            break;
+          }
+        }
+
+        switch (rowElementCount) {
+          case 1:
+            count = 3;
+            break;
+          case 2:
+            count = 2;
+            break;
+          case 3:
+            count = 3;
+            break;
+          case 4:
+            count = 4;
+            break;
+          case 5:
+            count = 5;
+            break;
+          default:
+            count = 6;
+        }
+      }
+      return count;
+    },
+    allCrossSellElements() {
+      let allCrossSellElements = this.elements;
+
+      // show result count based on windows width
+      allCrossSellElements = _.slice(allCrossSellElements, 0, this.resultCount);
+
+      return allCrossSellElements;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.div-inset {
+  box-shadow:
+    inset 0 .0625rem .25rem 0rem rgba($black, .15),
+    inset 0 -.0625rem .25rem 0rem rgba(white, .5);
+  border: .5px solid rgba($white,.5);
+
+  @include media-breakpoint-up(lg) {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+}
+</style>

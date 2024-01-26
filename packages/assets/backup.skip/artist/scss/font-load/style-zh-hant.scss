@@ -1,0 +1,69 @@
+// BOOTSTRAP FUNCTIONS, VARIABLES & MIXINS IMPORTS
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// VARIABLE OVERRIDES
+
+@import "src/assets/scss/bootstrap-custom/variables";
+
+// *
+// * FONT-FACE AND FONT-FAMILY
+// *
+
+// Define font-family name
+
+$font-family-zh-hant: "tbudrgothic-std";
+// $font-family-zh-hant: "GenSenMaruGothicTW";
+
+// // Set @font-face
+
+// // https://static.moele.me/fonts/gensen-maru-gothic-tw/191211/GenSenMaruGothicTW-Regular.ttf
+// $font-version-date: "191211";
+// $font-path: "https://static.moele.me/fonts/gensen-maru-gothic-tw/#{$font-version-date}";
+// $font-filename: "GenSenMaruGothicTW";
+
+// @font-face {
+//   font-family: 'GenSenMaruGothicTW';
+//   src: local('GenSenMaruGothic TW TTF'),
+//        url('#{$font-path}/#{$font-filename}-Light.ttf') format('truetype');
+//   font-weight: 300;
+// }
+
+// @font-face {
+//   font-family: 'GenSenMaruGothicTW';
+//   src: local('GenSenMaruGothic TW TTF'),
+//        url('#{$font-path}/#{$font-filename}-Regular.ttf') format('truetype');
+//   font-weight: 400;
+// }
+
+// @font-face {
+//   font-family: 'GenSenMaruGothicTW';
+//   src: local('GenSenMaruGothic TW TTF'),
+//        url('#{$font-path}/#{$font-filename}-Bold.ttf') format('truetype');
+//   font-weight: 700;
+// }
+
+// FONT-FACE AND FONT-FAMILY
+
+$font-family-sans-serif: $font-family-zh-hant, $font-family-fallback;
+$font-family-base: $font-family-sans-serif;
+
+[lang="zh-hant"] {
+  &,
+  body {
+    font-family: $font-family-base;
+    font-variant-ligatures: common-ligatures;
+    -moz-font-feature-settings: "liga", "clig";
+    -webkit-font-feature-settings: "liga", "clig";
+    font-feature-settings: "liga", "clig";
+    font-variant-east-asian: proportional-width;
+    -moz-font-feature-settings: "pwid";
+    -webkit-font-feature-settings: "pwid";
+    font-feature-settings: "pwid";
+    -moz-font-feature-settings: "palt";
+    -webkit-font-feature-settings: "palt";
+    font-feature-settings: "palt";
+  }
+}

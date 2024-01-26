@@ -1,0 +1,38 @@
+/* ME Icon Fonts V4 Stylesheet */
+
+/* GLOBAL */
+// $icomoon-font-path: "./assets/webfonts/me-icon-font";
+[class^="icon-"],
+[class*=" icon-"],
+[class*="me icon-"],
+[class*="mes icon-"],
+[class*="mer icon-"],
+[class*="mel icon-"],
+[class*="me-music-cat icon-"],
+[class*="me-cat icon-"],
+[class*="me-bmt icon-"] {
+  speak: none;
+  font-style: normal;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Variables
+
+$icomoon-font-family: "me-cat";
+$icomoon-music-cat-version: "rln9qn";
+$icomoon-font-path: "https://static.moele.me/fonts/me/190906/";
+@import "cat/variables";
+@import "cat";
+
+@import "icons-cat";
+
+$icomoon-font-family: "me-bmt";
+$icomoon-bmt-version: "9stsac";
+$icomoon-font-path: "https://static.moele.me/fonts/me/191126/";
+@import "bmt/variables";
+@import "bmt";
+
+@import "icons-bmt";

@@ -1,0 +1,215 @@
+[
+  {
+    "id": "image",
+    "name": "스톡 이미지 ・ GIF",
+    "name_plural": "이미지 ・ GIF",
+    "name_short": "이미지",
+    "name_short_plural": "이미지",
+    "code": "image",
+    "name_seo": "스톡 이미지 ・ GIF",
+    "name_seo_plural": "스톡 이미지 ・ GIF"
+  },
+  {
+    "id": "video",
+    "name": "영상 소스",
+    "name_plural": "비디오",
+    "name_short": "비디오",
+    "name_short_plural": "비디오",
+    "code": "video",
+    "name_seo": "영상 소스",
+    "name_seo_plural": "영상 소스"
+  },
+  {
+    "id": "ae",
+    "name": "애프터 이펙트",
+    "name_plural": "애프터 이펙트",
+    "name_short": "AE",
+    "name_short_plural": "AE",
+    "code": "ae",
+    "name_seo": "애프터 이펙트",
+    "name_seo_plural": "애프터 이펙트"
+  },
+  {
+    "id": "pr",
+    "name": "프리미어 프로",
+    "name_plural": "프리미어 프로",
+    "name_short": "프리미어",
+    "name_short_plural": "프리미어",
+    "code": "pr",
+    "name_seo": "프리미어 프로",
+    "name_seo_plural": "프리미어 프로"
+  },
+  {
+    "id": "3d",
+    "name": "3D 모델",
+    "name_plural": "3D",
+    "name_short": "3D",
+    "name_short_plural": "3D",
+    "code": "3d",
+    "name_seo": "3D 모델",
+    "name_seo_plural": "3D 모델"
+  },
+  {
+    "id": "fcp",
+    "name": "애플 모션 템플릿",
+    "name_plural": "애플 모션 템플릿",
+    "name_short": "애플 모션",
+    "name_short_plural": "애플 모션",
+    "code": "fcp",
+    "name_seo": "애플 모션 템플릿",
+    "name_seo_plural": "애플 모션 템플릿"
+  },
+  {
+    "id": 1,
+    "name": "스톡 사진",
+    "name_short": "사진",
+    "code": "photo",
+    "name_plural": "사진",
+    "name_seo": "스톡 사진",
+    "name_seo_plural": "스톡 사진"
+  },
+  {
+    "id": 2,
+    "name": "스톡 벡터",
+    "name_short": "벡터",
+    "code": "vector",
+    "name_plural": "벡터",
+    "name_seo": "스톡 벡터",
+    "name_seo_plural": "스톡 벡터"
+  },
+  {
+    "id": 3,
+    "name": "애니메이션",
+    "name_short": "애니메이션",
+    "code": "animation",
+    "name_plural": "애니메이션",
+    "name_seo": "애니메이션",
+    "name_seo_plural": "애니메이션"
+  },
+  {
+    "id": 4,
+    "name": "영상 소스",
+    "name_short": "실사 촬영",
+    "code": "video_live",
+    "name_plural": "비디오",
+    "name_seo": "영상 소스",
+    "name_seo_plural": "영상 소스"
+  },
+  {
+    "id": 5,
+    "name": "3D 모델",
+    "name_short": "3D",
+    "code": "3d_model",
+    "name_plural": "3D 모델",
+    "name_seo": "3D 모델",
+    "name_seo_plural": "3D 모델"
+  },
+  {
+    "id": 6,
+    "name": "저작권 무료 음악",
+    "name_short": "음악",
+    "code": "music",
+    "name_plural": "음악",
+    "name_seo": "저작권 무료 음악",
+    "name_seo_plural": "저작권 무료 음악"
+  },
+  {
+    "id": 7,
+    "name": "음향 효과",
+    "name_short": "SFX",
+    "code": "sfx",
+    "name_plural": "사운드 효과",
+    "name_seo": "음향 효과",
+    "name_seo_plural": "음향 효과"
+  },
+  {
+    "id": 8,
+    "name": "에프터 이펙트 소스",
+    "name_short": "AE 템플릿",
+    "code": "ae_template",
+    "name_plural": "애프터 이펙트 템플릿",
+    "name_seo": "에프터 이펙트 소스",
+    "name_seo_plural": "에프터 이펙트 소스"
+  },
+  {
+    "id": 9,
+    "name": "애플 모션 템플릿",
+    "name_short": "애플 모션",
+    "code": "motion_template",
+    "name_plural": "애플 모션 템플릿",
+    "name_seo": "애플 모션 템플릿",
+    "name_seo_plural": "애플 모션 템플릿"
+  },
+  {
+    "id": 11,
+    "name": "360° 사진",
+    "name_short": "360° 사진",
+    "code": "photo_vr",
+    "name_plural": "VR 360° 사진",
+    "name_seo": "360° 사진",
+    "name_seo_plural": "360° 사진"
+  },
+  {
+    "id": 12,
+    "name": "360° 영상",
+    "name_short": "360° 영상",
+    "code": "video_vr",
+    "name_plural": "VR 360° 영상",
+    "name_seo": "360° 영상",
+    "name_seo_plural": "360° 영상"
+  },
+  {
+    "id": 14,
+    "name": "GIF",
+    "name_short": "GIF",
+    "code": "gif",
+    "name_plural": "GIF",
+    "name_seo": "GIF",
+    "name_seo_plural": "GIF"
+  },
+  {
+    "id": 15,
+    "name": "프리미어 프로 템플릿",
+    "name_short": "프리미어 템플릿",
+    "code": "pr_template",
+    "name_plural": "프리미어 프로 템플릿",
+    "name_seo": "프리미어 프로 템플릿",
+    "name_seo_plural": "프리미어 프로 템플릿"
+  },
+  {
+    "id": 16,
+    "name": "모션 그래픽 템플릿",
+    "name_short": "모션 그래픽",
+    "code": "mg_template",
+    "name_plural": "모션 그래픽 템플릿",
+    "name_seo": "모션 그래픽 템플릿",
+    "name_seo_plural": "모션 그래픽 템플릿"
+  },
+  {
+    "id": 19,
+    "name": "이펙트 애니메이션 사전설정 후",
+    "name_short": "AE 프리셋",
+    "code": "ae_preset",
+    "name_plural": "애프터 이펙트 프리셋",
+    "name_seo": "이펙트 애니메이션 사전설정 후",
+    "name_seo_plural": "이펙트 애니메이션 사전설정 후"
+  },
+  {
+    "id": 20,
+    "name": "프리미어 프로 이펙트 사전설정",
+    "name_short": "프리미어 프리셋",
+    "code": "pr_preset",
+    "name_plural": "프리미어 프로 프리셋",
+    "name_seo": "프리미어 프로 이펙트 사전설정",
+    "name_seo_plural": "프리미어 프로 이펙트 사전설정"
+  },
+  {
+    "id": 21,
+    "name": "Lottie 애니메이션",
+    "name_short": "Lottie",
+    "code": "lottie",
+    "name_plural": "Lottie",
+    "name_seo": "Lottie 애니메이션",
+    "name_seo_plural": "Lottie 애니메이션"
+  }
+]

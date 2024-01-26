@@ -1,0 +1,472 @@
+<template>
+  <div>
+    <div class="container py-5">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="mb-0">
+            List Name
+          </h1>
+          <ul class="list-inline lead">
+            <li class="list-inline-item">
+              <span class="badge badge-pill badge-light">HD</span>
+            </li>
+            <li class="list-inline-item">
+              <span class="badge badge-pill badge-light">14 <i class="fas mes icon-after-effects"></i></span>
+            </li>
+            <li class="list-inline-item">
+              <span class="badge badge-pill badge-light">4 <i class="fas mes icon-music"></i></span>
+            </li>
+          </ul>
+          <div>
+            <p>Description of List that user can write themselves.</p>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-sm btn-white-secondary shadow-sm text-nowrap" href="#"><i class="fas fa-pencil fa-fw"></i> Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- SEARCH HEADER - Mediatypes & Display Settings -->
+      <div class="d-flex flex-column-reverse d-xl-flex flex-xl-row align-items-xl-center border-bottom justify-content-between mb-3">
+        <!-- SUB-MEDIA TYPE + RESULTS COUNT TABS -->
+        <ul class="nav nav-tabs border-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">All <small class="d-none d-md-inline">(15)</small></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">After Effects Templates <small class="d-none d-md-inline">(14)</small></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Music <small class="d-none d-md-inline">(4)</small></a>
+          </li>
+        </ul>
+
+        <!-- DISPLAY SETTINGS & MOBILE FILTER TOGGLE -->
+        <div>
+          <div class="d-flex justify-content-between justify-content-lg-end justify-content-xl-between">
+            <!-- MOBILE FILTER TOGGLE BUTTON -->
+            <div class="d-block d-lg-none">
+              <button id="btn-search-filter" class="btn btn-sm btn-light">
+                <i class="fas fa-filter"></i> フィルター
+              </button>
+            </div>
+
+            <!-- MORE DISPLAY SETTINGS BUTTON -->
+            <div class="d-block">
+              <!-- DISPLAY SETTINGS -->
+              <!-- <label class="mr-2 mb-0 small d-none d-md-inline-block" for="inline-sort-by">並べ替え</label>
+              <div class="form-inline d-none d-md-inline-block mr-3">
+                <select class="custom-select custom-select-sm" id="inline-sort-by">
+                  <option value="match" selected>最適のもの</option>
+                  <option value="popular">人気の高いもの</option>
+                  <option value="latest">最新のもの</option>
+                  <option value="price">価格：低→高</option>
+                  <option value="price-desc">価格：高→低</option>
+                  <option value="duration">長さ</option>
+                </select>
+              </div> -->
+              <button
+                class="btn btn-sm btn-light"
+                data-toggle="modal"
+                data-target="#search-display-settings"
+              >
+                <i class="fas fa-cog"></i>
+                <span class="d-inline d-md-none">&nbsp;表示設定</span>
+              </button>
+              <div
+                class="modal fade"
+                id="search-display-settings"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">表示設定</h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-left text-sm-right">
+                      <form>
+                        <div class="form-group row d-flex d-md-none">
+                          <label class="col-sm-6 col-form-label" for="sort-by">並べ替え</label>
+                          <div class="col-sm-6">
+                            <select class="custom-select" id="sort-by">
+                              <option value="match" selected>最適のもの</option>
+                              <option value="popular">人気の高いもの</option>
+                              <option value="latest">最新のもの</option>
+                              <option value="price">価格：低→高</option>
+                              <option value="price-desc">価格：高→低</option>
+                              <option value="duration">長さ</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="itemsPerPage" class="col-sm-6 col-form-label">検索結果</label>
+                          <div class="col-sm-6">
+                            <select class="custom-select" id="itemsPerPage" name="itemsPerPage">
+                              <option value="50">50</option>
+                              <option value="100" selected>100</option>
+                              <option value="200">200</option>
+                              <option value="500">500</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="showTitle" class="col-sm-6 col-form-label">タイトルを表示</label>
+                          <div class="col-sm-6 text-left">
+                            <span class="switch switch-sm">
+                              <input type="checkbox" class="switch" id="showTitle">
+                              <label class="hidden" for="showTitle"></label>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            for="keyboardNavigation"
+                            class="col-sm-6 col-form-label"
+                          >キーボードナビゲーション</label>
+                          <div class="col-sm-6 text-left">
+                            <span class="switch switch-sm">
+                              <input type="checkbox" class="switch" id="keyboardNavigation">
+                              <label class="hidden" for="keyboardNavigation"></label>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- DISPLAY SETTINGS & MOBILE FILTER TOGGLE -->
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col col-elements position-relative">
+          <div class="py-3">
+            <h5>After Effects Templates</h5>
+            <template>
+              <ElementCard v-for="element in elements" :key="element.id" :element="element"></ElementCard>
+            </template>
+          </div>
+
+          <div class="py-3">
+            <h5>Music</h5>
+            <template>
+              <ElementCardAudioDesktop v-for="element in music" :key="element.id" :element="element"></ElementCardAudioDesktop>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import ElementCard from '@/components/modules/common/ElementCard.vue';
+import ElementCardAudioDesktop from '@/components/modules/common/ElementCardAudioDesktop.vue';
+
+export default {
+  components: {
+    ElementCard,
+    ElementCardAudioDesktop,
+  },
+  data() {
+    return {
+      music: [
+        {
+          id: 12564622,
+          name: 'Weightlessness',
+          artist: {
+            username: 'NGordy',
+          },
+          url:
+            'https://www.motionelements.com/stock-music-12564622-weightlessness',
+          pro: false,
+          categories: ['穏やかな', 'アンビエント'],
+          duration: '3:27',
+          tempo: 95,
+          loop: false,
+          currency: 'jpy',
+          price: 30960,
+          thumb:
+            '//media-us-west-motionelements.s3.amazonaws.com/m/s/12574/12564622/a-0001.png',
+        },
+        {
+          id: 7729684,
+          name: 'Oversentimental Theme of Love and Regret in a Beech Wood',
+          artist: {
+            username: 'F_Giovannangelo',
+          },
+          url:
+            'https://www.motionelements.com/stock-music-7729684-oversentimental-theme-of-love-and-regret-in-a-beech-wood',
+          pro: true,
+          categories: ['ロマンチック', 'クラシック・交響曲'],
+          duration: '2:36',
+          tempo: 120,
+          loop: false,
+          currency: 'jpy',
+          price: 37410,
+          thumb:
+            'https://media-us-west-motionelements.s3.amazonaws.com/m/s/772/7729684/a-0001.png',
+        },
+        {
+          id: 12700995,
+          name: 'Corporate Inspiration',
+          artist: {
+            username: 'HappyM',
+          },
+          url:
+            'https://www.motionelements.com/ja/stock-music-12700995-corporate-inspiration',
+          pro: false,
+          categories: ['インスピレーション', 'ポップ'],
+          duration: '2:40',
+          tempo: 100,
+          loop: false,
+          currency: 'jpy',
+          price: 30960,
+          thumb:
+            'https://media-us-west-motionelements.s3.amazonaws.com/m/s/12710/12700995/a-0001.png',
+        },
+        {
+          id: 12700951,
+          name: 'Dream Chaser (Hip Hop Trap Beat)',
+          artist: {
+            username: 'aaronscore',
+          },
+          url:
+            'https://www.motionelements.com/ja/stock-music-12700951-dream-chaser-hip-hop-trap-beat',
+          pro: true,
+          categories: ['グラマラス', 'ヒップホップ'],
+          duration: '1:44',
+          tempo: 120,
+          loop: true,
+          currency: 'jpy',
+          price: 25800,
+          thumb:
+            'https://media-us-west-motionelements.s3.amazonaws.com/m/s/12710/12700951/a-0001.png',
+        },
+      ],
+      elements: [
+        {
+          id: 9416064,
+          name: 'Simple Flat Logo CS6+',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/1426/9416064/a-0060.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-9416064-simple-flat-logo-cs6',
+          preview: {
+            mp4:
+              'https://d3auje5car4oak.cloudfront.net/v/1426/9416064_a-01.mp4',
+            webm:
+              'https://d3auje5car4oak.cloudfront.net/v/1426/9416064_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11755389,
+          name: 'Logo reveals',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/11765/11755389/a-0122.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11755389-logo-reveals',
+          preview: {
+            mp4:
+              'https://s3-us-west-2.amazonaws.com/v.motionelements.com/v/11765/11755389_a-01.mp4',
+            webm:
+              'https://s3-us-west-2.amazonaws.com/v.motionelements.com/v/11765/11755389_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11228593,
+          name: 'Flat Logo Reveal',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/11238/11228593/a-0036.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11228593-flat-logo-reveal',
+          preview: {
+            mp4:
+              'https://d3auje5car4oak.cloudfront.net/v/11238/11228593_a-01.mp4',
+            webm:
+              'https://d3auje5car4oak.cloudfront.net/v/11238/11228593_a-01.mp4',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11803953,
+          name: 'Vertical Template For Facebook Instagram',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/11813/11803953/a-0143.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11803953-vertical-template-for-facebook-instagram',
+          preview: {
+            mp4:
+              'https://d3auje5car4oak.cloudfront.net/v/11813/11803953_a-01.mp4',
+            webm:
+              'https://d3auje5car4oak.cloudfront.net/v/11813/11803953_a-01.webm',
+          },
+          aspectRatio: '9:16',
+        },
+        {
+          id: 12378842,
+          name: 'Square Promo',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/12388/12378842/a-0270.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-12378842-square-promo',
+          preview: {
+            mp4:
+              'https://d3auje5car4oak.cloudfront.net/v/12388/12378842_u-01.mp4',
+            webm:
+              'https://d3auje5car4oak.cloudfront.net/v/12388/12378842_u-01.webm',
+          },
+          aspectRatio: '1:1',
+        },
+        {
+          id: 12353403,
+          name: 'Blueprint Logo Reveal',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/12363/12353403/a-0048.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-12353403-blueprint-logo-reveal',
+          preview: {
+            mp4:
+              'https://d3auje5car4oak.cloudfront.net/v/12363/12353403_a-01.mp4',
+            webm:
+              'https://d3auje5car4oak.cloudfront.net/v/12363/12353403_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11498266,
+          name: 'Flat Logo Reveal',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/11508/11498266/a-0030.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11498266-flat-logo-reveal',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/11508/11498266_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/11508/11498266_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 10458927,
+          name: 'Minimal Flat Logo',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/10468/10458927/a-0060.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-10458927-minimal-flat-logo',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/10468/10458927_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/10468/10458927_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 10529117,
+          name: 'Colored Flat Logo Reveal',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/10539/10529117/u-594f9c744f59f.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-10529117-colored-flat-logo-reveal',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/10539/10529117_u-01.mp4',
+            webm: 'https://v.motionelements.com/v/10539/10529117_u-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11229462,
+          name: 'Flat Logo Reveal',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/11239/11229462/a-0045.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11229462-flat-logo-reveal',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/11239/11229462_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/11239/11229462_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11259155,
+          name: 'Flat Logo',
+          src:
+            'https://d1o2pwfline4gu.cloudfront.net/m/t/11269/11259155/a-0601.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11259155-flat-logo',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/11269/11259155_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/11269/11259155_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11501098,
+          name: 'Flat Logo 4k',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/11511/11501098/a-0046.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11501098-flat-logo-4k',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/11511/11501098_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/11511/11501098_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 11047236,
+          name: 'Flat Logo Reveal',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/11057/11047236/a-0120.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-11047236-flat-logo-reveal',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/11057/11047236_u-01.mp4',
+            webm: 'https://v.motionelements.com/v/11057/11047236_u-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+        {
+          id: 8388414,
+          name: 'Miracles Happen',
+          src:
+            'https://d31l02nbp0owar.cloudfront.net/m/t/838/8388414/u-55c45cb2b2cf5.jpg',
+          link:
+            'https://www.motionelements.com/ja/after-effects-template-8388414-miracles-happen',
+          preview: {
+            mp4: 'https://v.motionelements.com/v/838/8388414_a-01.mp4',
+            webm: 'https://v.motionelements.com/v/838/8388414_a-01.webm',
+          },
+          aspectRatio: '16:9',
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>

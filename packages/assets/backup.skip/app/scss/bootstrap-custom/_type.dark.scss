@@ -1,0 +1,37 @@
+// stylelint-disable declaration-no-important, selector-list-comma-newline-after
+
+.ui-dark {
+
+  //
+  // Headings
+  //
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: $headings-color-dark;
+  }
+
+  mark,
+  .mark {
+    background-color: $mark-bg-dark;
+  }
+
+
+  //
+  // Horizontal rules
+  //
+
+  hr {
+    border-top: $hr-border-width solid $hr-border-color-dark;
+  }
+
+
+  //
+  // Misc
+  //
+
+  // Blockquotes
+  .blockquote-footer {
+    color: $blockquote-small-color; // $gray
+  }
+}

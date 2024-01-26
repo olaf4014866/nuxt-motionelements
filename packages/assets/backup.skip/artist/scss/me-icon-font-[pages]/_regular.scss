@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "#{$icomoon-font-family}";
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-regular-version}");
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-regular-version}#iefix")
+      format("embedded-opentype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?#{$icomoon-regular-version}")
+      format("woff2"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?#{$icomoon-regular-version}")
+      format("truetype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?#{$icomoon-regular-version}")
+      format("woff"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?#{$icomoon-regular-version}##{$icomoon-font-family}")
+      format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+[class*="mer icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "#{$icomoon-font-family}" !important;
+  font-weight: 400 !important;
+}

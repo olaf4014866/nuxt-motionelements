@@ -1,0 +1,13 @@
+@each $color, $value in $theme-colors {
+  @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
+}
+
+@each $color-group, $color-levels in $theme-colors-variants {
+  @each $color-level, $value in $color-levels {
+    @if $color-level != "0" {
+      .bg-#{$color-group}.#{map-get($color-levels-map,$color-level)} {
+        background-color: $value !important;
+      }
+    }
+  }
+}

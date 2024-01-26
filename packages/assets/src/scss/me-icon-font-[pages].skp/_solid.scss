@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "#{$icomoon-font-family}";
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-solid-version}");
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-solid-version}#iefix")
+      format("embedded-opentype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?#{$icomoon-solid-version}")
+      format("woff2"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?#{$icomoon-solid-version}")
+      format("truetype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?#{$icomoon-solid-version}")
+      format("woff"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?#{$icomoon-solid-version}##{$icomoon-font-family}")
+      format("svg");
+  font-weight: 900;
+  font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"],
+[class*="me icon-"],
+[class*="mes icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "#{$icomoon-font-family}";
+  font-weight: 900;
+}

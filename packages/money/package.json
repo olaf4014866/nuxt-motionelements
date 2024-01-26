@@ -1,0 +1,11 @@
+{
+  "name": "@motionelements/money",
+  "version": "1.0.0",
+  "description": "money/currency js libray",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "dinero.js": "^1.8.1"
+  }
+}

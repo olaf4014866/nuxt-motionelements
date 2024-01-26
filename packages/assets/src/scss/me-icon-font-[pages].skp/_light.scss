@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "#{$icomoon-font-family}";
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-light-version}");
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?#{$icomoon-light-version}#iefix")
+      format("embedded-opentype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?#{$icomoon-light-version}")
+      format("woff2"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?#{$icomoon-light-version}")
+      format("truetype"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?#{$icomoon-light-version}")
+      format("woff"),
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?#{$icomoon-light-version}##{$icomoon-font-family}")
+      format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+
+[class*="mel icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "#{$icomoon-font-family}" !important;
+  font-weight: 300 !important;
+}

@@ -1,0 +1,145 @@
+<template>
+  <div
+    v-show="pageTotal > 1"
+    class="btn-toolbar btn-toolbar-pagination justify-content-between justify-content-sm-center"
+    role="toolbar"
+  >
+    <button @click="goPrevPage" :disabled="pageNow < 2" type="button" class="btn btn-light mr-2">
+      <font-awesome-icon :icon="['fas','chevron-left']"></font-awesome-icon>
+      {{ $t('pagination.previous') }}
+    </button>
+
+    <div class="btn-group d-none d-sm-flex" role="group">
+      <button @click="goPage(1)" v-show="pageNow >= 2" type="button" class="btn btn-link">1</button>
+
+      <button
+        v-show="pageNow >= 5 && (pageNow-10 != 2) "
+        type="button"
+        class="btn btn-link disabled"
+      >...</button>
+
+      <button
+        v-show="(pageNow-10) >= 2 && pageNow >= (pageNow-10)"
+        @click="goPage(pageNow-10)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow-10}}</button>
+
+      <button
+        v-show="(pageNow-2) >= 2  && pageNow >= (pageNow-2)"
+        @click="goPage(pageNow-2)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow-2}}</button>
+
+      <button
+        v-show="(pageNow-1) >= 2  && pageNow >= (pageNow-1)"
+        @click="goPage(pageNow-1)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow-1}}</button>
+    </div>
+
+    <button href="#" type="button" class="btn btn-simple-dark btn-current disabled">
+      {{pageNow}}
+      <span class="d-inline d-sm-none">/ {{pageTotal}}</span>
+    </button>
+
+    <div class="btn-group mr-2 d-none d-sm-flex" role="group">
+      <button
+        v-show="pageNow+1 < pageTotal"
+        @click="goPage(pageNow+1)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow+1}}</button>
+      <button
+        v-show="pageNow+2 < pageTotal"
+        @click="goPage(pageNow+2)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow+2}}</button>
+      <button
+        v-show="pageNow+10 < pageTotal"
+        @click="goPage(pageNow+10)"
+        type="button"
+        class="btn btn-link"
+      >{{pageNow+10}}</button>
+
+      <button
+        v-show="pageNow+3 < pageTotal || (pageNow+10 == pageTotal-1)"
+        type="button"
+        class="btn btn-link disabled"
+      >...</button>
+      <button
+        v-show="pageNow < pageTotal"
+        @click="goPage(pageTotal)"
+        type="button"
+        class="btn btn-link"
+      >{{pageTotal}}</button>
+    </div>
+
+    <button
+      :disabled="pageNow >= pageTotal"
+      @click="goNextPage"
+      type="button"
+      class="btn btn-light mr-2"
+    >
+      {{ $t('pagination.next') }}
+      <font-awesome-icon :icon="['fas','chevron-right']"></font-awesome-icon>
+    </button>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  name: 'search-pagination',
+  computed: {
+    ...mapState({
+      itemTotel: state => state.search.filter.pageTotal,
+      pageNow: state => state.search.filter.page,
+      pageTotal: state => Math.ceil(state.search.filter.pageTotal / state.search.filter.itemPerPage, 10),
+    }),
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    goPage(page) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.page = page;
+      this.$store.dispatch('search/setFilter', filter);
+      this.$root.$emit('doSearch', filter);
+    },
+    goNextPage() {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      if (filter.page < filter.pageTotal) {
+        filter.page += 1;
+        this.$store.dispatch('search/setFilter', filter);
+        this.$root.$emit('doSearch', filter);
+      }
+    },
+    goPrevPage() {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      if (filter.page > 1) {
+        filter.page -= 1;
+        this.$store.dispatch('search/setFilter', filter);
+        this.$root.$emit('doSearch', filter);
+      }
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.ui-dark {
+  .btn-light {
+    background: $gray-950;
+    border-color: $gray-950;
+
+    @include hover {
+      background-color: $black;
+    }
+  }
+}
+</style>

@@ -1,0 +1,8 @@
+{
+  "name": "@motionelements/assets",
+  "version": "1.0.0",
+  "description": "common frontend assets - css, images, svg ...",
+  "private": true,
+  "main": "index.js",
+  "scripts": {}
+}

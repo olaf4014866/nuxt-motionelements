@@ -1,0 +1,56 @@
+.ui-dark {
+  // Base class
+
+  .nav-link {
+    // Disabled state lightens text
+    &.disabled {
+      color: $nav-link-disabled-color-dark;
+    }
+    &.active, .nav-item.show & {
+      color: $nav-tabs-link-active-color-dark;
+    }
+  }
+
+  //
+  // Tabs
+  //
+
+  .nav-tabs {
+    border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color-dark;
+
+    .nav-link {
+      color: $nav-tabs-link-color-dark;
+      @include hover-focus {
+        border-color: $nav-tabs-link-hover-border-color-dark;
+      }
+
+      &.disabled {
+        color: $nav-link-disabled-color-dark;
+      }
+
+      &:not(.active):hover {
+        color: $nav-tabs-link-hover-color-dark;
+      }
+    }
+
+    .nav-link.active,
+    .nav-item.show .nav-link {
+      color: $nav-tabs-link-active-color-dark;
+      background-color: $nav-tabs-link-active-bg-dark;
+      border-color: $nav-tabs-link-active-border-color-dark;
+    }
+  }
+
+
+  //
+  // Pills
+  //
+
+  .nav-pills {
+    .nav-link.active,
+    .show > .nav-link {
+      color: $nav-pills-link-active-color-dark;
+      background-color: $nav-pills-link-active-bg-dark;
+    }
+  }
+}

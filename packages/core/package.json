@@ -1,0 +1,15 @@
+{
+  "name": "@motionelements/core",
+  "version": "1.0.0",
+  "description": "common layout component",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "v-mask": "^2.2.1",
+    "vue-input-tag": "^2.0.6",
+    "vuelidate": "^0.7.5",
+    "vuelidate-messages": "^0.1"
+  }
+}

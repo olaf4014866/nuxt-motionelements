@@ -1,0 +1,11 @@
+{
+  "name": "@motionelements/testes6",
+  "version": "1.0.0",
+  "description": "[for debug] library use for test ES6 compent",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}

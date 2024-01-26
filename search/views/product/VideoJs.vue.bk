@@ -1,0 +1,78 @@
+<template>
+  <div class="py-6">
+    <div class="container">
+      <h1>
+        Video.js Test
+      </h1>
+
+    </div>
+    <div class="container mb-3">
+      <div class="d-flex justify-content-center">
+        <div class="col-12 col-lg-6">
+          <VideoJsPlayer :options="{
+            autoplay: false,
+            controls: true,
+            fluid: true,
+            sources: [
+              {
+                src: 'https://d3p44rvigeokzf.cloudfront.net/v/10321/10311848_f-118941.mp4?v=1557464379',
+                type: 'video/mp4',
+              },
+              {
+                src: 'https://d3p44rvigeokzf.cloudfront.net/v/10321/10311848_f-118941.webm?v=1557464379',
+                type: 'video/webm',
+              },
+            ],
+          }"
+          ></VideoJsPlayer>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="true"
+      class="container-fluid mb-3">
+      <div class="d-flex justify-content-center">
+        <div class="col-12 col-lg-6">
+          <VideoJsPlayer :options="{
+            projection: 'equirectangular',
+            autoplay: false,
+            controls: true,
+            fluid: true,
+            aspectRatio: '2:1',
+            poster: 'https://media-us-west-motionelements.s3.amazonaws.com/m/s/1542/9532078/a-0720.jpg',
+            sources: [
+              {
+                src: 'https://d3auje5car4oak.cloudfront.net/v/1542/9532078_a-01.mp4',
+                type: 'video/mp4',
+              },
+              {
+                src: 'https://d3auje5car4oak.cloudfront.net/v/1542/9532078_a-01.webm',
+                type: 'video/webm',
+              },
+            ],
+          }"
+          ></VideoJsPlayer>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import VideoJsPlayer from '@/components/modules/common/VideoJsPlayer.vue';
+
+export default {
+  name: 'video-js',
+  components: {
+    VideoJsPlayer,
+  },
+  data() {
+    return {
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>

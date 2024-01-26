@@ -1,0 +1,41 @@
+@mixin product-wrapper-container {
+  @media (max-width: map-get(map-get($card-breakpoints,"sm"),"2")) {
+    width: 100%;
+  }
+
+  @media (min-width: (map-get(map-get($card-breakpoints,"sm"),"2") + 1px)) {
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+
+  @media (min-width: (map-get(map-get($card-breakpoints,"sm"),"2") + 1px)) and (max-width: map-get($grid-breakpoints,"md")) {
+    width: calc(50% - 1rem);
+  }
+
+  @include media-breakpoint-only(md) {
+    width: calc(33.3333% - 1rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: calc(25% - 1rem);
+  }
+}
+
+@mixin product-wrapper-container-lg {
+  @media (max-width: map-get(map-get($card-breakpoints,"lg"),"2")) {
+    width: 100%;
+  }
+
+  @media (min-width: (map-get(map-get($card-breakpoints,"lg"),"2") + 1px)) {
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+
+  @media (min-width: (map-get(map-get($card-breakpoints,"lg"),"2") + 1px)) and (max-width: map-get($grid-breakpoints,"lg")) {
+    width: calc(50% - 1rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: calc(33.3333% - 1rem);
+  }
+}

@@ -1,0 +1,181 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant-custom(
+  $background,
+  $border,
+  $hover-background: darken($background, 7.5%),
+  $hover-border: darken($border, 10%),
+  $active-background: darken($background, 10%),
+  $active-border: darken($border, 12.5%)
+  ) {
+  color: choose-contrast-color($background);
+  @include gradient-bg($background);
+  border-color: $border;
+  @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: choose-contrast-color($hover-background);
+    @include gradient-bg($hover-background);
+    border-color: $hover-border;
+  }
+
+  &:focus,
+  &.focus {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    @if $enable-shadows {
+      box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(choose-contrast-color($background), $border, 15%), .15);
+    } @else {
+      box-shadow: 0 0 0 $btn-focus-width rgba(mix(choose-contrast-color($background), $border, 15%), .15);
+    }
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    color: choose-contrast-color($background);
+    background-color: $background;
+    border-color: $border;
+    // Remove CSS gradients if they're enabled
+    @if $enable-gradients {
+      background-image: none;
+    }
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: choose-contrast-color($active-background);
+    background-color: $active-background;
+    @if $enable-gradients {
+      background-image: none; // Remove the gradient for the pressed/active state
+    }
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows and $btn-active-box-shadow != none {
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(choose-contrast-color($background), $border, 15%), .15);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(choose-contrast-color($background), $border, 15%), .15);
+      }
+    }
+  }
+}
+
+@mixin button-other-variant(
+  $color,
+  $background,
+  $border-color,
+  $color-hover,
+  $active-background,
+  $active-border,
+  $active-color: $color-hover,
+) {
+  color: $color;
+  border-color: $border-color;
+  background-color: $background;
+
+  @include hover {
+    color: $color-hover;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $btn-focus-width rgba($color, .15);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: $active-color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows and $btn-active-box-shadow != none {
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .15);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba($color, .15);
+      }
+    }
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant-custom(
+      map-get(map-get($theme-colors-variants,$color),"0"),
+      map-get(map-get($theme-colors-variants,$color),"0"),
+      map-get(map-get($theme-colors-variants,$color),"-1"),
+      map-get(map-get($theme-colors-variants,$color),"-1"),
+      map-get(map-get($theme-colors-variants,$color),"-2"),
+      map-get(map-get($theme-colors-variants,$color),"0"),
+    );
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-simple-#{$color} {
+    @include button-other-variant(
+      $value,
+      $white,
+      $light,
+      map-get(map-get($theme-colors-variants,$color),"-2"),
+      $white,
+      map-get(map-get($theme-colors-variants,"light"),"-1")
+    );
+
+    &:hover {
+      &.border-0,
+      &.border-top-0,
+      &.border-right-0,
+      &.border-bottom-0,
+      &.border-left-0 {
+        border-color: $light;
+      }
+    }
+  }
+
+  .btn-white-#{$color} {
+    @include button-other-variant(
+      $value,
+      $white,
+      $white,
+      map-get(map-get($theme-colors-variants,$color),"-2"),
+      $white,
+      $white
+    );
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant(
+      map-get(map-get($theme-colors-variants,$color),"-1"),
+      choose-contrast-color($value),
+      $value,
+      $value
+    );
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @include media-breakpoint-only(#{$name}) {
+    .btn-#{$name}-block {
+      display: block;
+      width: 100%;
+    }
+  }
+}

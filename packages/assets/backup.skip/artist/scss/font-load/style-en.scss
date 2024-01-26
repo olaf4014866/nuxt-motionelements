@@ -1,0 +1,76 @@
+// BOOTSTRAP FUNCTIONS, VARIABLES & MIXINS IMPORTS
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// VARIABLE OVERRIDES
+
+@import "src/assets/scss/bootstrap-custom/variables";
+
+// *
+// * FONT-FACE AND FONT-FAMILY
+// *
+
+// Define font-family name
+
+$font-family-en: "Nunito";
+$font-version-date: "191211";
+
+// Set @font-face
+// Provided by https://google-webfonts-helper.herokuapp.com/
+
+$font-version-date: "191211";
+$font-path: "https://static.moele.me/fonts/nunito/#{$font-version-date}";
+$font-filename: "nunito-v12-latin";
+
+/* nunito-regular - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$font-path}/#{$font-filename}-regular.eot'); /* IE9 Compat Modes */
+  src: local('Nunito Regular'), local('Nunito-Regular'),
+       url('#{$font-path}/#{$font-filename}-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/#{$font-filename}-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-regular.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/#{$font-filename}-regular.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+/* nunito-300 - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: url('#{$font-path}/#{$font-filename}-300.eot'); /* IE9 Compat Modes */
+  src: local('Nunito Light'), local('Nunito-Light'),
+       url('#{$font-path}/#{$font-filename}-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/#{$font-filename}-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-300.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/#{$font-filename}-300.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+/* nunito-700 - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: url('#{$font-path}/#{$font-filename}-700.eot'); /* IE9 Compat Modes */
+  src: local('Nunito Bold'), local('Nunito-Bold'),
+       url('#{$font-path}/#{$font-filename}-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/#{$font-filename}-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-700.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/#{$font-filename}-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/#{$font-filename}-700.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+
+
+$font-family-sans-serif: $font-family-en, $font-family-fallback;
+$font-family-base: $font-family-sans-serif;
+
+html:not([lang="ja"]):not([lang="ko"]):not([lang="zh-hant"]) {
+  &,
+  body {
+    font-family: $font-family-base;
+  }
+}

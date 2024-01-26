@@ -1,0 +1,281 @@
+[
+  {
+    "id": "image",
+    "name": "Stock Image ・ GIF",
+    "name_plural": "Images ・ GIFs",
+    "name_short": "Image",
+    "name_short_plural": "Image",
+    "code": "image",
+    "name_seo": "Stock Image ・ GIF",
+    "name_seo_plural": "Stock Image ・ GIF"
+  },
+  {
+    "id": "video",
+    "name": "Stock video footage",
+    "name_plural": "Videos",
+    "name_short": "Video",
+    "name_short_plural": "Video",
+    "code": "video",
+    "name_seo": "Stock video footage",
+    "name_seo_plural": "Stock video footage"
+  },
+  {
+    "id": "ae",
+    "name": "After Effects",
+    "name_plural": "After Effects",
+    "name_short": "AE",
+    "name_short_plural": "AE",
+    "code": "ae",
+    "name_seo": "After Effects",
+    "name_seo_plural": "After Effects"
+  },
+  {
+    "id": "pr",
+    "name": "Premiere Pro",
+    "name_plural": "Premiere Pro",
+    "name_short": "Premiere",
+    "name_short_plural": "Premiere",
+    "code": "pr",
+    "name_seo": "Premiere Pro",
+    "name_seo_plural": "Premiere Pro"
+  },
+  {
+    "id": "3d",
+    "name": "3D models",
+    "name_plural": "3D",
+    "name_short": "3D",
+    "name_short_plural": "3D",
+    "code": "3d",
+    "name_seo": "3D models",
+    "name_seo_plural": "3D models"
+  },
+  {
+    "id": "fcp",
+    "name": "Apple Motion templates",
+    "name_plural": "Apple Motion Templates",
+    "name_short": "Apple Motion",
+    "name_short_plural": "Apple Motion",
+    "code": "fcp",
+    "name_seo": "Apple Motion templates",
+    "name_seo_plural": "Apple Motion templates"
+  },
+  {
+    "id": 1,
+    "name": "Stock Photo",
+    "name_short": "Photo",
+    "code": "photo",
+    "name_plural": "Photos",
+    "name_seo": "Stock Photo",
+    "name_seo_plural": "Stock Photo"
+  },
+  {
+    "id": 2,
+    "name": "Stock Vector",
+    "name_short": "Vector",
+    "code": "vector",
+    "name_plural": "Vectors",
+    "name_seo": "Stock Vector",
+    "name_seo_plural": "Stock Vector"
+  },
+  {
+    "id": 3,
+    "name": "Stock Animation",
+    "name_short": "Animation",
+    "code": "animation",
+    "name_plural": "Animations",
+    "name_seo": "Stock Animation",
+    "name_seo_plural": "Stock Animation"
+  },
+  {
+    "id": 4,
+    "name": "Stock video footage",
+    "name_short": "Live Action",
+    "code": "video_live",
+    "name_plural": "Videos",
+    "name_seo": "Stock video footage",
+    "name_seo_plural": "Stock video footage"
+  },
+  {
+    "id": 5,
+    "name": "3D models",
+    "name_short": "3D",
+    "code": "3d_model",
+    "name_plural": "3D Models",
+    "name_seo": "3D models",
+    "name_seo_plural": "3D models"
+  },
+  {
+    "id": 6,
+    "name": "Background music for video",
+    "name_short": "Music",
+    "code": "music",
+    "name_plural": "Music",
+    "name_seo": "Background music for video",
+    "name_seo_plural": "Background music for video"
+  },
+  {
+    "id": 7,
+    "name": "Sound Effects for Video",
+    "name_short": "SFX",
+    "code": "sfx",
+    "name_plural": "Sound Effects",
+    "name_seo": "Sound Effects for Video",
+    "name_seo_plural": "Sound Effects for Video"
+  },
+  {
+    "id": 8,
+    "name": "After Effects templates",
+    "name_short": "AE Template",
+    "code": "ae_template",
+    "name_plural": "After Effects Templates",
+    "name_seo": "After Effects templates",
+    "name_seo_plural": "After Effects templates"
+  },
+  {
+    "id": 9,
+    "name": "Apple Motion templates",
+    "name_short": "Apple Motion",
+    "code": "motion_template",
+    "name_plural": "Apple Motion Templates",
+    "name_seo": "Apple Motion templates",
+    "name_seo_plural": "Apple Motion templates"
+  },
+  {
+    "id": 11,
+    "name": "360° Photo",
+    "name_short": "360° Photo",
+    "code": "photo_vr",
+    "name_plural": "VR 360° Photos",
+    "name_seo": "360° Photo",
+    "name_seo_plural": "360° Photo"
+  },
+  {
+    "id": 12,
+    "name": "360° Video",
+    "name_short": "360° Video",
+    "code": "video_vr",
+    "name_plural": "VR 360° Videos",
+    "name_seo": "360° Video",
+    "name_seo_plural": "360° Video"
+  },
+  {
+    "id": 14,
+    "name": "GIF",
+    "name_short": "GIF",
+    "code": "gif",
+    "name_plural": "GIFs",
+    "name_seo": "GIF",
+    "name_seo_plural": "GIF"
+  },
+  {
+    "id": 15,
+    "name": "Premiere Pro Template",
+    "name_short": "Premiere Template",
+    "code": "pr_template",
+    "name_plural": "Premiere Pro Templates",
+    "name_seo": "Premiere Pro Template",
+    "name_seo_plural": "Premiere Pro Template"
+  },
+  {
+    "id": 16,
+    "name": "Motion Graphics Template",
+    "name_short": "Motion Graphics",
+    "code": "mg_template",
+    "name_plural": "Motion Graphics Templates",
+    "name_seo": "Motion Graphics Template",
+    "name_seo_plural": "Motion Graphics Template"
+  },
+  {
+    "id": 19,
+    "name": "After Effects Animation Preset",
+    "name_short": "AE Preset",
+    "code": "ae_preset",
+    "name_plural": "After Effects Presets",
+    "name_seo": "After Effects Animation Preset",
+    "name_seo_plural": "After Effects Animation Preset"
+  },
+  {
+    "id": 20,
+    "name": "Premiere Pro Effect Preset",
+    "name_short": "Premiere Preset",
+    "code": "pr_preset",
+    "name_plural": "Premiere Pro Presets",
+    "name_seo": "Premiere Pro Effect Preset",
+    "name_seo_plural": "Premiere Pro Effect Preset"
+  },
+  {
+    "id": 21,
+    "name": "Lottie Animation",
+    "name_short": "Lottie",
+    "code": "lottie",
+    "name_plural": "Lottie",
+    "name_seo": "Lottie Animation",
+    "name_seo_plural": "Lottie Animation"
+  },
+  {
+    "name": "After Effects Plugin",
+    "name_short": "AE Plugin",
+    "name_seo":  "After Effects Plugin",
+    "code": "ae_plugin"
+  },
+  {
+    "name": "Free After Effects Templates",
+    "name_short": "Free AE Templates",
+    "name_seo": "Free After Effects Templates",
+    "code": "ae_free"
+  },
+  {
+    "name": "Free After Effects Plugin",
+    "name_short": "Free AE Plugin",
+    "name_seo": "Free After Effects Plugin",
+    "code": "ae_plugin_free"
+  },
+  {
+    "name": "Free GIFs",
+    "name_short": "Free GIFs",
+    "name_seo": "Free GIFs for commerucial use",
+    "code": "gifs_free"
+  },
+  {
+    "name": "Free Background music",
+    "name_short": "Free Music",
+    "name_seo": "Free Background music",
+    "code": "music_free"
+  },
+  {
+    "name": "Free Stock video footage",
+    "name_short": "Free Video",
+    "name_seo": "Free Stock video footage",
+    "code": "video_free"
+  },
+  {
+    "name": "Free Sound Effects",
+    "name_short": "Free SFX",
+    "name_seo": "Free Sound Effect",
+    "code": "sfx_free"
+  },
+  {
+    "name": "Free Motion Graphics template",
+    "name_short": "Free FCPX template",
+    "name_seo": "Free FCPX Motion Graphics template",
+    "code": "mg_template_free"
+  },
+  {
+    "name": "Free Premiere Pro template",
+    "name_short": "Free Premiere template",
+    "name_seo": "Free Premiere Pro template",
+    "code": "pr_free"
+  },
+  {
+    "name": "Free FCP, Motion template",
+    "name_short": "Free FCP, Motion template",
+    "name_seo": "Free Final Cut Pro, Motion template",
+    "code": "fcp_free"
+  },
+  {
+    "name": "Free Image",
+    "name_short": "Free Image",
+    "name_seo": "Free Image",
+    "code": "image_free"
+  }
+]

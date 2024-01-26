@@ -1,0 +1,2137 @@
+<template>
+  <div :class="{ active: isMobileFacetsActive }" class="col col-facets">
+
+    <!-- for mobile -->
+    <div class="row sticky-top d-block d-lg-none">
+      <div class="col py-3 bg-light">
+        <button @click="disableMobileFacets" type="button" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="filter-title my-0">{{ $t('search.filter') }}</h5>
+      </div>
+    </div>
+
+    <!-- cancel all filter -->
+    <div
+      v-if="hasFilterBar"
+      class="d-block d-lg-none py-3"
+    >
+        <a
+          @click="cancelAllFilter"
+          class="btn btn-block btn-light"
+        >
+          <font-awesome-icon
+            :icon="['fal','times']"
+            fixed-width
+          ></font-awesome-icon>
+          {{ $t('search.clear_all_filters') }}
+        </a>
+    </div>
+    <!-- cancel all filter -->
+
+    <!-- for mobile -->
+    <div class="list-facets py-4">
+
+      <!-- subscription -->
+      <div class="list-facet-item mb-5">
+        <div class="facet-item-header">
+          <h6 class="mb-1">
+            <font-awesome-icon
+              :icon="['fal','me-lightning']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.subscription_elements') }}
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="custom-control custom-checkbox text-secondary small">
+            <input
+              :checked="activeSubscription === '1'"
+              @click="filterSubscription($event)"
+              type="checkbox"
+              class="custom-control-input"
+              id="facet-subscription"
+            >
+            <label class="custom-control-label" for="facet-subscription">
+              {{ $t('search.subscription_elements') }}
+              <span
+                :title="$t('search.subscription_elements_hint')"
+                data-toggle="tooltip"
+                data-placement="right"
+                class="d-inline-block"
+              >
+                <a
+                  :href="`${siteUrlwithLang}/subscribe`"
+                  class="text-info"
+                >
+                  <font-awesome-icon :icon="['fal','info-circle']"></font-awesome-icon>
+                </a>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- subscription -->
+
+
+      <!-- easy to use -->
+      <div
+        :class="{ 'd-none' : hideEasyUseBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 class="mb-1">
+            <font-awesome-icon
+              :icon="['fal','me-easy']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.ease_of_use') }}
+          </h6>
+        </div>
+        <div class="facet-item-body">
+
+          <!-- Editable -->
+          <div
+            :class="{ 'd-none' : hideEditableCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeEditable"
+              @click="filterEditable($event)"
+              id="facet-editable" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-editable">
+              {{ $t('search.editable_in_fcpx') }}
+            </label>
+          </div>
+          <!-- Editable -->
+
+          <!-- Tutorial -->
+          <div
+            :class="{ 'd-none' : hideTutorialCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeTutorial"
+              @click="filterTutorial($event)"
+              id="facet-tutorial" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-tutorial">
+              {{ $t('search.tutorial_available') }}
+            </label>
+          </div>
+          <!-- Tutorial -->
+
+          <!-- Plugins -->
+          <div
+            :class="{ 'd-none' : hidePluginCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activePlugin"
+              @click="filterPlugin($event)"
+              id="facet-plugin" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-plugin">
+              {{ $t('search.no_plugin_required') }}
+            </label>
+          </div>
+          <!-- Plugins -->
+
+          <!-- Skill  -->
+          <div
+            :class="{ 'd-none' : hideSkillCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeSkill"
+              @click="filterSkill($event)"
+              id="facet-easy" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-easy">
+              {{ $t('search.easy_to_use') }}
+              <span
+                :title="$t('search.easy_to_use_hint')"
+                data-toggle="tooltip"
+                data-placement="right"
+                class="d-inline-block"
+              >
+                <a href class="text-info">
+                  <font-awesome-icon :icon="['fal','info-circle']"></font-awesome-icon>
+                </a>
+              </span>
+            </label>
+          </div>
+          <!-- Skill -->
+
+          <!-- Alpha -->
+          <div
+            :class="{ 'd-none' : hideAlphaCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeAlpha"
+              @click="filterAlpha($event)"
+              id="facet-alpha" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-alpha">
+              {{ $t('search.with_matte_alpha') }}
+            </label>
+          </div>
+          <!-- Alpha -->
+
+          <!-- Loop  -->
+          <div
+            :class="{ 'd-none' : hideLoopCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeLoop"
+              @click="filterLoop($event)"
+              id="facet-loop" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-loop">
+              {{ $t('search.loopable') }}
+            </label>
+          </div>
+          <!-- Loop  -->
+
+          <!-- Textspace  -->
+          <div
+            :class="{ 'd-none' : hideTextspaceCheckbox }"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <input
+              :checked="activeTextspace"
+              @click="filterTextspace($event)"
+              id="facet-textspace" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-textspace">
+              {{ $t('search.suitable_for_text_layouts') }}
+            </label>
+          </div>
+          <!-- Textspace  -->
+
+          <!-- Animated  -->
+          <div v-if="!isProduction"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <!-- <input
+              :checked="activeAnimated"
+              @click="filterAnimated($event)"
+              id="facet-animated" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-animated">
+              Animated
+            </label> -->
+            <input
+              id="facet-animated" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-animated">
+              Animated
+            </label>
+          </div>
+          <!-- Animated  -->
+
+          <!-- Rigged  -->
+          <div v-if="!isProduction"
+            class="custom-control custom-checkbox text-secondary small"
+          >
+            <!-- <input
+              :checked="activeRigged"
+              @click="filterRigged($event)"
+              id="facet-rigged" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-rigged">
+              Rigged
+            </label> -->
+            <input
+              id="facet-rigged" type="checkbox" class="custom-control-input"
+            >
+            <label class="custom-control-label" for="facet-rigged">
+              Rigged
+            </label>
+          </div>
+          <!-- Rigged  -->
+
+        </div>
+      </div>
+
+      <!-- formats -->
+      <div v-if="!isProduction"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterFormatsTitleBar" class="mb-1" data-toggle="collapse" href="#facet-formats">
+            <font-awesome-icon
+              :icon="['fal','me-format']"
+              fixed-width
+            ></font-awesome-icon>
+            Formats
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-formats">
+            <div class="text-secondary">
+
+              <!-- <div
+                v-for="(info, key) in facetFormats" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeFormat"
+                  :id="'facet-formats-'+key"
+                  :value="key"
+                  @click="filterFormat($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-formats-'+key">
+                  {{info.name}}
+                </label>
+              </div> -->
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-formats-obj" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-formats-obj">
+                  .obj
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-formats-c4d" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-formats-c4d">
+                  .c4d
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- formats -->
+
+      <!-- version compatibility -->
+      <div
+        :class="{ 'd-none' : hideVersionsBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterVersionTitleBar" class="mb-1" data-toggle="collapse" href="#facet-version">
+            <font-awesome-icon
+              :icon="['fal','desktop']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.version') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse text-secondary" id="facet-version">
+            <div
+              v-for="(info, key) in facetVersions" :key="key"
+              class="custom-control custom-checkbox small"
+            >
+              <input
+                :checked="key == activeSoftwareVersion"
+                :id="'facet-version-'+key"
+                :value="key"
+                @click="filterSoftwareVersion($event)"
+                type="checkbox"
+                class="custom-control-input"
+              >
+              <label
+                class="custom-control-label"
+                :for="'facet-version-'+key"
+              >
+                {{ info.text }}<!--({{ info.count }})-->
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- version compatibility -->
+
+      <!-- software source -->
+      <div v-if="!isProduction"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterSourceTitleBar" class="mb-1" data-toggle="collapse" href="#facet-source">
+            <font-awesome-icon
+              :icon="['fal','desktop']"
+              fixed-width
+            ></font-awesome-icon>
+            Software Source
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-source">
+            <div class="text-secondary">
+
+              <!-- <div
+                v-for="(info, key) in facetSources" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeSource"
+                  :id="'facet-sources-'+key"
+                  :value="key"
+                  @click="filterSources($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-sources-'+key">
+                  {{info.name}}
+                </label>
+              </div> -->
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-sources-blender" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-sources-blender">
+                  Blender
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-sources-c4d" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-sources-c4d">
+                  Cinema 4D
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- software source -->
+
+      <!-- polygon count -->
+      <div v-if="!isProduction"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterPolygonTitleBar" class="mb-1" data-toggle="collapse" href="#facet-polygon">
+            <font-awesome-icon
+              :icon="['fal','me-polygon']"
+              fixed-width
+            ></font-awesome-icon>
+            Poly Count
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-polygon">
+            <div class="text-secondary">
+
+              <!-- <div
+                v-for="(info, key) in facetPolygon" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activePolygon"
+                  :id="'facet-polygon-'+key"
+                  :value="key"
+                  @click="filterPolygon($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-polygon-'+key">
+                  {{info.name}}
+                </label>
+              </div> -->
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-5k" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-5k">
+                  Up to 5k
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-10k" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-10k">
+                  5k to 10k
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-50k" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-50k">
+                  10k to 50k
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-100k" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-100k">
+                  50k to 100k
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-250k" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-250k">
+                  100k to 250k
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox small">
+                <input id="facet-polygon-250k+" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="facet-polygon-250k+">
+                  250k+
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- polygon count -->
+
+
+      <!-- orientation -->
+      <div
+        :class="{ 'd-none' : hideOrientationBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterOrientationTitleBar" class="mb-1" data-toggle="collapse" href="#facet-orientation">
+            <font-awesome-icon
+              :icon="['fal','me-aspect-ratio']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.orientation') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-orientation">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetOrientation" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeOrientation"
+                  :id="'facet-size-'+key"
+                  :value="key"
+                  @click="filterOrientation($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-size-'+key"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- orientation -->
+
+      <!-- fps -->
+      <div
+        :class="{ 'd-none' : hideFpsBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterFpsTitleBar" class="mb-1" data-toggle="collapse" href="#facet-fps">
+            <font-awesome-icon
+              :icon="['fal','me-frame-rate']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.frame_rate") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-fps">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetFps" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeFps"
+                  :id="'facet-fps-'+key"
+                  :value="key"
+                  @click="filterFps($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-fps-'+key">{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fps -->
+
+      <!-- resolution -->
+      <div
+        :class="{ 'd-none' : hideResolutionBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterResolutionTitleBar" class="mb-1" data-toggle="collapse" href="#facet-resolution">
+            <font-awesome-icon
+              :icon="['fal','me-resolution']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.resolution") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-resolution">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetResolution" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeResolution"
+                  :id="'facet-resolution-'+key"
+                  :value="key"
+                  @click="filterResolution($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-resolution-'+key">{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- resolution -->
+
+
+      <!-- types -->
+      <div
+        :class="{ 'd-none' : hideTypesBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterTypeTitleBar" class="mb-1" data-toggle="collapse" href="#facet-type">
+            <font-awesome-icon
+              :icon="['fal','tag']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.type') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-type">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetTypes" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="info.value == activeType"
+                  :id="'facet-cat-'+info.value"
+                  :value="info.value"
+                  @click="filterType($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-cat-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- types -->
+
+
+      <!-- size filter-->
+      <div
+        :class="{ 'd-none' : hideSizesBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterSizeTitleBar" class="mb-1" data-toggle="collapse" href="#facet-size">
+            <font-awesome-icon
+              :icon="['fal','expand-arrows']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.size') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-size">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetSizes" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeSize"
+                  :id="'facet-size-'+key"
+                  :value="key"
+                  @click="filterSizes($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-size-'+key"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- size filter-->
+
+      <!-- genres -->
+      <div
+        :class="{ 'd-none' : hideGenresBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterGenreTitleBar" class="mb-1" data-toggle="collapse" href="#facet-genre">
+            <font-awesome-icon
+              :icon="['fal','music']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.genre') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-genre">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetGenres" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="info.value == activeGenre"
+                  :id="'facet-cat-'+info.value"
+                  :value="info.value"
+                  @click="filterGenres($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-cat-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- genres -->
+
+      <!-- moods -->
+      <div
+        :class="{ 'd-none' : hideMoodsBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterMoodTitleBar" class="mb-1" data-toggle="collapse" href="#facet-mood">
+            <font-awesome-icon
+              :icon="['fal','theater-masks']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.mood') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-mood">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetMoods" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="info.value == activeMood"
+                  :id="'facet-cat-'+info.value"
+                  :value="info.value"
+                  @click="filterMoods($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-cat-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- moods -->
+
+
+      <!-- instruments -->
+      <div
+        :class="{ 'd-none' : hideInstrumentsBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterInstrumentTitleBar" class="mb-1" data-toggle="collapse" href="#facet-instrument">
+            <font-awesome-icon
+              :icon="['fal','guitar']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.instrument') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-instrument">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetInstruments" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="info.value == activeInstrument"
+                  :id="'facet-cat-'+info.value"
+                  :value="info.value"
+                  @click="filterInstruments($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-cat-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- instruments -->
+
+
+      <!-- category -->
+      <div
+        :class="{ 'd-none' : hideCategoriesBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterCategoryTitleBar" class="mb-1" data-toggle="collapse" href="#facet-category">
+            <font-awesome-icon
+              :icon="['fal','tag']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.category') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-category">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetCategories" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  @click="filterCategories($event)"
+                  :checked="info.value == activeCategory"
+                  :id="'facet-cat-'+info.value"
+                  :value="info.value"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-cat-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- category -->
+
+
+      <!-- styles -->
+      <div
+        :class="{ 'd-none' : hideStylesBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterStyleTitleBar" class="mb-1" data-toggle="collapse" href="#facet-style">
+            <font-awesome-icon
+              :icon="['fal','paint-brush']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t('search.style') }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-style">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetStyles" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="info.value == activeStyle"
+                  :id="'facet-style-'+info.value"
+                  :value="info.value"
+                  @click="filterStyles($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label
+                  class="custom-control-label"
+                  :for="'facet-style-'+info.value"
+                >{{info.name}}<!--({{info.count}})--></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- styles -->
+
+
+      <!-- color -->
+      <div
+        :class="{ 'd-none' : hideColorBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterColorTitleBar" class="mb-1" data-toggle="collapse" href="#facet-color">
+            <font-awesome-icon
+              :icon="['fal','tint']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.color") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-color">
+            <input id="search-color-facet" class="color-facet form-control" name="color" type="text" value="">
+          </div>
+        </div>
+      </div>
+      <!-- color -->
+
+      <!-- duration -->
+      <div
+        :class="{ 'd-none' : hideDurationRangeBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterDurationRangeTitleBar" class="mb-1" data-toggle="collapse" href="#facet-duration-range">
+            <font-awesome-icon
+              :icon="['fal','clock']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.duration") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-duration-range">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetDurationRange" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeDurationRange"
+                  :id="'facet-duration-range-'+key"
+                  :value="key"
+                  @click="filterDurationRange($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-duration-range-'+key">
+                  {{info.text}}<!--({{info.count}})-->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- duration -->
+
+      <!-- price -->
+      <div
+        :class="{ 'd-none' : hidePriceRangeBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterPriceRangeTitleBar" class="mb-1" data-toggle="collapse" href="#facet-price-range">
+            <font-awesome-icon
+              :icon="['fal','dollar-sign']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.price") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-price-range">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetPriceRange" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activePriceRange"
+                  :id="'facet-price-'+key"
+                  :value="key"
+                  @click="filterPriceRange($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-price-'+key">
+                  {{info.text}}<!--({{info.count}})-->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- price -->
+
+      <!-- tempo -->
+      <div
+        :class="{ 'd-none' : hideBpmRangeBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterBpmRangeTitleBar" class="mb-1" data-toggle="collapse" href="#facet-bpm-range">
+            <font-awesome-icon
+              :icon="['fal','me-metronome']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.tempo") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-bpm-range">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetBpmRange" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeBpmRange"
+                  :id="'facet-bpm-range-'+key"
+                  :value="key"
+                  @click="filterBpmRange($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-bpm-range-'+key">
+                  {{info.text}}<!--({{info.count}})-->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- tempo -->
+
+
+      <!-- framing -->
+      <div
+        :class="{ 'd-none' : hideFramingBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterFramingTitleBar" class="mb-1" data-toggle="collapse" href="#facet-framing">
+            <font-awesome-icon
+              :icon="['fal','me-framing']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.framing") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-framing">
+            <div class="text-secondary">
+              <div
+                v-for="(info, key) in facetFraming" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeFraming"
+                  :id="'facet-framing-'+key"
+                  :value="key"
+                  @click="filterFraming($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-framing-'+key">
+                  {{info.name}}<!--({{info.count}})-->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- framing -->
+
+
+      <!-- license -->
+      <div
+        :class="{ 'd-none' : hideLicenseBlock }"
+        class="list-facet-item mb-5"
+      >
+        <div class="facet-item-header">
+          <h6 id="filterLicenseTitleBar" class="mb-1" data-toggle="collapse" href="#facet-license">
+            <font-awesome-icon
+              :icon="['fal','file-certificate']"
+              fixed-width
+            ></font-awesome-icon>
+            {{ $t("search.license") }}
+            <font-awesome-icon :icon="['fal','angle-down']" class="float-right"></font-awesome-icon>
+          </h6>
+        </div>
+        <div class="facet-item-body">
+          <div class="collapse" id="facet-license">
+            <div class="text-secondary">
+
+              <div
+                v-for="(info, key) in facetLicense" :key="key"
+                class="custom-control custom-checkbox small"
+              >
+                <input
+                  :checked="key == activeLicense"
+                  :id="'facet-license-'+key"
+                  :value="key"
+                  @click="filterLicense($event)"
+                  type="checkbox"
+                  class="custom-control-input"
+                >
+                <label class="custom-control-label" :for="'facet-license-'+key">
+                  {{info.name}}<!--({{info.count}})-->
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- license -->
+
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  name: 'search-facet',
+  components: {},
+  computed: {
+    ...mapState({
+
+      isMobileFacetsActive: state => state.site.isMobileFacetsActive,
+      isUploading: state => state.member.upload.status,
+      uploadProgress: state => state.member.upload.progress,
+
+      hasFilterBar: state => state.search.hasFilterBar,
+
+      activeSubscription: state => state.search.filter.subscription,
+
+      activeEditable: state => state.search.filter.editable,
+      activeTutorial: state => state.search.filter.tutorial,
+      activePlugin: state => state.search.filter.plugin,
+      activeSkill: state => state.search.filter.skill,
+      activeTextspace: state => state.search.filter.textspace,
+      activeAlpha: state => state.search.filter.alpha,
+      activeLoop: state => state.search.filter.loop,
+
+      activeSoftwareVersion: state => state.search.filter.softwareVersion,
+      activeOrientation: state => state.search.filter.orientation,
+      activeResolution: state => state.search.filter.resolution,
+      activeFps: state => state.search.filter.fps,
+
+      activeType: state => state.search.filter.type,
+      activeSize: state => state.search.filter.size,
+      activeCategory: state => state.search.filter.category,
+      activeStyle: state => state.search.filter.style,
+      activeColor: state => state.search.filter.color,
+      activeGenre: state => state.search.filter.genre,
+      activeInstrument: state => state.search.filter.instrument,
+      activeMood: state => state.search.filter.mood,
+      activeDurationRange: state => state.search.filter.durationRange,
+      activeFraming: state => state.search.filter.framing,
+      activeBpmRange: state => state.search.filter.bpmRange,
+      activePriceRange: state => state.search.filter.priceRange,
+      activeLicense: state => state.search.filter.license,
+
+    }),
+    isProduction: function () {
+      return process.env.VUE_APP_ENV === 'production';
+    },
+    siteUrlwithLang: function () {
+      const domain = process.env.VUE_APP_SITE_URL;
+      const lang = this.$store.getters['site/currentLanguage'];
+
+      let url = `${domain}/${lang}`;
+      if (lang === 'en') {
+        url = `${domain}`;
+      }
+
+      return url;
+    },
+    hideEasyUseBlock() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = false;
+      const disableMediaType = [
+        'sfx',
+        'lottie',
+      ];
+
+      if (disableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = true;
+      }
+
+      return hide;
+    },
+
+    // on easy use filter checkbox
+    hideEditableCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+        'motion-template',
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    hideTutorialCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+        'ae',
+        'ae-template',
+        'ae-preset',
+        'pr',
+        'pr-template',
+        'pr-preset',
+        'mg-template',
+        'motion-template',
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    hidePluginCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+        'pr-template',
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    hideSkillCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    hideTextspaceCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = false;
+      const disableMediaType = [
+        'ae',
+        'ae-template',
+        'ae-preset',
+        'pr',
+        'pr-template',
+        'pr-preset',
+        'mg-template',
+        'motion-template',
+        'music',
+        'sfx',
+        '3d-model',
+      ];
+
+      if (disableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = true;
+      }
+
+      return hide;
+    },
+    hideAlphaCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+        'video',
+        'animation',
+        'video-live',
+        'video-vr',
+        'image',
+        'photo',
+        'vector',
+        'gif',
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    hideLoopCheckbox() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = true;
+      const enableMediaType = [
+        'video',
+        'animation',
+        'video-live',
+        'video-vr',
+        'music',
+      ];
+
+      if (enableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = false;
+      }
+
+      return hide;
+    },
+    // on easy use filter checkbox
+
+    // all filters
+    hideVersionsBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetVersions']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetVersions() {
+      return this.$store.getters['search/facetVersions'];
+    },
+    hideOrientationBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetOrientations']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetOrientation() {
+      return this.$store.getters['search/facetOrientations'];
+    },
+    hideResolutionBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetResolutions']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetResolution() {
+      return this.$store.getters['search/facetResolutions'];
+    },
+    hideFpsBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetFps']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetFps() {
+      return this.$store.getters['search/facetFps'];
+    },
+    hideTypesBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetTypes']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetTypes() {
+      return this.$store.getters['search/facetTypes'];
+    },
+    hideSizesBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetSizes']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetSizes() {
+      return this.$store.getters['search/facetSizes'];
+    },
+    hideCategoriesBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetCategories']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetCategories() {
+      const categorys = this.$store.getters['search/facetCategories'];
+      return _.sortBy(categorys, ['name']);
+    },
+    hideStylesBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetStyles']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetStyles() {
+      const styles = this.$store.getters['search/facetStyles'];
+      return _.sortBy(styles, ['name']);
+    },
+    hideColorBlock() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'].id;
+
+      let hide = false;
+      const disableMediaType = [
+        'music',
+        'sfx',
+        'lottie',
+      ];
+
+      if (disableMediaType.indexOf(currentMediaType) >= 0) {
+        hide = true;
+      }
+
+      return hide;
+    },
+    facetColor() {
+      return false;
+    },
+    hideGenresBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetGenres']) > 0;
+      return (hasContent && this.isAudio()) ? false : true;
+    },
+    facetGenres() {
+      return this.$store.getters['search/facetGenres'];
+    },
+    hideInstrumentsBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetInstruments']) > 0;
+      return (hasContent && this.isAudio()) ? false : true;
+    },
+    facetInstruments() {
+      return this.$store.getters['search/facetInstruments'];
+    },
+    hideMoodsBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetMoods']) > 0;
+      return (hasContent && this.isAudio()) ? false : true;
+    },
+    facetMoods() {
+      return this.$store.getters['search/facetMoods'];
+    },
+    hideDurationRangeBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetDurationRange']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetDurationRange() {
+      return this.$store.getters['search/facetDurationRange'];
+    },
+    hideFramingBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetFramings']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetFraming() {
+      return this.$store.getters['search/facetFramings'];
+    },
+    hideBpmRangeBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetBpmRange']) > 0;
+      return (hasContent && this.isAudio()) ? false : true;
+    },
+    facetBpmRange() {
+      return this.$store.getters['search/facetBpmRange'];
+    },
+    hidePriceRangeBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetPriceRange']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetPriceRange() {
+      return this.$store.getters['search/facetPriceRange'];
+    },
+    hideLicenseBlock() {
+      const hasContent = _.size(this.$store.getters['search/facetLicenses']) > 0;
+      return (hasContent) ? false : true;
+    },
+    facetLicense() {
+      return this.$store.getters['search/facetLicenses'];
+    },
+    // all filters
+
+
+  },
+  created() {},
+  mounted() {
+    this.$root.$on('filterGenres', (element) => {
+      this.filterGenres(element);
+    });
+
+    this.$root.$on('filterCategories', (element) => {
+      this.filterCategories(element);
+    });
+
+    // event for filter collapse effect
+    $('[data-toggle="collapse"]').on('click', function () {
+      const $target = $($(this).attr('href'));
+      const $sibling = $(this)
+        .siblings('.collapse')
+        .not($target);
+      const $arrow = $($(this).find('.fa-angle-down'));
+      $sibling.toggleClass('show');
+      $arrow.toggleClass('fa-flip-vertical');
+    });
+
+    // set bootstrap tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // init spectrum colorpicker
+    $('#search-color-facet').spectrum({
+      color: '',
+      preferredFormat: 'hex',
+      flat: true,
+      showInput: true,
+      allowEmpty: true,
+      showPaletteOnly: true,
+      palette: ['#000000', '#666666', '#ffffff', '#ff0000', '#ff9900', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#9900ff', '#ff00ff'],
+      togglePaletteOnly: true,
+      togglePaletteMoreText: this.$i18n.t('search.more'),
+      togglePaletteLessText: this.$i18n.t('search.less'),
+      cancelText: this.$i18n.t('search.cancel'),
+      chooseText: this.$i18n.t('search.choose'),
+    });
+    $('#search-color-facet').on('change', this.filterColor);
+  },
+  methods: {
+    isAudio() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+
+      let status = false;
+      if (currentMediaType.isAudio) {
+        status = true;
+      }
+
+      return status;
+    },
+    cancelAllFilter() {
+      this.$root.$emit('doCancelAllFilter');
+    },
+
+    disableMobileFacets() {
+      this.$store.dispatch('site/disableMobileFacets');
+    },
+
+    filterSubscription(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+
+      sessionStorage.setItem('ME_subscriptionFilter', JSON.stringify(status));
+
+      filter.subscription = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.subscription.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+
+    // on easy use filter checkbox
+    filterEditable(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.editable = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.editable.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterTutorial(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.tutorial = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.tutorial.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterPlugin(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? -1 : 0;
+      filter.plugin = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.plugin.status = (status === -1) ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterSkill(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.skill = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.skill.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterTextspace(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.textspace = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.textspace.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterAlpha(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.alpha = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.alpha.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterLoop(e) {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const status = e.target.checked ? 1 : 0;
+      filter.loop = status;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.loop.status = status ? true : false;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    // on easy use filter checkbox
+
+
+    // all filters
+    filterSoftwareVersion(e) {
+      let softwareVersion = '';
+      if (e.target.checked) {
+        softwareVersion = e.target.value;
+      }
+      const state = softwareVersion ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.softwareVersion = softwareVersion;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.softwareVersion.status = state;
+      filterBar.softwareVersion.value = softwareVersion;
+
+      const mapVersions = this.$store.getters['search/facetVersions'];
+      if (_.has(mapVersions, softwareVersion)) {
+        filterBar.softwareVersion.value = mapVersions[softwareVersion].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterOrientation(e) {
+      let orientation = '';
+      if (e.target.checked) {
+        orientation = e.target.value;
+      }
+      const state = orientation ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.orientation = orientation;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.orientation.status = state;
+      filterBar.orientation.value = orientation;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterResolution(e) {
+      let resolution = '';
+      if (e.target.checked) {
+        resolution = e.target.value;
+      }
+      const state = resolution ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.resolution = resolution;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.resolution.status = state;
+      filterBar.resolution.value = resolution;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterFps(e) {
+      let fps = '';
+      if (e.target.checked) {
+        fps = e.target.value;
+      }
+      const state = fps ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.fps = fps;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.fps.status = state;
+      filterBar.fps.value = fps;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterType(e) {
+      let type = '';
+      if (e.target.checked) {
+        type = e.target.value;
+      }
+      const state = type ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.type = type;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.type.status = state;
+      filterBar.type.value = type;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterSizes(e) {
+      let size = '';
+      if (e.target.checked) {
+        size = e.target.value;
+      }
+      const state = size ? true : false;
+      // console.log(size);
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.size = size;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.size.status = state;
+      filterBar.size.value = size;
+
+      const mapSize = this.$store.getters['search/mapSizes'];
+      if (_.has(mapSize, size)) {
+        filterBar.size.value = mapSize[size];
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterCategories(e) {
+      let category = '';
+
+      // click from facets
+      if (_.size(e.target) && e.target.checked) {
+        category = e.target.value;
+      }
+
+      // click from element card
+      if (_.size(e.categories)) {
+        category = e.categories[0].id.toString();
+      }
+
+      const state = category ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.category = category;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.category.status = state;
+      filterBar.category.value = category;
+
+      const mapCategories = this.$store.getters['search/mapCategories'];
+      const mapKey = _.findKey(mapCategories, { id: category });
+      if (mapKey >= 0) {
+        filterBar.category.value = mapCategories[mapKey].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterStyles(e) {
+      let style = '';
+      if (e.target.checked) {
+        style = e.target.value;
+      }
+      const state = style ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.style = style;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.style.status = state;
+      filterBar.style.value = style;
+
+      const mapStyles = this.$store.getters['search/mapStyles'];
+      const mapKey = _.findKey(mapStyles, { id: style });
+      if (mapKey >= 0) {
+        filterBar.style.value = mapStyles[mapKey].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterColor(e, tinycolor) {
+      // console.log('filterColor change - ', e, tinycolor);
+
+      let state = '';
+      let value = '';
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const currentColor = filter.color;
+      const isCancelFilter = (currentColor === 0) ? true : false;
+      if (isCancelFilter) {
+        state = false;
+        value = '';
+
+        const filter = this.$store.getters['search/allSearchFilter'];
+        filter.color = value;
+        filter.page = 1;
+        this.$store.dispatch('search/setFilter', filter);
+
+        const filterBar = this.$store.getters['search/allSearchFilterBar'];
+        filterBar.color.status = state;
+        filterBar.color.value = value;
+        this.$store.dispatch('search/setFilterBar', filterBar);
+
+        $('#search-color-facet').spectrum('set', '');
+        $('#filterColorTitleBar').click();
+
+        this.$root.$emit('doSearch', filter);
+      }
+
+      if (_.size(tinycolor) > 0) {
+        const newColor = tinycolor.toHexString();
+
+        // console.log('currentColor - ', currentColor);
+        // console.log('newColor - ', newColor);
+
+        const hasColor = (_.size(tinycolor) > 0) ? true : false;
+        const hasChange = (currentColor !== newColor) ? true : false;
+        const hasChangeColor = (hasColor && hasChange && !isCancelFilter) ? true : false;
+
+        if (hasChangeColor) {
+          state = true;
+          value = newColor;
+
+          const filter = this.$store.getters['search/allSearchFilter'];
+          filter.color = value;
+          filter.page = 1;
+          this.$store.dispatch('search/setFilter', filter);
+
+          const filterBar = this.$store.getters['search/allSearchFilterBar'];
+          filterBar.color.status = state;
+          filterBar.color.value = value;
+          this.$store.dispatch('search/setFilterBar', filterBar);
+
+          this.$root.$emit('doSearch', filter);
+        }
+      }
+    },
+    filterGenres(e) {
+      let genre = '';
+
+      // click from facets
+      if (_.size(e.target) && e.target.checked) {
+        genre = e.target.value;
+      }
+
+      // click from element card
+      if (_.size(e.genres)) {
+        genre = e.genres[0].id.toString();
+      }
+
+      const state = genre ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.genre = genre;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.genre.status = state;
+      filterBar.genre.value = genre;
+
+      const mapGenres = this.$store.getters['search/mapGenres'];
+      const mapKey = _.findKey(mapGenres, { id: genre });
+      if (mapKey >= 0) {
+        filterBar.genre.value = mapGenres[mapKey].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterInstruments(e) {
+      let instrument = '';
+
+      // click from facets
+      if (_.size(e.target) && e.target.checked) {
+        instrument = e.target.value;
+      }
+
+      // click from element card
+      if (_.size(e.instruments)) {
+        instrument = e.instruments[0].id;
+      }
+
+      const state = instrument ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.instrument = instrument;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.instrument.status = state;
+      filterBar.instrument.value = instrument;
+
+      const mapInstruments = this.$store.getters['search/mapInstruments'];
+      const mapKey = _.findKey(mapInstruments, { id: instrument });
+      if (mapKey >= 0) {
+        filterBar.genre.value = mapInstruments[mapKey].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterMoods(e) {
+      let mood = '';
+
+      // click from facets
+      if (_.size(e.target) && e.target.checked) {
+        mood = e.target.value;
+      }
+
+      // click from element card
+      if (_.size(e.moods)) {
+        mood = e.moods[0].id;
+      }
+
+      const state = mood ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.mood = mood;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.mood.status = state;
+      filterBar.mood.value = mood;
+
+      const mapMoods = this.$store.getters['search/mapMoods'];
+      const mapKey = _.findKey(mapMoods, { id: mood });
+      if (mapKey >= 0) {
+        filterBar.mood.value = mapMoods[mapKey].name;
+      }
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterDurationRange(e) {
+      let durationRange = '';
+      if (e.target.checked) {
+        durationRange = e.target.value;
+      }
+      const state = durationRange ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.durationRange = durationRange;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.durationRange.status = state;
+      filterBar.durationRange.value = durationRange;
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterFraming(e) {
+      let framing = '';
+      if (e.target.checked) {
+        framing = e.target.value;
+      }
+      const state = framing ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.framing = framing;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.framing.status = state;
+      filterBar.framing.value = framing;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterBpmRange(e) {
+      console.log('filterBpmRange');
+
+      let bpmRange = '';
+      if (e.target.checked) {
+        bpmRange = e.target.value;
+      }
+      const state = bpmRange ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.bpmRange = bpmRange;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.bpmRange.status = state;
+      filterBar.bpmRange.value = bpmRange;
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterPriceRange(e) {
+      let priceRange = '';
+      if (e.target.checked) {
+        priceRange = e.target.value;
+      }
+      const state = priceRange ? true : false;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.priceRange = priceRange;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.priceRange.status = state;
+      filterBar.priceRange.value = priceRange;
+
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    filterLicense(e) {
+      let license = '';
+      if (e.target.checked) {
+        license = e.target.value;
+      }
+      const state = license ? true : false;
+
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.license = license;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      console.log('filterLicense', license);
+
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.license.status = state;
+      filterBar.license.value = license;
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    // all filters
+
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+$facet-max-width: 250px;
+
+.col-facets {
+  @media (min-width: 992px) {
+    max-width: $facet-max-width;
+  }
+  @media (max-width: 991.98px) {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    overflow-y: scroll;
+    z-index: 1080;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &.active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// COLORS
+.col-facets {
+  @media (max-width: 991.98px) {
+    background: $white;
+
+    .ui-dark & {
+      background: $black;
+    }
+  }
+}
+</style>

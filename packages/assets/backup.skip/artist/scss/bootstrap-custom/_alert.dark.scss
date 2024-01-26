@@ -1,0 +1,47 @@
+@mixin alert-variant-dark($background, $border, $color) {
+  color: $color;
+  @include gradient-bg($background);
+  border-color: $border;
+
+  hr {
+    border-top-color: lighten($border, 5%);
+  }
+
+  .alert-link {
+    color: lighten($color, 10%);
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.ui-dark {
+  // Headings for larger alerts
+  .alert-heading {
+    // Specified to prevent conflicts of changing $headings-color
+    color: inherit;
+  }
+
+
+  // Dismissible alerts
+  //
+  // Expand the right padding and account for the close button's positioning.
+
+  .alert-dismissible {
+    // Adjust close link position
+    .close {
+      color: inherit;
+    }
+  }
+
+  // Alternate styles
+  //
+  // Generate contextual modifier classes for colorizing the alert.
+
+  @each $color, $value in $theme-colors-dark {
+    .alert-#{$color} {
+      @include alert-variant-dark(theme-color-level-dark($color, $alert-bg-level-dark), theme-color-level-dark($color, $alert-border-level-dark), theme-color-level-dark($color, $alert-color-level-dark));
+    }
+  }
+}

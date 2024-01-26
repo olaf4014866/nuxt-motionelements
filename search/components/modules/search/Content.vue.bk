@@ -1,0 +1,2564 @@
+<template>
+  <div class="col pt-4">
+    <div class="row mb-3">
+
+      <!-- SEARCH INPUT BOX -->
+      <div class="col-12 col-xl-9 col-xxl-6">
+        <SearchBar></SearchBar>
+      </div>
+      <!-- SEARCH INPUT BOX -->
+
+      <!-- SEARCH RECOMMENDATIONS: show if there's keyword or artist suggestion -->
+      <!-- TODO: add suggestionFilters & suggestionSubcategories -->
+      <!--
+      <div
+        v-show="hasSuggestionArtist || hasSuggestionKeyword || suggestionFilters || suggestionSubcategories"
+        class="col-12"
+      >
+      -->
+
+      <div
+        v-show="hasSuggestionArtist || hasSuggestionKeyword"
+        class="col-12"
+      >
+        <p class="d-md-flex mb-0 search-recommendations-wrapper">
+          <span class="text-nowrap pr-3">{{ $t('search.suggestions') }}</span>
+          <span class="search-recommendations d-inline-block">
+
+            <a v-for="(artist, key) in suggestionArtists" :key="`suggestion-artists-${key}`"
+              @click.prevent="goArtistPage(artist)"
+              href="#"
+              class="btn btn-sm btn-simple-secondary mr-1"
+            >
+              <font-awesome-icon :icon="['fas','me-user-artist']" size="lg" title="Artist" class="mr-1"></font-awesome-icon> {{artist}}
+            </a>
+
+            <!-- TODO: add suggestionFilters & suggestionSubcategories -->
+            <!--
+            <a v-for="(filter, key) in suggestionFilters" :key="`suggestion-filters-${key}`"
+              @click.prevent="console.log('test')"
+              href="#"
+              class="btn btn-sm btn-simple-secondary mr-1"
+            >
+              <font-awesome-icon :icon="['fal','search']" size="lg" title="Filter" class="mr-1"></font-awesome-icon>
+              {{ _.startCase(filter.type) }}: {{ _.startCase(filter.value) }}
+            </a>
+
+            <a v-for="(subcat, key) in suggestionSubcategories" :key="`suggestion-subcat-${key}`"
+              @click.prevent="console.log('test')"
+              href="#"
+              class="btn btn-sm btn-simple-secondary mr-1"
+            >
+              <font-awesome-icon :icon="['fal','tag']" size="lg" title="Sub-category" class="mr-1"></font-awesome-icon> {{subcat}}
+            </a>
+            -->
+
+            <a v-for="(keyword, key) in suggestionKeywords" :key="`suggestion-keywords-${key}`"
+              @click.prevent="doSearchKeyword(keyword)"
+              class="btn btn-sm btn-simple-secondary mr-1"
+            >{{keyword}}</a>
+          </span>
+        </p>
+      </div>
+      <!-- SEARCH RECOMMENDATIONS -->
+
+    </div>
+
+    <!-- SEARCH RESULTS QUERY: show if there's keyword search -->
+    <div
+      v-show="searchKeyword!=''"
+      class="row"
+    >
+      <div class="col">
+        <h4 class="mt-3 mb-0">“{{searchKeyword}}” {{ $t('search.search_results') }}</h4>
+      </div>
+    </div>
+
+    <div>
+      <!-- SEARCH HEADER - Mediatypes & Display Settings -->
+      <div class="d-flex flex-column-reverse d-xl-flex flex-xl-row align-items-xl-center border-bottom justify-content-between mb-3">
+        <!-- SUB-MEDIA TYPE + RESULTS COUNT TABS -->
+        <ul class="nav nav-tabs border-0">
+          <li
+            v-for="(mediaType, key) in mediaTypeTabs" :key="key"
+            @click.prevent="changeSubMediaType(mediaType.id)"
+            class="nav-item"
+          >
+            <a
+              @click.prevent=""
+              :class="{ active : (currentMediaType.id === mediaType.id)}"
+              class="nav-link"
+              href="#"
+            >{{mediaType.name}} <!--<small class="d-none d-md-inline">({{mediaType.count}})</small>--></a>
+          </li>
+        </ul>
+        <!-- SUB-MEDIA TYPE + RESULTS COUNT TABS -->
+
+        <!-- DISPLAY SETTINGS & MOBILE FILTER TOGGLE -->
+        <div class="py-3 py-lg-0">
+          <div class="d-flex justify-content-between justify-content-lg-end justify-content-xl-between align-items-center">
+
+            <!-- MOBILE FILTER TOGGLE BUTTON -->
+            <div class="d-block d-lg-none d-xl-none">
+              <button @click="enableMobileFacets" class="btn btn-sidebar-toggle btn btn-light pl-3 ml-n3">
+                <font-awesome-icon :icon="['fas','filter']" class="mr-1"></font-awesome-icon>
+                {{ $t('search.filter') }}
+              </button>
+            </div>
+            <!-- MOBILE FILTER TOGGLE BUTTON -->
+
+            <!-- MORE DISPLAY SETTINGS BUTTON -->
+            <div class="d-block">
+
+              <label
+                class="mr-2 mb-0 lg:small d-none d-md-inline-block"
+                for="inline-sort-by"
+              >
+                <span
+                  :title="$t('search.not_support_when_search_by_color_or_similar')"
+                  data-toggle="tooltip"
+                  data-placement="left"
+                  class="d-inline-block"
+                >
+                    <a
+                      v-show="!enableSort"
+                      href="#" class="text-info"
+                    >
+                    <font-awesome-icon :icon="['fas','info-circle']"></font-awesome-icon>
+                  </a>
+                </span>
+                {{ $t('search.sort_by') }}
+              </label>
+              <div
+                class="form-inline d-none d-md-inline-block mr-3"
+              >
+                <select
+                  :disabled="!enableSort"
+                  v-model="inputSort"
+                  @change="doSearchChangeSort"
+                  id="inline-sort-by"
+                  class="custom-select lg:custom-select-sm"
+                >
+                  <option value="popular">{{ $t('search.most_popular') }}</option>
+                  <option value="match">{{ $t('search.best_match') }}</option>
+                  <option value="latest">{{ $t('search.latest') }}</option>
+
+                  <option v-show="!isImage" value="price">{{ $t('search.price') }}: {{ $t('search.low_to_high') }}</option>
+                  <option v-show="!isImage" value="-price">{{ $t('search.price') }}: {{ $t('search.high_to_low') }}</option>
+                  <option v-show="!isImage" value="duration">{{ $t('search.duration') }}: {{ $t('search.short_to_long') }}</option>
+                  <option v-show="!isImage" value="-duration">{{ $t('search.duration') }}: {{ $t('search.long_to_short') }}</option>
+
+                </select>
+              </div>
+              <a
+                class="btn lg:btn-sm btn-light"
+                data-toggle="modal"
+                data-target="#search-display-settings"
+                href="#"
+              >
+                <font-awesome-icon :icon="['fas','cog']" class="mr-1 mr-md-0"></font-awesome-icon>
+                <span class="d-inline d-md-none"> {{ $t('search.settings') }}</span>
+              </a>
+              <div
+                class="modal fade"
+                id="search-display-settings"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{ $t('search.settings') }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-left text-sm-right">
+                      <form>
+                        <div class="form-group row d-flex d-md-none">
+                          <label
+                            class="col-sm-6 col-form-label"
+                            for="sort-by"
+                          >{{ $t('search.sort_by') }}</label>
+                          <div class="col-sm-6">
+                            <select
+                              :disabled="!enableSort"
+                              v-model="inputSort"
+                              @change="doSearchChangeSort"
+                              alt="searchSort"
+                              class="custom-select"
+                              id="sort-by"
+                            >
+                              <option value="popular">{{ $t('search.most_popular') }}</option>
+                              <option value="match">{{ $t('search.best_match') }}</option>
+                              <option value="latest">{{ $t('search.latest') }}</option>
+
+                              <option v-show="!isImage" value="price">{{ $t('search.price') }}: {{ $t('search.low_to_high') }}</option>
+                              <option v-show="!isImage" value="-price">{{ $t('search.price') }}: {{ $t('search.high_to_low') }}</option>
+                              <option v-show="!isImage" value="duration">{{ $t('search.duration') }}: {{ $t('search.short_to_long') }}</option>
+                              <option v-show="!isImage" value="-duration">{{ $t('search.duration') }}: {{ $t('search.long_to_short') }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            for="itemsPerPage"
+                            class="col-sm-6 col-form-label"
+                          >{{ $t('search.result') }}</label>
+                          <div class="col-sm-6">
+                            <select
+                              v-model="itemPerPage"
+                              class="custom-select"
+                              id="itemsPerPage"
+                              name="itemsPerPage"
+                            >
+                              <option value="10">10</option>
+                              <option value="50" selected>50</option>
+                              <option value="100">100</option>
+                              <option value="200">200</option>
+                              <option value="500">500</option>
+                            </select>
+                          </div>
+                        </div>
+
+                      </form>
+
+                      <!--
+                      <a
+                        :href="`${siteRedirectSearchV3}`"
+                        class="btn btn-light btn-sm track-search-v3 d-block d-sm-none"
+                      >
+                        <font-awesome-icon :icon="['fas','arrow-alt-right']" fixed-width></font-awesome-icon>
+                        {{ $t('search.switch_back_to_old_ui') }}
+                      </a>
+                      -->
+
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >{{ $t('search.close') }}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--
+              <a
+                :href="`${siteRedirectSearchV3}`"
+                class="btn btn-light btn-sm ml-3 track-search-v3 d-none d-sm-inline-block"
+                data-toggle="tooltip"
+                :title="$t('search.switch_back_to_old_ui_hint')"
+              >
+                <font-awesome-icon :icon="['fas','arrow-alt-right']" fixed-width></font-awesome-icon>
+                {{ $t('search.switch_back_to_old_ui') }}
+              </a>
+              -->
+
+            </div>
+            <!-- MORE DISPLAY SETTINGS BUTTON -->
+
+          </div>
+        </div>
+        <!-- DISPLAY SETTINGS & MOBILE FILTER TOGGLE -->
+      </div>
+
+      <!-- FILTERS APPLIED -->
+      <div class="row">
+        <div class="col-12">
+          <!-- FILTER BAR block-->
+          <p class="d-none d-lg-block">
+
+            <a
+              v-cloak
+              v-if="appliedSubscription"
+              @click="cancelFilter('subscription')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.subscription_elements') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedEditable"
+              @click="cancelFilter('editable')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.editable_in_fcpx') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedTutorial"
+              @click="cancelFilter('tutorial')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.tutorial_available') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedPlugin"
+              @click="cancelFilter('plugin')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.no_plugin_required') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedSkill"
+              @click="cancelFilter('skill')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.easy_to_use') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedTextspace"
+              @click="cancelFilter('textspace')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.suitable_for_text_layouts') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedAlpha"
+              @click="cancelFilter('alpha')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.with_matte_alpha') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedLoop"
+              @click="cancelFilter('loop')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.loopable') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+
+            <a
+              v-cloak
+              v-if="appliedSoftwareVersion"
+              @click="cancelFilter('softwareVersion')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.version') }} - {{ appliedSoftwareVersionText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedOrientation"
+              @click="cancelFilter('orientation')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.orientation') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedResolution"
+              @click="cancelFilter('resolution')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.resolution') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedFps"
+              @click="cancelFilter('fps')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ appliedFpsText }} FPS
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedType"
+              @click="cancelFilter('type')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.type') }} - {{ appliedTypeText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedSize"
+              @click="cancelFilter('size')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.size') }} - {{ appliedSizeText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+            <a
+              v-cloak
+              v-if="appliedCategory"
+              @click="cancelFilter('category')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.category') }} - {{ appliedCategoryText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedStyle"
+              @click="cancelFilter('style')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.style') }} - {{ appliedStyleText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedColor"
+              @click="cancelFilter('color')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              <font-awesome-icon
+                :icon="['fas','square']"
+                size="lg"
+                class="filter-applied-color border border-gray rounded"
+                :style="{ color: appliedColorText }"
+                :title="appliedColorText"
+                aria-hidden="true"
+              ></font-awesome-icon>
+              {{ $t('search.color') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedGenre"
+              @click="cancelFilter('genre')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.genre') }} - {{ appliedGenreText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedInstrument"
+              @click="cancelFilter('instrument')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.instrument') }} - {{ appliedInstrumentText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedMood"
+              @click="cancelFilter('mood')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.mood') }} - {{ appliedMoodText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedDurationRange"
+              @click="cancelFilter('durationRange')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.duration') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedFraming"
+              @click="cancelFilter('framing')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.framing') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedBpmRange"
+              @click="cancelFilter('bpmRange')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.tempo') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedPriceRange"
+              @click="cancelFilter('priceRange')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              <template v-if="appliedPriceRangeValue === '-1'">
+                {{ $t('search.price') }} - {{ $t('search.price_free') }}
+              </template>
+
+              <template v-if="appliedPriceRangeValue !== '-1'">
+                {{ $t('search.price') }}
+              </template>
+
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedLicense"
+              @click="cancelFilter('license')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              {{ $t('search.license') }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+            <a
+              v-cloak
+              v-if="appliedArtist"
+              @click="cancelFilter('artist')"
+              class="btn btn-sm btn-success mr-2"
+            >
+              <font-awesome-icon :icon="['fas','me-user-artist']" size="lg" title="Artist" class="mr-1"></font-awesome-icon>
+              {{ $t('search.artist') }} : {{ appliedArtistText }}
+              <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+            </a>
+
+
+            <a
+              v-cloak
+              v-if="hasFilterBar"
+              @click.prevent="cancelAllFilter()"
+              href="#"
+              class="small font-weight-bold ml-2">{{ $t('search.clear_all_filters') }}
+            </a>
+          </p>
+          <!-- FILTER BAR block-->
+        </div>
+
+        <!-- FILTERS Visual Search div -->
+        <div v-cloak v-if="appliedSimilar" class="col-12 col-md-6 col-xxl-4 mb-5">
+          <div class="card shadow-sm bg-light lt border-0 p-3">
+            <div
+              :class="{ 'media-vs' : isNormalLayout }"
+              class="media"
+            >
+
+              <!-- visual searching image -->
+              <div v-if="isNormalLayout" class="media-wrapper mr-3">
+
+                <a v-if="!appliedSimilarImage">
+                  <font-awesome-icon :icon="['fas','file-image']" fixed-width size="3x" class="text-muted"></font-awesome-icon>
+                </a>
+
+                <a v-if="appliedSimilarImage">
+                  <img :src="appliedSimilarImage">
+                </a>
+              </div>
+
+              <!-- audio searching image -->
+              <div v-if="isAudioLayout && !appliedSimilarImage" class="media-wrapper mr-3">
+                <a>
+                  <font-awesome-icon :icon="['fas','file-audio']" fixed-width size="3x" class="text-muted"></font-awesome-icon>
+                </a>
+              </div>
+
+              <div class="media-body">
+                <button
+                  @click="cancelSimilarImageFilter()"
+                  class="close"
+                  type="button"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">
+                    <font-awesome-icon :icon="['fas','times']" fixed-width></font-awesome-icon>
+                  </span>
+                </button>
+                <h6>
+                  <!-- <span class="badge badge-light"> -->
+                  <font-awesome-icon :icon="['fas','me-search-ai']" fixed-width></font-awesome-icon>
+                  {{ $t('search.similar_mediatype_result', {'0': mediaTypeNameShort}) }}
+                </h6>
+                <p class="mb-0 small text-muted">
+                  <a :href="appliedSimilarProductUrl">{{ appliedSimilarProductName }}</a>
+                </p>
+                <!--
+                <p class="mb-0 small text-muted">
+                  [{{ $t('search.File_Name_or_Element_Name') }}]
+                </p>
+                -->
+                <a v-if="isAudioLayout && appliedSimilarImage">
+                  <img class="img-waveform" :src="appliedSimilarImage">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FILTERS Visual Search div -->
+
+      </div>
+      <!-- FILTERS APPLIED -->
+
+      <!-- SEARCH RESULTS -->
+      <div class="row">
+        <transition name="fade" mode="out-in">
+          <ModalWrapperProduct
+            v-if="isModal"
+            @modal-close="handleModalClose"
+            @button-prev="handleModalPrev"
+            @button-next="handleModalNext"
+            :isFirst="isFirst"
+            :isLast="isLast"
+          >
+            <template slot="header">
+              <div class="flex-column">
+                <h2
+                  class="h6 element-title"
+                >
+                  <i :class="`fas fa-lg mr-1 me-bmt ${mediaTypeIcon} text-muted`"></i> {{ elementData.name }}
+                </h2>
+                <div class="btn-categories">
+                  <a
+                    v-for="category in displayCategories"
+                    :key="`category-${category.id}`"
+                    class="btn btn-sm btn-simple-secondary"
+                    :href="$siteUrl(`/${currentMediaType.id}?cat=${category.id}`).search().url()"
+                  >
+                    {{ category.name }}
+                  </a>
+                </div>
+              </div>
+            </template>
+            <ProductPageMobile :element="elementData" @close-product-modal="handleModalClose()" />
+          </ModalWrapperProduct>
+        </transition>
+        <ContentResult>
+
+          <!-- result loading block -->
+          <transition>
+            <div v-if="isLoadingSearch" class="card-element-loader">
+
+              <!-- normal layout -->
+              <template v-if="isNormalLayout">
+                <ElementCardLoader v-for="n in 24" :key="`loader-video-${n}`" />
+              </template>
+              <!-- normal layout -->
+
+              <!-- audio layout -->
+              <template v-if="isAudioLayout">
+                <ElementCardAudioLoader v-for="n in 12" :key="`loader-audio-${n}`" />
+              </template>
+              <!-- audio layout -->
+
+            </div>
+          </transition>
+          <!-- result loading block -->
+
+          <!-- result block -->
+          <transition>
+            <div v-if="!isLoadingSearch">
+
+
+              <template v-if="isNormalLayout">
+                <ProductWrapper
+                  v-for="element in allSearchElements"
+                  :key="`item-video-${element.id}`"
+                  :value="element.id"
+                  :element="element"
+                  :options="{
+                    cardType: 'card',
+                    expand: false,
+                    favorites: true,
+                    enablePlayer: true,
+                    hoverEvent: true,
+                  }"
+                ></ProductWrapper>
+              </template>
+
+              <template v-if="isAudioLayout && !isSearchFreeElement">
+                <ProductWrapper
+                  v-for="element in allSearchElements"
+                  :key="`item-audio-${element.id}`"
+                  :value="element.id"
+                  :element="element"
+                  :options="{
+                    cardType: 'list',
+                    expand: false,
+                    favorites: true,
+                    fullWidth: true,
+                    enablePlayer: true,
+                    hoverEvent: true,
+                  }"
+                ></ProductWrapper>
+              </template>
+
+              <template v-if="isAudioLayout && isSearchFreeElement">
+                <ProductWrapper
+                  v-for="element in allSearchElements"
+                  :key="`item-audio-${element.id}`"
+                  :value="element.id"
+                  :element="element"
+                  :options="{
+                    cardType: 'list-min',
+                    favorites: true,
+                    fullWidth: true,
+                    enablePlayer: true,
+                    hoverEvent: true,
+                  }"
+                ></ProductWrapper>
+              </template>
+
+
+              <!--
+              <template v-if="!isProductModalMode">
+
+                <template v-if="isNormalLayout">
+                  <ProductWrapper
+                    v-for="element in allSearchElements"
+                    :key="`item-video-${element.id}`"
+                    :value="element.id"
+                    :element="element"
+                    :options="{
+                      cardType: 'card',
+                      expand: false,
+                      favorites: true,
+                      enablePlayer: true,
+                      hoverEvent: true,
+                    }"
+                  ></ProductWrapper>
+                </template>
+
+                <template v-if="isAudioLayout && !isSearchFreeElement">
+                  <ProductWrapper
+                    v-for="element in allSearchElements"
+                    :key="`item-audio-${element.id}`"
+                    :value="element.id"
+                    :element="element"
+                    :options="{
+                      cardType: 'list',
+                      expand: false,
+                      favorites: true,
+                      fullWidth: true,
+                      enablePlayer: true,
+                      hoverEvent: true,
+                    }"
+                  ></ProductWrapper>
+                </template>
+
+                <template v-if="isAudioLayout && isSearchFreeElement">
+                  <ProductWrapper
+                    v-for="element in allSearchElements"
+                    @click.native="handleMobileClick(element)"
+                    :key="`item-audio-${element.id}`"
+                    :value="element.id"
+                    :element="element"
+                    :options="{
+                      cardType: 'list-min',
+                      favorites: true,
+                      fullWidth: true,
+                      enablePlayer: true,
+                      hoverEvent: true,
+                    }"
+                  ></ProductWrapper>
+                </template>
+
+              </template>
+              -->
+
+              <!--
+              <template v-if="isNormalLayout && isMobileLayout">
+              </template>
+
+              <template v-if="isAudioLayout && isMobileLayout">
+              </template>
+              -->
+
+            </div>
+          </transition>
+          <!-- result block -->
+
+        </ContentResult>
+
+
+        <ContentAside v-if="isSearchFreeElement">
+          <transition>
+            <AsideElement />
+          </transition>
+        </ContentAside>
+
+      </div>
+      <!-- SEARCH RESULTS -->
+
+    </div>
+
+    <!-- COLLECTIONS RESULTS -->
+    <template v-if="!isLoadingSearch">
+
+      <hr v-cloak v-if="hasCollections" class="mt-0 mb-5">
+
+      <div v-if="hasCollections" class="row mb-3">
+        <div class="col-12">
+          <h6 class="mb-0">
+            <i class="fas fa-fw me-bmt icon-collection"></i>
+            {{ $t('search.bundles') }}
+          </h6>
+        </div>
+      </div>
+
+      <div v-if="hasCollections" class="row">
+        <div class="col col-elements position-relative">
+
+          <template v-if="isNormalLayout">
+            <ProductWrapper
+              v-for="element in allSearchCollections"
+              :key="`collection-${element.id}`"
+              :value="element.id"
+              :element="element"
+              :options="{
+                cardType: 'card',
+                expand: true,
+                favorites: true,
+              }"
+            ></ProductWrapper>
+          </template>
+
+          <template v-if="isAudioLayout">
+            <ProductWrapper
+              v-for="element in allSearchCollections"
+              :key="`collection-${element.id}`"
+              :value="element.id"
+              :element="element"
+              :options="{
+                cardType: 'list',
+                expand: true,
+                favorites: true,
+              }"
+            ></ProductWrapper>
+          </template>
+
+        </div>
+      </div>
+
+    </template>
+    <!-- COLLECTIONS RESULTS -->
+
+    <!-- CROSS SELL ON DEMAND RESULTS -->
+    <transition name="fade" mode="out-in">
+      <template v-if="appliedSubscription && !isSearchFreeElement && !isLoadingSearch">
+        <ContentCrossSell
+          class="mx-n3 my-5"
+          :isNormalLayout="isNormalLayout"
+          :isAudioLayout="isAudioLayout"
+        >
+        </ContentCrossSell>
+      </template>
+    </transition>
+    <!-- CROSS SELL ON DEMAND RESULTS -->
+
+    <!-- PAGINATION -->
+    <div class="row pt-3 pb-6">
+      <div class="col">
+        <Pagination></Pagination>
+      </div>
+    </div>
+    <!-- PAGINATION -->
+
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  name: 'search-content',
+  components: {
+    SearchBar: () => import('@/components/modules/common/SearchBar.vue'),
+
+    ElementCardLoader: () => import('@/components/modules/common/ElementCardLoader.vue'),
+    ElementCardAudioLoader: () => import('@/components/modules/common/ElementCardAudioLoader.vue'),
+    ProductWrapper: () => import('@motionelements/core/src/components/product/ProductWrapper.vue'),
+    // ProductWrapper: () => import('frontend-modules/shared/modules/common/product/ProductWrapper.vue'),
+
+    ContentResult: () => import('@/components/modules/search/ContentResult.vue'),
+    ContentCrossSell: () => import('@/components/modules/search/ContentCrossSell.vue'),
+
+    ContentAside: () => import('@/components/modules/search/ContentAside.vue'),
+    AsideElement: () => import('@/components/modules/search/AsideElement.vue'),
+
+    Pagination: () => import('@/components/modules/search/Pagination.vue'),
+    ProductPageMobile: () => import('@/views/product/ProductPage.Mobile.vue'),
+    ModalWrapperProduct: () => import('@/components/modules/common/modals/ModalWrapper.Product.vue'),
+  },
+  data: function () {
+    return {
+      isSearching: false,
+      isModal: false,
+      elementId: '',
+      elementData: {},
+      isFirst: false,
+      isLast: false,
+    };
+  },
+  computed: {
+    ...mapState({
+      isMobile: state => state.site.isMobile,
+
+      mediaTypeNameShort: state => state.site.currentMediaType.nameShort,
+
+      playElementId: state => state.audioPlayer.element.id,
+      playStatus: state => state.audioPlayer.playStatus,
+
+      currentMediaType: state => state.site.currentMediaType,
+      mediaTypeTabs: state => state.search.mediaTypeTabs,
+
+      mediaTypeName: state => state.site.currentMediaType.name,
+      mediaTypeIcon: state => state.site.currentMediaType.iconClassDefault,
+
+      isLoadingSearch: state => state.site.loadingSearch.status,
+
+      searchKeyword: state => state.search.filter.searchKeyword,
+      totalCount: state => state.search.filter.pageTotal,
+
+      sort: state => state.search.filter.sort,
+
+      // sortBy: state => state.search.filter.sortBy,
+      // sortOrder: state => state.search.filter.sortOrder,
+      // elements: state => state.search.elements,
+      // collections: state => state.search.collections,
+      errorMessage: state => state.search.error.message,
+      errorCode: state => state.search.error.code,
+
+      hasSuggestionKeyword: state => state.search.hasSuggestionKeyword,
+      suggestionKeywords: state => state.search.suggestion.keywords,
+
+      hasSuggestionArtist: state => state.search.hasSuggestionArtist,
+      suggestionArtists: state => state.search.suggestion.artists,
+
+      hasFilterBar: state => state.search.hasFilterBar,
+
+      appliedSubscription: state => state.search.filterBar.subscription.status,
+
+      appliedEditable: state => state.search.filterBar.editable.status,
+      appliedTutorial: state => state.search.filterBar.tutorial.status,
+      appliedPlugin: state => state.search.filterBar.plugin.status,
+      appliedSkill: state => state.search.filterBar.skill.status,
+      appliedTextspace: state => state.search.filterBar.textspace.status,
+      appliedAlpha: state => state.search.filterBar.alpha.status,
+      appliedLoop: state => state.search.filterBar.loop.status,
+
+
+      appliedSoftwareVersion: state => state.search.filterBar.softwareVersion.status,
+      appliedSoftwareVersionText: state => state.search.filterBar.softwareVersion.text,
+
+      appliedOrientation: state => state.search.filterBar.orientation.status,
+      appliedOrientationText: state => state.search.filterBar.orientation.text,
+
+      appliedResolution: state => state.search.filterBar.resolution.status,
+      appliedResolutionText: state => state.search.filterBar.resolution.text,
+
+      appliedFps: state => state.search.filterBar.fps.status,
+      appliedFpsText: state => state.search.filterBar.fps.text,
+
+      appliedType: state => state.search.filterBar.type.status,
+      appliedTypeText: state => state.search.filterBar.type.text,
+
+      appliedSize: state => state.search.filterBar.size.status,
+      appliedSizeText: state => state.search.filterBar.size.text,
+
+      appliedCategory: state => state.search.filterBar.category.status,
+      appliedCategoryText: state => state.search.filterBar.category.text,
+
+      appliedStyle: state => state.search.filterBar.style.status,
+      appliedStyleText: state => state.search.filterBar.style.text,
+
+      appliedColor: state => state.search.filterBar.color.status,
+      appliedColorText: state => state.search.filterBar.color.text,
+
+      appliedGenre: state => state.search.filterBar.genre.status,
+      appliedGenreText: state => state.search.filterBar.genre.text,
+
+      appliedInstrument: state => state.search.filterBar.instrument.status,
+      appliedInstrumentText: state => state.search.filterBar.instrument.text,
+
+      appliedMood: state => state.search.filterBar.mood.status,
+      appliedMoodText: state => state.search.filterBar.mood.text,
+
+      appliedDurationRange: state => state.search.filterBar.durationRange.status,
+      appliedDurationRangeText: state => state.search.filterBar.durationRange.text,
+
+      appliedFraming: state => state.search.filterBar.framing.status,
+      appliedFramingText: state => state.search.filterBar.framing.text,
+
+      appliedBpmRange: state => state.search.filterBar.bpmRange.status,
+      appliedBpmRangeText: state => state.search.filterBar.bpmRange.text,
+
+      appliedPriceRange: state => state.search.filterBar.priceRange.status,
+      appliedPriceRangeText: state => state.search.filterBar.priceRange.text,
+      appliedPriceRangeValue: state => state.search.filterBar.priceRange.value,
+
+      appliedLicense: state => state.search.filterBar.license.status,
+      appliedLicenseText: state => state.search.filterBar.license.text,
+
+      appliedArtist: state => state.search.filterBar.artist.status,
+      appliedArtistText: state => state.search.filterBar.artist.text,
+
+      appliedSimilar: state => state.search.filterBar.similar.status,
+      appliedSimilarImage: state => state.search.filterBar.similar.imageUrl,
+      appliedSimilarProductName: state => state.search.filterBar.similar.productName,
+      appliedSimilarProductUrl: state => state.search.filterBar.similar.productUrl,
+
+      hasCollections: state => ((_.size(state.search.collections)) ? true : false),
+
+    }),
+    suggestionFilters() {
+      return [
+        {
+          type: 'price',
+          value: 'free',
+        },
+      ];
+    },
+    suggestionSubcategories() {
+      return ['Subcategory1', 'Subcategory2'];
+    },
+    siteUrl: function () {
+      return process.env.VUE_APP_SITE_URL;
+    },
+    isMainMediaType() {
+      const currentMediaTypeInfo = this.$store.getters['site/currentMediaType'];
+      const status = currentMediaTypeInfo.isMainMediaType ? true : false;
+
+      return status;
+    },
+    isImage() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+
+      let status = false;
+      if (currentMediaType.isImage) {
+        status = true;
+      }
+
+      return status;
+    },
+    isSearchFreeElement() {
+      return (this.$route.query.price_range === '-1') ? true : false;
+    },
+    isProductModalMode() {
+      return (this.$route.query.product_modal === '1') ? true : false;
+    },
+    isNormalLayout() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+
+      let status = false;
+      if (!currentMediaType.isAudio) {
+        status = true;
+      }
+
+      return status;
+    },
+    isAudioLayout() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+
+      let status = false;
+      if (currentMediaType.isAudio) {
+        status = true;
+      }
+
+      return status;
+    },
+    isMobileLayout() {
+      const currentWindowWidth = this.$store.getters['site/windowWidth'];
+      // console.log(currentWindowWidth);
+
+      let status = false;
+      if (currentWindowWidth < 1200) {
+        status = true;
+      }
+
+      return status;
+    },
+    enableSort() {
+      let status = true;
+
+      // disable sort when searching similar or color
+      const filter = this.$store.getters['search/allSearchFilter'];
+      if (_.size(filter.similar) || _.size(filter.color)) {
+        status = false;
+      }
+
+      console.log('enableSort - ', status);
+
+      return status;
+    },
+    allSearchElements() {
+      return this.$store.getters['search/allSearchElements'];
+    },
+    allSearchCollections() {
+      let allSearchCollections = this.$store.getters['search/allSearchCollections'];
+      const currentWindowWidth = this.$store.getters['site/windowWidth'];
+
+      // only show 3 collection on windows width 800~1433px
+      if (_.inRange(currentWindowWidth, 800, 1433)) {
+        allSearchCollections = _.slice(allSearchCollections, 0, 3);
+      }
+
+      return allSearchCollections;
+    },
+    itemPerPage: {
+      get() {
+        return this.$store.state.search.filter.itemPerPage;
+      },
+      set(value) {
+        const filter = this.$store.getters['search/allSearchFilter'];
+        filter.itemPerPage = value;
+        filter.page = 1;
+        this.$store.dispatch('search/setFilter', filter);
+      },
+    },
+    inputSort: {
+      get() {
+        return this.$store.state.search.filter.inputSort;
+      },
+      set(value) {
+        console.log('inputSort set:', value);
+        const filter = { ...this.$store.getters['search/allSearchFilter'] };
+
+        filter.inputSort = value;
+        filter.sort = value;
+        filter.page = 1;
+
+        this.$store.dispatch('search/setFilter', filter);
+      },
+    },
+    displayCategories() {
+      if (this.elementData && this.elementData.genres) {
+        return this.elementData.genres;
+      }
+      return this.elementData.categories;
+    },
+  },
+  created() {
+  },
+  mounted() {
+    this.$root.$on('clickAudioPlayButton', (element) => {
+      this.clickAudioPlayButton(element);
+    });
+
+    this.$root.$on('doAudioPlayerSetPosition', (event) => {
+      this.doAudioPlayerSetPosition(event);
+    });
+
+    // this.doInitAudioPlayer();
+    this.$audioPlayer.init();
+
+    this.doInit();
+
+    this.$root.$on('doInit', () => {
+      this.doInit();
+    });
+
+    this.$root.$on('doSearch', () => {
+      console.log('emit on doSearch');
+      this.doSearch();
+    });
+
+    this.$root.$on('doSearchKeyword', (keyword) => {
+      this.doSearchKeyword(keyword);
+    });
+
+    this.$root.$on('doCancelAllFilter', () => {
+      this.cancelAllFilter();
+    });
+  },
+  methods: {
+    handleMobileClick(element) {
+      // console.log('handle mobile click /touch');
+      if (this.isMobile) {
+        this.isModal = false;
+        const id = element.id;
+        this.elementData = Object.freeze(element);
+        const elementArr = this.allSearchElements.findIndex(x => x.id === id);
+        // alert(elementArr + 1);
+        this.elementId = id;
+        this.isFirst = false;
+        this.isLast = false;
+        if (elementArr === this.allSearchElements.length - 1) {
+          this.isLast = true;
+        }
+        if (elementArr === 0) {
+          this.isFirst = true;
+        }
+        this.isModal = true;
+        const body = document.querySelector('body');
+        body.style.height = '100%';
+        body.style.overflow = 'hidden';
+      }
+    },
+    handleModalPrev() {
+      const prevNum = this.allSearchElements.findIndex(x => x.id === this.elementId);
+      const prevElement = this.allSearchElements[prevNum - 1];
+      // this.handleMobileClick(prevElement.id);
+      this.handleMobileClick(prevElement);
+    },
+    handleModalNext() {
+      const nextNum = this.allSearchElements.findIndex(x => x.id === this.elementId);
+      const nextElement = this.allSearchElements[nextNum + 1];
+      // this.handleMobileClick(nextElement.id);
+      this.handleMobileClick(nextElement);
+    },
+    handleModalClose() {
+      this.isModal = false;
+      this.elementData = {};
+      try {
+        this.doAudioPlayerStop();
+        this.doVideoPlayerStop();
+      } catch (error) {
+        console.error(error);
+      }
+      const body = document.querySelector('body');
+      body.style = '';
+    },
+    // doInitAudioPlayer: function () {
+    //   console.log('do init audio player');
+    //   const swfUrl = 'https://static.motionelements.com/swf/sm2/2.97a.20170601/xdomain/soundmanager2.swf';
+    //   // const swfUrl = './assets/swf/soundmanager2/';
+
+    //   this.$audioPlayer.setup({
+    //     // id: 'soundManagerPlayer',
+    //     url: swfUrl,
+    //     debugMode: false,
+    //     useHTML5Audio: true,
+    //     flashVersion: 9,
+    //     preferFlash: false,
+    //     useHighPerformance: true,
+    //     onready: function () {
+    //       console.log('audioPlayer onready');
+    //     },
+    //   });
+    // },
+    clickAudioPlayButton(element) {
+      console.log('clickAudioPlayButton element : ', element);
+
+      const playStatus = this.$store.getters['audioPlayer/playStatus'];
+      console.log('clickAudioPlayButton play status : ', playStatus);
+
+      const playingElementId = this.playElementId;
+      const clickElementId = element.id;
+      const isCurrentElement = (clickElementId === playingElementId) ? true : false;
+
+      if (isCurrentElement) {
+        switch (playStatus) {
+          case 'playing':
+            this.doAudioPlayerPause();
+            break;
+          case 'paused':
+            this.doAudioPlayerResume();
+            break;
+          default:
+            this.doAudioPlayerSetup(element);
+            break;
+        }
+      } else {
+        // reset progress bar
+        const progress = {
+          timeElapsed: 0,
+          timeTotal: 0,
+        };
+        this.$store.dispatch('audioPlayer/setPlayProgress', progress);
+
+        this.doAudioPlayerSetup(element);
+      }
+    },
+    doAudioPlayerStop() {
+      this.$audioPlayer.stopAll();
+      this.$store.dispatch('audioPlayer/setPlayStatus', '');
+    },
+    doAudioPlayerPause() {
+      this.$audioPlayer.pauseAll();
+      this.$store.dispatch('audioPlayer/setPlayStatus', 'paused');
+    },
+    doAudioPlayerResume() {
+      this.$audioPlayer.resumeAll();
+      this.$store.dispatch('audioPlayer/setPlayStatus', 'playing');
+    },
+    doAudioPlayerSetup(element) {
+      console.log('doAudioPlayerSetup : ', element);
+
+      this.$audioPlayer.stopAll();
+
+      const audioUrl = element.previews.mp3.url;
+
+      let player = this.$audioPlayer.player.getSoundById('soundManagerPlayer');
+      if (player === undefined) {
+        console.log('doAudioPlayerSetup player undefined', element);
+
+        player = this.$audioPlayer.player.createSound({
+          id: 'soundManagerPlayer',
+          url: audioUrl,
+          whileplaying: () => {
+            console.log('doAudioPlayerSetup player whileplaying - position ', player.position);
+            // console.log('doAudioPlayerSetup player whileplaying', player.estimatedDuration);
+
+            // get waveformWidth when at mobile mode
+            let waveformWidth = this.$store.getters['audioPlayer/waveformWidth'];
+            if (this.isMobileLayout && !waveformWidth) {
+              const $waveformTotalMobile = $('#waveformTotalMobile');
+              waveformWidth = $waveformTotalMobile.width();
+
+              this.$store.dispatch('audioPlayer/setWaveformWidth', waveformWidth);
+            }
+
+            const timeElapsed = Math.round(player.position);
+            const timeTotal = player.duration;
+            const timeEstimated = player.estimatedDuration;
+
+            const progress = {
+              timeElapsed: timeElapsed,
+              timeTotal: timeTotal,
+              timeEstimated: timeEstimated,
+            };
+
+            this.$store.dispatch('audioPlayer/setPlayProgress', progress);
+          },
+          onfinish: () => {
+            // console.log('audioPlayer onfinish');
+            const progress = {
+              timeElapsed: 0,
+              timeTotal: 0,
+              timeEstimated: 0,
+            };
+            this.$store.dispatch('audioPlayer/setPlayProgress', progress);
+            this.$store.dispatch('audioPlayer/setPlayStatus', '');
+            this.$store.dispatch('audioPlayer/setElementInfo', { id: false });
+          },
+        });
+      }
+
+      player.play({
+        url: audioUrl,
+      });
+
+      this.$store.dispatch('audioPlayer/setInitStatus', true);
+      this.$store.dispatch('audioPlayer/setPlayStatus', 'playing');
+      this.$store.dispatch('audioPlayer/setElementInfo', element);
+    },
+    doAudioPlayerSetPosition(info) {
+      console.log('doAudioPlayerSetPosition', info);
+
+      const playStatus = this.$store.getters['audioPlayer/playStatus'];
+      console.log('doAudioPlayerSetPosition : play status - ', playStatus);
+      if (playStatus === '') {
+        return;
+      }
+
+      const player = this.$audioPlayer.player.getSoundById('soundManagerPlayer');
+
+      const event = info.event;
+      const element = info.element;
+      const playingElementId = this.playElementId;
+      const clickElementId = element.id;
+      const isCurrentElement = (clickElementId === playingElementId) ? true : false;
+
+      // when click playing audio's waveform
+      if (playStatus && isCurrentElement) {
+        player.stop();
+
+        const progress = this.$store.getters['audioPlayer/playProgress'];
+        const duration = progress.timeTotal || progress.timeEstimated;
+        const waveformWidth = this.$store.getters['audioPlayer/waveformWidth'];
+        const clickPositionX = event.offsetX;
+        const position = Math.round(clickPositionX * duration / waveformWidth);
+        player.setPosition(position);
+
+        player.play();
+      }
+
+      // when click other audio's waveform
+      if (!isCurrentElement) {
+        const progress = {
+          timeElapsed: 0,
+          timeTotal: 0,
+          timeEstimated: 0,
+        };
+        this.$store.dispatch('audioPlayer/setPlayProgress', progress);
+
+        this.doAudioPlayerSetup(element);
+      }
+    },
+    doVideoPlayerStop() {
+      $('.flowplayer').each(function () {
+        // console.log(this);
+        const id = $(this).attr('id');
+        const player = flowplayer(`#${id}`);
+        player.pause();
+      });
+    },
+
+    doInit() {
+      console.log('doInit');
+
+      Promise.all([
+        this.$store.dispatch('site/getTerms').then((result) => {
+          console.log('site/getTerms', result);
+
+          // this.$store.commit('site/setSupportedCurrencies', result.data.data.currencies);
+
+          // console.log(result);
+          // this.$store.commit('search/setTerms', result.data);
+        }),
+        this.$store.dispatch('site/getMediaTypesInfo').then((result) => {
+          this.tidyMediaTypesName(result);
+        }),
+        this.$store.dispatch('search/getTerms').then((result) => {
+          console.log('search/getTerms', result);
+
+          this.$store.commit('search/setSoftwareVersions', result.data.data.software_versions);
+
+          this.$store.commit('search/setTypes', result.data.data.types);
+          this.$store.commit('search/setCategories', result.data.data.categories);
+          this.$store.commit('search/setStyles', result.data.data.styles);
+          this.$store.commit('search/setGenres', result.data.data.genres);
+          this.$store.commit('search/setInstruments', result.data.data.instruments);
+          this.$store.commit('search/setMoods', result.data.data.moods);
+          // this.$store.commit('search/setLicenses', result.data.data.license);
+        }),
+      ]).then(() => {
+        this.updateFilterForMobile();
+
+        // trigger facets click event
+        this.$root.$emit('updateFilterFromRouter');
+        this.$root.$emit('doSearch');
+      });
+    },
+
+    getSearchPaidContent() {
+      console.log('getSearchPaidContent');
+
+      this.$store.dispatch('search/getSearchPaidResult').then((response) => {
+        // console.log('getSearchPaidResult', response);
+        this.$store.dispatch('search/setSearchPaidResult', response.data);
+      });
+    },
+    getSearchCrossSellContent() {
+      console.log('getSearchCrossSellContent');
+
+      this.$store.dispatch('search/getSearchCrossSellResult').then((response) => {
+        // console.log('getSearchCrossSellResult', response);
+        this.$store.dispatch('search/setSearchCrossSellResult', response.data);
+      });
+    },
+
+    doSearchKeyword(keyword) {
+      // reset search value to default
+      console.log('doSearchKeyword', keyword);
+
+      if (keyword) {
+        const filter = this.$store.getters['search/allSearchFilter'];
+        const searchBar = this.$store.getters['search/searchBar'];
+
+        filter.page = 1;
+        filter.searchKeyword = keyword;
+        searchBar.inputKeyword = keyword;
+
+        this.$store.dispatch('search/setFilter', filter);
+        this.$store.dispatch('search/setSearchBar', searchBar);
+      }
+
+      this.doSearch();
+    },
+    doSearch() {
+      console.log('doSearch', this.isSearching);
+
+      if (this.isSearching) {
+        return;
+      }
+
+      this.isSearching = true;
+
+      this.$scrollToTop();
+
+      try {
+        this.doAudioPlayerStop();
+        this.doVideoPlayerStop();
+      } catch (error) {
+        console.error('do player stop error :', error);
+      }
+
+      this.$store.dispatch('site/setLoadingSearch', { status: true });
+
+      this.$store.dispatch('search/getSearchResult')
+        .then((response) => {
+          // tidyup result with mapping list
+          const result = this.tidySearchResult(response);
+
+          // check apply filter have in response result or reset it
+          // this.checkFilters(result);
+
+          this.generateSubMediaTypeMenu(result);
+
+          this.$store.dispatch('search/setSearchResult', result.data);
+
+          this.$store.dispatch('site/setLoadingSearch', { status: false });
+
+          // prepare teleport product_searched request
+          const searchCurrentPage = result.data.page;
+          const searchItemPerPage = result.data.per_page;
+          const searchItemCount = result.data.total_count;
+
+          const searchParams = this.$store.getters['search/allSearchFilter'];
+          delete searchParams.productModal;
+          delete searchParams.inputSort;
+
+          const searchResultElements = result.data.data.elements;
+          const searchResultCollections = result.data.data.collections;
+          const productsInfo = _.concat(searchResultElements, searchResultCollections);
+
+          const teleportSearchInfo = {
+            'search': {
+              'page': searchCurrentPage,
+              'per_page': searchItemPerPage,
+              'total_count': searchItemCount,
+              'params': searchParams,
+            },
+            'products': productsInfo,
+          };
+
+          this.$teleport.event('product_searched', teleportSearchInfo);
+          // console.log('doSearch teleportSearchInfo', teleportSearchInfo);
+
+          this.isSearching = false;
+        });
+
+      this.$store.dispatch('search/getSearchSuggestionResult')
+        .then((result) => {
+          const suggestion = result.data.data;
+          this.$store.dispatch('search/setSearchSuggestionResult', suggestion);
+        });
+
+      if (this.isSearchFreeElement) {
+        this.getSearchPaidContent();
+      }
+
+      if (this.appliedSubscription) {
+        this.getSearchCrossSellContent();
+      }
+
+      this.$root.$emit('updateRouterFromFilter');
+      this.disableMobileFacets();
+    },
+    doSearchChangeSort() {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.page = 1;
+
+      this.$store.dispatch('search/setFilter', filter);
+      console.log('doSearchChangeSort - ', filter.inputSort, filter);
+
+      this.doSearch();
+    },
+    updateFilterForMobile() {
+      // if is mobile, default show 10 elements
+      const isMobile = this.$store.state.site.isMobile;
+      const notSetCookie = true;
+      if (isMobile && notSetCookie) {
+        const filter = this.$store.getters['search/allSearchFilter'];
+        filter.itemPerPage = 10;
+        this.$store.dispatch('search/setFilter', filter);
+      }
+    },
+    itemCountCheck(count) {
+      let value = count;
+
+      if (count === 1000) {
+        value = '1000+';
+      }
+
+      if (count === 10000) {
+        value = '10000+';
+      }
+
+      return value;
+    },
+    tidySearchResult(result) {
+      // console.log('tidySearchResult', result);
+
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+      // console.log('tidySearchResult mapVersions:', currentMediaType.mainMediaType);
+
+      // set software_version
+      const mapVersions = this.$store.getters['search/mapVersions'];
+      if (result.data.facets.software_version) {
+        Object.keys(result.data.facets.software_version).map((versionId) => {
+          const hasValue = _.has(result.data.facets.software_version, versionId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.software_version[versionId]);
+            const mapKey = _.findKey(mapVersions, { version: versionId });
+            // console.log('software_version', versionId, mapKey);
+
+            if (mapKey) {
+              const name = mapVersions[mapKey].display_version;
+
+              // only show version number when is resolve
+              let textValue = this.$t('search.{version}_and_below', { version: name });
+              if (currentMediaType.mainMediaType === 'resolve') {
+                textValue = name;
+              }
+
+              const info = {
+                value: mapKey,
+                text: textValue,
+                name: name,
+                count: count,
+              };
+              result.data.facets.software_version[versionId] = info;
+            }
+
+            // remove filter if not on api mapping list
+            if (mapKey === undefined) {
+              delete result.data.facets.software_version[versionId];
+            }
+          }
+        });
+      }
+
+      // set orientation
+      if (result.data.facets.orientation) {
+        Object.keys(result.data.facets.orientation).map((orientationId) => {
+          const hasValue = _.has(result.data.facets.orientation, orientationId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.orientation[orientationId]);
+
+            let name = '';
+            switch (orientationId) {
+              case 'horizontal':
+                name = this.$t('search.horizontal');
+                break;
+              case 'vertical':
+                name = this.$t('search.vertical');
+                break;
+              case 'square':
+                name = this.$t('search.square');
+                break;
+              default:
+                break;
+            }
+
+            const info = {
+              value: orientationId,
+              name: name,
+              count: count,
+            };
+            result.data.facets.orientation[orientationId] = info;
+          }
+        });
+      }
+
+      // set resolution
+      if (result.data.facets.resolution) {
+        Object.keys(result.data.facets.resolution).map((resolutionId) => {
+          const hasValue = _.has(result.data.facets.resolution, resolutionId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.resolution[resolutionId]);
+
+            let name = '';
+            switch (resolutionId) {
+              case 'hd':
+                name = this.$t('search.hd');
+                break;
+              case '4k':
+                name = this.$t('search.4k');
+                break;
+              case '8k':
+                name = this.$t('search.8k');
+                break;
+              default:
+                name = resolutionId;
+                break;
+            }
+
+            const info = {
+              value: resolutionId,
+              name: name,
+              count: count,
+            };
+            result.data.facets.resolution[resolutionId] = info;
+          }
+        });
+      }
+
+      // set fps
+      if (result.data.facets.fps) {
+        Object.keys(result.data.facets.fps).map((fpsId) => {
+          const hasValue = _.has(result.data.facets.fps, fpsId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.fps[fpsId]);
+
+            const info = {
+              value: fpsId,
+              name: fpsId,
+              count: count,
+            };
+            result.data.facets.fps[fpsId] = info;
+          }
+        });
+      }
+
+      // set type
+      const mapTypes = this.$store.getters['search/mapTypes'];
+      if (result.data.facets.type) {
+        Object.keys(result.data.facets.type).map((typeKey) => {
+          const hasValue = _.has(result.data.facets.type, typeKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.type[typeKey]);
+            const mapKey = _.findKey(mapTypes, { id: typeKey });
+            if (mapKey) {
+              const type = mapTypes[mapKey];
+              const info = {
+                value: typeKey,
+                name: type.name,
+                count: count,
+              };
+              result.data.facets.type[typeKey] = info;
+            }
+          }
+        });
+      }
+
+      // set size
+      if (result.data.facets.size) {
+        Object.keys(result.data.facets.size).map((sizeKey) => {
+          const hasValue = _.has(result.data.facets.size, sizeKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.size[sizeKey]);
+
+            let name = '';
+            switch (sizeKey) {
+              case 'small':
+                name = this.$t('search.small');
+                break;
+              case 'medium':
+                name = this.$t('search.medium');
+                break;
+              case 'large':
+                name = this.$t('search.large');
+                break;
+              default:
+                break;
+            }
+
+            const info = {
+              value: sizeKey,
+              name: name,
+              count: count,
+            };
+            result.data.facets.size[sizeKey] = info;
+          }
+        });
+      }
+
+      // set genre
+      const mapGenres = this.$store.getters['search/mapGenres'];
+      if (result.data.facets.genre) {
+        Object.keys(result.data.facets.genre).map((genreKey) => {
+          const hasValue = _.has(result.data.facets.genre, genreKey) ? true : false;
+
+
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.genre[genreKey]);
+            const mapKey = _.findKey(mapGenres, { id: genreKey });
+            if (mapKey) {
+              const genre = mapGenres[mapKey];
+              const info = {
+                value: genreKey,
+                name: genre.name,
+                count: count,
+              };
+              result.data.facets.genre[genreKey] = info;
+            }
+          }
+        });
+      }
+
+      // set mood
+      const mapMoods = this.$store.getters['search/mapMoods'];
+      if (result.data.facets.mood) {
+        Object.keys(result.data.facets.mood).map((moodKey) => {
+          const hasValue = _.has(result.data.facets.mood, moodKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.mood[moodKey]);
+            const mapKey = _.findKey(mapMoods, { id: moodKey });
+            if (mapKey) {
+              const mood = mapMoods[mapKey];
+              const info = {
+                value: moodKey,
+                name: mood.name,
+                count: count,
+              };
+              result.data.facets.mood[moodKey] = info;
+            }
+          }
+        });
+      }
+
+      // set instrument
+      const mapInstruments = this.$store.getters['search/mapInstruments'];
+      if (result.data.facets.instrument) {
+        Object.keys(result.data.facets.instrument).map((instrumentKey) => {
+          const hasValue = _.has(result.data.facets.instrument, instrumentKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.instrument[instrumentKey]);
+            const mapKey = _.findKey(mapInstruments, { id: instrumentKey });
+            if (mapKey) {
+              const instrument = mapInstruments[mapKey];
+              const info = {
+                value: instrumentKey,
+                name: instrument.name,
+                count: count,
+              };
+              result.data.facets.instrument[instrumentKey] = info;
+            }
+          }
+        });
+      }
+
+      // set category
+      const mapCategories = this.$store.getters['search/mapCategories'];
+      if (result.data.facets.category) {
+        Object.keys(result.data.facets.category).map((categoryKey) => {
+          const hasValue = _.has(result.data.facets.category, categoryKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.category[categoryKey]);
+            const mapKey = _.findKey(mapCategories, { id: categoryKey });
+            if (mapKey) {
+              const category = mapCategories[mapKey];
+              const info = {
+                value: categoryKey,
+                name: category.name,
+                count: count,
+              };
+              result.data.facets.category[categoryKey] = info;
+            }
+          }
+        });
+      }
+
+      // set style
+      const mapStyles = this.$store.getters['search/mapStyles'];
+      if (result.data.facets.style) {
+        Object.keys(result.data.facets.style).map((styleKey) => {
+          const hasValue = _.has(result.data.facets.style, styleKey) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.style[styleKey]);
+            const mapKey = _.findKey(mapStyles, { id: styleKey });
+            if (mapKey) {
+              const style = mapStyles[mapKey];
+              const info = {
+                value: styleKey,
+                name: style.name,
+                count: count,
+              };
+              result.data.facets.style[styleKey] = info;
+            }
+          }
+        });
+      }
+
+      // set price range and calculation currency
+      const mapCurrencies = this.$store.getters['site/mapCurrencies'];
+      const currentCurrency = this.$store.getters['site/currentCurrency'];
+
+      console.log('tidySearchResult', mapCurrencies);
+      console.log('tidySearchResult', currentCurrency);
+
+      const currencyInfo = (mapCurrencies[currentCurrency]) || mapCurrencies.USD;
+
+      console.log('tidySearchResult', currencyInfo);
+
+      if (result.data.facets.price_range) {
+        Object.keys(result.data.facets.price_range).map((priceString) => {
+          if (!_.size(priceString)) {
+            return;
+          }
+
+          let info = {};
+          const count = this.itemCountCheck(result.data.facets.price_range[priceString]);
+
+          if (priceString === '-1') {
+            info = {
+              value: '-1',
+              text: this.$t('search.price_free'),
+              low: '',
+              high: '',
+              count: count,
+              symbol: '',
+            };
+          }
+
+          if (priceString !== '-1') {
+            const priceLow = priceString.split('-')[0];
+            const priceHigh = priceString.split('-')[1];
+
+            const isOnePrice = priceHigh === undefined;
+
+            // const symbol = currencyInfo.symbol;
+            const currencySymbol = _.get(currencyInfo, 'symbol', '');
+            const currencyRate = _.get(currencyInfo, 'rate', 1);
+
+            // console.log('facets.price_range', priceString, currencyInfo);
+
+            let currencyText = '';
+            if (isOnePrice) {
+              currencyText = `${currencySymbol} ${(priceLow * currencyRate)}`;
+            } else {
+              const priceLowString = `${currencySymbol}${(priceLow * currencyRate)}`;
+              const priceHighString = `${currencySymbol}${(priceHigh * currencyRate)}`;
+              currencyText = `${priceLowString} - ${priceHighString}`;
+
+              // Less then US$ 20
+              if (priceLow === '*') {
+                currencyText = this.$t('search.less_than', { '0': priceHighString });
+              }
+
+              // US$ 40 or more
+              if (priceHigh === '*') {
+                currencyText = this.$t('search.or_more', { '0': priceLowString });
+              }
+            }
+
+            info = {
+              value: priceString,
+              text: currencyText,
+              low: priceLow,
+              high: priceHigh,
+              count: count,
+              symbol: currencySymbol,
+            };
+          }
+
+          // console.log(info);
+          result.data.facets.price_range[priceString] = info;
+        });
+      }
+
+      // set duration range
+      if (result.data.facets.duration_range) {
+        Object.keys(result.data.facets.duration_range).map((durationString) => {
+          if (_.size(durationString)) {
+            const count = this.itemCountCheck(result.data.facets.duration_range[durationString]);
+
+            const stringSeconds = this.$t('search.seconds');
+
+            const durationLow = durationString.split('-')[0];
+            const durationHigh = durationString.split('-')[1];
+
+            const durationHighString = `${durationHigh}${stringSeconds}`;
+            const durationLowString = `${durationLow}${stringSeconds}`;
+
+            let durationText = `${durationLowString} - ${durationHighString}`;
+
+            // Shorter than 20s
+            if (durationLow === '*') {
+              // durationText = `${stringShorter} ${durationHigh}${stringSeconds}`;
+              durationText = this.$t('search.less_than', { '0': durationHighString });
+            }
+
+            // 120s or longer
+            if (durationHigh === '*') {
+              // durationText = `${durationLow}${stringSeconds} ${stringLonger} `;
+              durationText = this.$t('search.or_more', { '0': durationLowString });
+            }
+
+            const info = {
+              value: durationString,
+              text: durationText,
+              low: durationLow,
+              high: durationHigh,
+              count: count,
+            };
+
+            result.data.facets.duration_range[durationString] = info;
+          }
+        });
+      }
+
+      // set framing
+      if (result.data.facets.framing) {
+        Object.keys(result.data.facets.framing).map((framingId) => {
+          const hasValue = _.has(result.data.facets.framing, framingId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.framing[framingId]);
+
+            let name = '';
+            switch (framingId) {
+              case 'cu':
+                name = this.$t('search.close_up');
+                break;
+              case 'ms':
+                name = this.$t('search.medium_shot');
+                break;
+              case 'ls':
+                name = this.$t('search.wide_shot');
+                break;
+              default:
+                break;
+            }
+
+            const info = {
+              value: framingId,
+              name: name,
+              count: count,
+            };
+            result.data.facets.framing[framingId] = info;
+          }
+        });
+      }
+
+      // set bpm range
+      if (result.data.facets.bpm_range) {
+        Object.keys(result.data.facets.bpm_range).map((bpmString) => {
+          if (_.size(bpmString)) {
+            const count = this.itemCountCheck(result.data.facets.bpm_range[bpmString]);
+
+            const bpmLow = bpmString.split(',')[0];
+            const bpmHigh = bpmString.split(',')[1];
+
+            let bpmText = '';
+            switch (bpmString) {
+              case '0,80':
+                bpmText = this.$t('search.slow');
+                break;
+              case '70,110':
+                bpmText = this.$t('search.moderate');
+                break;
+              case '110,150':
+                bpmText = this.$t('search.fast');
+                break;
+              case '140,*':
+                bpmText = this.$t('search.vary_fast');
+                break;
+              default:
+                break;
+            }
+
+            const info = {
+              value: bpmString,
+              text: bpmText,
+              low: bpmLow,
+              high: bpmHigh,
+              count: count,
+            };
+
+            result.data.facets.bpm_range[bpmString] = info;
+          }
+        });
+      }
+
+      // set license
+      if (result.data.facets.license) {
+        Object.keys(result.data.facets.license).map((licenseId) => {
+          const hasValue = _.has(result.data.facets.license, licenseId) ? true : false;
+          if (hasValue) {
+            const count = this.itemCountCheck(result.data.facets.license[licenseId]);
+
+            let name = '';
+            switch (licenseId) {
+              case 'rf':
+                name = this.$t('search.royalty_free_rf');
+                break;
+              case 'pro':
+                name = this.$t('search.pro_registered');
+                break;
+              case 'editorial':
+                name = this.$t('search.editorial');
+                break;
+              default:
+                break;
+            }
+
+            const info = {
+              value: licenseId,
+              name: name,
+              count: count,
+            };
+            result.data.facets.license[licenseId] = info;
+          }
+        });
+      }
+
+
+      // calculation colletcion's element currency
+      // if (result.data.data.collections) {
+      //   Object.keys(result.data.data.collections).map((collectionKey) => {
+      //     const hasValue = _.has(result.data.data.collections, collectionKey) ? true : false;
+      //     if (hasValue) {
+      //       const price = result.data.data.collections[collectionKey].price;
+      //       const priceOriginal = result.data.data.collections[collectionKey].price_original;
+
+      //       result.data.data.collections[collectionKey].price = (price * currencyInfo.rate);
+      //       result.data.data.collections[collectionKey].price_original = (priceOriginal * currencyInfo.rate);
+      //     }
+      //   });
+      // }
+
+      return result;
+    },
+    tidyMediaTypesName(result) {
+      const mapMediaTypesName = result.data.data;
+      const supportedMediaTypes = this.$store.getters['site/mapMediaTypes'];
+
+      // console.log('tidyMediaTypesName', mapMediaTypesName);
+      // console.log('tidyMediaTypesName', supportedMediaTypes);
+
+      Object.keys(supportedMediaTypes).map((key) => {
+        const mediaType = supportedMediaTypes[key].id;
+
+        let info = '';
+        switch (mediaType) {
+          default:
+          case 'ae':
+            info = _.find(mapMediaTypesName, { id: 'ae' });
+            break;
+          case 'ae-template':
+            info = _.find(mapMediaTypesName, { id: '8' });
+            break;
+          case 'ae-preset':
+            info = _.find(mapMediaTypesName, { id: '19' });
+            break;
+
+          case 'pr':
+            info = _.find(mapMediaTypesName, { id: 'pr' });
+            break;
+          case 'pr-template':
+            info = _.find(mapMediaTypesName, { id: '15' });
+            break;
+          case 'pr-preset':
+            info = _.find(mapMediaTypesName, { id: '20' });
+            break;
+          case 'mg-template':
+            info = _.find(mapMediaTypesName, { id: '16' });
+            break;
+
+          case 'video':
+            info = _.find(mapMediaTypesName, { id: 'video' });
+            break;
+          case 'video-live':
+            info = _.find(mapMediaTypesName, { id: '4' });
+            break;
+          case 'animation':
+            info = _.find(mapMediaTypesName, { id: '3' });
+            break;
+          case 'video-vr':
+            info = _.find(mapMediaTypesName, { id: '12' });
+            break;
+
+          case 'music':
+            info = _.find(mapMediaTypesName, { id: '6' });
+            break;
+
+          case 'image':
+          // case 'images':
+            info = _.find(mapMediaTypesName, { id: 'image' });
+            break;
+
+          case 'photo':
+            info = _.find(mapMediaTypesName, { id: '1' });
+            break;
+
+          case 'vector':
+            info = _.find(mapMediaTypesName, { id: '2' });
+            break;
+
+          case 'gif':
+            info = _.find(mapMediaTypesName, { id: '14' });
+            break;
+
+          case 'sfx':
+            info = _.find(mapMediaTypesName, { id: '7' });
+            break;
+
+          case 'fcp':
+            info = _.find(mapMediaTypesName, { id: 'fcp' });
+            break;
+
+          case 'motion-template':
+            info = _.find(mapMediaTypesName, { id: '9' });
+            break;
+
+          case '3d':
+            info = _.find(mapMediaTypesName, { id: '3d' });
+            break;
+          case '3d-model':
+            info = _.find(mapMediaTypesName, { id: '5' });
+            break;
+
+          case 'lottie':
+            info = _.find(mapMediaTypesName, { id: '21' });
+            break;
+
+          case 'resolve':
+            info = _.find(mapMediaTypesName, { id: 'resolve' });
+            break;
+          case 'resolve-template':
+            info = _.find(mapMediaTypesName, { id: '22' });
+            break;
+          case 'resolve-macro':
+            info = _.find(mapMediaTypesName, { id: '23' });
+            break;
+        }
+
+        supportedMediaTypes[key].name = _.get(info, 'name', '');
+        supportedMediaTypes[key].nameShort = _.get(info, 'name_short', '');
+      });
+      // console.log(supportedMediaTypes);
+    },
+    checkFilters(result) {
+      // console.log('checkFilters', result.data.facets);
+      const responseFacets = result.data.facets;
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+
+      if (filterBar) {
+        Object.keys(filterBar).map((facetName) => {
+          // not on search result facets column
+          const ignoreFacets = [
+            'subscription',
+
+            'editable',
+            'tutorial',
+            'plugin',
+            'skill',
+            'textspace',
+            'alpha',
+            'loop',
+
+            'color',
+
+            'similar',
+          ];
+
+          if (ignoreFacets.indexOf(facetName) >= 0) {
+            return;
+          }
+
+          const currentValue = filterBar[facetName].value;
+          // console.log(currentValue);
+
+          const facetNameSnakeCase = _.snakeCase(facetName);
+          const facetsList = responseFacets[facetNameSnakeCase];
+          // console.log(facetsList);
+
+          // when apply facet is not in search api response then reset it
+          const isMatch = _.has(facetsList, currentValue) ? true : false;
+          // console.log(isMatch);
+
+          if (!isMatch) {
+            filter[facetName] = '';
+            this.$store.dispatch('search/setFilter', filter);
+
+            filterBar[facetName].status = false;
+            filterBar[facetName].value = '';
+            this.$store.dispatch('search/setFilterBar', filterBar);
+          }
+        });
+
+        this.$root.$emit('updateRouterFromFilter');
+      }
+    },
+    generateSubMediaTypeMenu(result) {
+      const mediaTypeTabs = [];
+
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+      const countSubMediaType = _.size(result.data.facets.mt);
+      // only show 'all' tabs when not have submediatype or more then two
+      if (countSubMediaType === 0 || countSubMediaType >= 2) {
+        const currentMediaTypeTab = {
+          id: currentMediaType.mainMediaType,
+          name: this.$t('search.Tab_All'),
+          count: this.itemCountCheck(result.data.total_count),
+        };
+        mediaTypeTabs.push(currentMediaTypeTab);
+      }
+
+      // add more tab if have other sub media
+      const subMediaTypes = result.data.facets.mt;
+      if (_.size(subMediaTypes)) {
+        const supportedMediaTypes = this.$store.getters['site/mapMediaTypes'];
+
+        Object.keys(subMediaTypes).map((key) => {
+          const count = this.itemCountCheck(subMediaTypes[key]);
+          const info = _.find(supportedMediaTypes, { code: parseInt(key, 10) });
+          if (info) {
+            const subMediaTypeTab = {
+              id: info.id,
+              name: info.nameShort,
+              count: count,
+            };
+            mediaTypeTabs.push(subMediaTypeTab);
+          }
+        });
+      }
+
+      // console.log('generateSubMediaTypeMenu : ', mediaTypeTabs);
+      this.$store.dispatch('search/setMediaTypeTabs', mediaTypeTabs);
+    },
+    enableMobileFacets() {
+      this.$store.dispatch('site/enableMobileFacets');
+    },
+    disableMobileFacets() {
+      this.$store.dispatch('site/disableMobileFacets');
+    },
+    cancelAllFilter() {
+      sessionStorage.setItem('ME_subscriptionFilter', '0');
+
+      const lang = this.$store.getters['site/currentLanguage'];
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+      const mediaType = currentMediaType.api;
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      const keyword = (filter.searchKeyword) || '';
+      // const similar = (filter.similar) || '';
+
+      this.$router.push({
+        path: `/${lang}/search/${mediaType}`,
+        query: {
+          s: keyword,
+          page: 1,
+          // similar: similar,
+        },
+      });
+      window.location.reload(true);
+    },
+    cancelFilter(filterName) {
+      console.log('cancelFilter - ', filterName);
+
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter[filterName] = 0;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar[filterName].status = false;
+      filterBar[filterName].value = '';
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      if (filterName === 'subscription') {
+        sessionStorage.setItem('ME_subscriptionFilter', '0');
+      }
+
+      this.$root.$emit('doSearch', filter);
+    },
+    cancelSimilarImageFilter() {
+      const filter = this.$store.getters['search/allSearchFilter'];
+      filter.similar = 0;
+      filter.page = 1;
+      this.$store.dispatch('search/setFilter', filter);
+
+      const filterBar = this.$store.getters['search/allSearchFilterBar'];
+      filterBar.similar.status = false;
+      filterBar.similar.imageFilename = '';
+      filterBar.similar.imageUrl = '';
+      this.$store.dispatch('search/setFilterBar', filterBar);
+
+      this.$root.$emit('doSearch', filter);
+    },
+    goArtistPage(artist) {
+      console.log('goArtistPage');
+
+      const url = this.siteUrl;
+      const lang = this.$store.getters['site/currentLanguage'];
+
+      window.location.href = `${url}/${lang}/artists/${artist}`;
+
+      // const lang = this.$store.getters['site/currentLanguage'];
+
+      // const currentMediaType = this.$store.getters['site/currentMediaType'];
+      // const mediaType = currentMediaType.api;
+
+      // this.$router.push({
+      //   path: `/${lang}/search/${mediaType}`,
+      //   query: {
+      //     artist: artist,
+      //   },
+      // });
+
+      // window.location.reload(true);
+    },
+    changeSubMediaType(mediaType) {
+      this.$root.$emit('changeSubMediaType', mediaType);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+// sidebar toggle on mobile
+.btn-sidebar-toggle {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+// responsive display settings
+
+@include media-breakpoint-up(lg) {
+  .lg\:btn-sm {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $font-size-sm, $line-height-sm, $border-radius);
+  }
+  .lg\:small {
+    font-size: 80%;
+    font-weight: 400;
+  }
+
+  .lg\:custom-select-sm {
+    height: calc(2em + 0.125rem + 2px);
+    padding-top: 0.0625rem;
+    padding-bottom: 0.0625rem;
+    padding-left: 0.4375rem;
+    font-size: 0.75rem;
+  }
+}
+
+// search recommendations
+
+.search-recommendations {
+  position: relative;
+  @include media-breakpoint-down(sm) {
+    display: block;
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+}
+
+.search-recommendations-wrapper {
+  @include media-breakpoint-down(sm) {
+    &:after {
+      position: absolute;
+      content: '';
+      width: $spacer * 2;
+      height: 100%;
+      top:0;
+      right:$spacer;
+
+      background: $transparent; /* Old browsers */
+      background: -moz-linear-gradient(left, $transparent 0%, $body-bg 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, $transparent 0%,$body-bg 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, $transparent 0%,$body-bg 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$transparent', endColorstr='$body-bg',GradientType=1 ); /* IE6-9 */
+    }
+    .search-recommendations {
+      padding-right: $spacer;
+    }
+  }
+}
+
+.media {
+  &.media-vs {
+    .media-wrapper {
+      border-radius: $border-radius;
+      overflow: hidden;
+      position: relative;
+      max-width: 33.333%;
+
+      img {
+        max-width: 14rem;
+        max-height: 4rem;
+      }
+
+      .media-play {
+        &:after {
+          font-family: "Font Awesome 5 Pro";
+          font-weight: 900;
+          content: "\f04b";
+
+          color: white;
+          font-size: 1.5rem;
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-shadow: $text-shadow-3;
+
+          opacity: 0;
+          -webkit-transition: opacity 0.15s ease-in-out;
+          -moz-transition: opacity 0.15s ease-in-out;
+          -ms-transition: opacity 0.15s ease-in-out;
+          -o-transition: opacity 0.15s ease-in-out;
+          transition: opacity 0.15s ease-in-out;
+        }
+      }
+
+      &:hover {
+        .media-play:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .media-body {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.col-elements {
+  line-height: 1;
+}
+
+// STYLE IMG OF AUDIOSEARCH WAVEFORM
+.img-waveform {
+  width: 100%;
+  height: 3rem;
+  filter: grayscale(100%);
+  opacity: 1;
+}
+
+// PRODUCT MODAL HEADER
+
+.btn-categories {
+  .btn {
+    &:not(:last-child) {
+      margin-right: map-get($spacers,1);
+    }
+  }
+}
+
+//
+// COLORS
+//
+
+// COLOR FILTER APPLIED
+
+.filter-applied-color {
+  text-shadow: -1px -1px 0 $gray, 1px -1px 0 $gray, -1px 1px 0 $gray, 1px 1px 0 $gray;
+
+  .ui-dark & {
+    text-shadow: -1px -1px 0 $light, 1px -1px 0 $light, -1px 1px 0 $light, 1px 1px 0 $light;
+  }
+}
+</style>

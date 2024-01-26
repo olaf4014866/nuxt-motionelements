@@ -1,0 +1,30 @@
+import notificationService from '@motionelements/core/src/services/notification.service.js';
+
+/*
+  SAMPLE COPY BUTTON EVENT
+  <button type="button"
+  v-clipboard:copy="message" // copy message in component state
+  v-clipboard:success="onClickCopy"
+  v-clipboard:error="onClickCopyError">Copy!</button>
+  */
+
+export default {
+  // beforeDestroy() {
+  // },
+  methods: {
+    onClickCopy(message) {
+      console.log('onClickCopy: ', message.text);
+      notificationService.alert({
+        level: 'info',
+        title: 'Copied',
+      });
+    },
+    onClickCopyError(message) {
+      console.log('onClickCopyError: ', message);
+      notificationService.alert({
+        level: 'info',
+        title: 'Error',
+      });
+    },
+  },
+};

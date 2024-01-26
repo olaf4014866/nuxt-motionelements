@@ -1,0 +1,35 @@
+<template>
+  <div
+    :class="{'pr-sm-0' : !isAudioLayout}"
+    class="col col-elements position-relative flex-grow-1"
+  >
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'content-result',
+  computed: {
+    isAudioLayout() {
+      const currentMediaType = this.$store.getters['site/currentMediaType'];
+
+      let status = false;
+      if (currentMediaType.isAudio) {
+        status = true;
+      }
+
+      return status;
+    },
+  },
+  created() {
+  },
+  mounted() {
+  },
+  methods: {
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+</style>

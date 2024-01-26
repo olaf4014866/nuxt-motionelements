@@ -1,0 +1,50 @@
+<template>
+  <div class="container-fluid py-6">
+    <h1>ElementCard Restructuring</h1>
+    <div class="position-relative">
+      <template>
+        <ProductWrapper
+          v-for="element in elements"
+          :key="`item-${element.id}`"
+          :value="element.id"
+          :element="element"
+          :hideTitle="false"
+          :options="{
+            cardType: 'list',
+            expand: true,
+            favorites: false,
+            checkbox: false,
+            tagsInput: false,
+            // new options
+            showFavoritesIcon: false,
+            showSimilarIcon: false,
+            showMediaTypeBadge: false,
+            layoutDetailExpand: false,
+            layoutCheckbox: false,
+            layoutTagsInput: false,
+          }"
+        ></ProductWrapper>
+      </template>
+    </div>
+  </div>
+</template>
+
+<script>
+import { elementsAe } from '@/mock/mockData.js';
+
+export default {
+  name: 'element-card-restructure',
+  data() {
+    return {
+      elements: elementsAe,
+    };
+  },
+  components: {
+    ProductWrapper: () => import('@/views/demo/content/ProductWrapper.vue'),
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>

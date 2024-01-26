@@ -1,0 +1,59 @@
+@import "variables";
+
+.ui-dark {
+	.svg-funnel-js {
+		.svg-funnel-js__labels {
+
+			.svg-funnel-js__label {
+
+				.label__value {
+					color: $label-value-color-dark;
+				}
+
+				.label__title {
+					color: $label-title-color-dark;
+				}
+
+				.label__percentage {
+					color: $label-percentage-color-dark;
+				}
+
+				.label__segment-percentages {
+					background-color: $label-segment-percentages-bg-dark;
+
+					ul {
+						li {
+							color: $body-color-dark;
+							.percentage__list-label {
+								color: $white;
+							}
+						}
+					}
+				}
+
+			}
+		}
+
+		&:not(.svg-funnel-js--vertical) {
+			.svg-funnel-js__label {
+				&:not(:first-child) {
+					border-left-color: $border-color-dark;
+				}
+			}
+		}
+
+		&.svg-funnel-js--vertical {
+			.svg-funnel-js__label {
+				&:not(:first-child) {
+					border-top-color: $border-color-dark;
+				}
+			}
+		}
+
+		.svg-funnel-js__subLabels {
+			.svg-funnel-js__subLabel {
+				color: $body-color-dark;
+			}
+		}
+	}
+}

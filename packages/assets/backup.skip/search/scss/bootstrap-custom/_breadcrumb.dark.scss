@@ -1,0 +1,18 @@
+.ui-dark, .breadcrumb-dark {
+  & .breadcrumb, &.breadcrumb {
+    background-color: $breadcrumb-bg-dark;
+  }
+
+  .breadcrumb-item {
+    // The separator between breadcrumbs (by default, a forward-slash: "/")
+    + .breadcrumb-item {
+      &::before {
+        color: $breadcrumb-divider-color-dark;
+      }
+    }
+
+    &.active {
+      color: $breadcrumb-active-color-dark;
+    }
+  }
+}

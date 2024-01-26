@@ -1,0 +1,21 @@
+<template>
+  <div class="py-7">
+    <ShareModal
+      class="show"
+      style="position:relative;top:auto;right:auto;bottom:auto;left:auto;z-index:1;display:block;"></ShareModal>
+  </div>
+</template>
+
+<script>
+import ShareModal from '@/components/modules/favorites/Share.Modal.vue';
+
+export default {
+  components: {
+    ShareModal,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>

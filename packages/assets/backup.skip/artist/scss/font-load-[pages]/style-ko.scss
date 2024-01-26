@@ -1,0 +1,44 @@
+// *now loading fonts for KO in App.vue
+// BOOTSTRAP FUNCTIONS, VARIABLES & MIXINS IMPORTS
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// VARIABLE OVERRIDES
+
+@import "src/assets/scss/bootstrap-custom/variables";
+
+// Import font file from /vendor/fonts
+$font-family-ko: "Nanum Gothic";
+
+/* nanum-gothic-regular - latin */
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('NanumGothic'),
+       url('https://dy43if2kkri7j.cloudfront.net/vendor/fonts/nanum-gothic-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('https://dy43if2kkri7j.cloudfront.net/vendor/fonts/nanum-gothic-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* nanum-gothic-700 - latin */
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 700;
+  src: local('NanumGothic Bold'), local('NanumGothic-Bold'),
+       url('https://dy43if2kkri7j.cloudfront.net/vendor/fonts/nanum-gothic-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('https://dy43if2kkri7j.cloudfront.net/vendor/fonts/nanum-gothic-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// FONT-FACE AND FONT-FAMILY
+$font-family-sans-serif: $font-family-ko, $font-family-fallback;
+$font-family-base: $font-family-sans-serif;
+
+[lang="ko"] {
+  &,
+  body {
+    font-family: $font-family-base;
+  }
+}

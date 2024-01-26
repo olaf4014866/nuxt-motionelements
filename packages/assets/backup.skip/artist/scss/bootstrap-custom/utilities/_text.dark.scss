@@ -1,0 +1,52 @@
+// stylelint-disable declaration-no-important
+
+$bg-contextual-classes-to-override: (
+  (
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+    "gray",
+  )
+);
+
+.ui-dark {
+  //
+  // Text
+  //
+
+  // Contextual colors
+
+  .text-white:not(.no-invert) { color: $black !important; }
+
+  @each $color, $value in $theme-colors-dark {
+    @include text-emphasis-variant(".text-#{$color}:not(.no-invert)", $value);
+  }
+
+  .text-body:not(.no-invert) { color: $body-color-dark !important; }
+  .text-muted:not(.no-invert) { color: $text-muted-dark !important; }
+
+  .text-black-50:not(.no-invert) { color: rgba($white, .5) !important; }
+  .text-white-50:not(.no-invert) { color: rgba($black, .5) !important; }
+
+  @each $color-name in $bg-contextual-classes-to-override {
+    .bg-#{$color-name}, .bg-gradient-#{$color-name} {
+      .text-white { color: $white !important; }
+
+      @each $color, $value in $theme-colors {
+        @include text-emphasis-variant(".text-#{$color}", $value);
+      }
+
+      .text-body { color: $body-color-dark !important; }
+      .text-muted { color: $text-muted-dark !important; }
+
+      .text-black-50 { color: rgba($black, .5) !important; }
+      .text-white-50 { color: rgba($white, .5) !important; }
+    }
+  }
+
+  // Reset
+  .text-reset { color: inherit !important; }
+}

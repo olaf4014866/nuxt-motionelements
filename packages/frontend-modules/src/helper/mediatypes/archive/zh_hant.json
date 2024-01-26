@@ -1,0 +1,215 @@
+[
+    {
+        "id": "image",
+        "name": "圖片素材 ・ GIF 動畫",
+        "name_plural": "圖片 ・ GIF 動畫",
+        "name_short": "圖片",
+        "name_short_plural": "圖片",
+        "code": "image",
+        "name_seo": "圖片素材 ・ GIF 動畫",
+        "name_seo_plural": "圖片素材 ・ GIF 動畫"
+    },
+    {
+        "id": "video",
+        "name": "影片素材",
+        "name_plural": "影片",
+        "name_short": "影片",
+        "name_short_plural": "影片",
+        "code": "video",
+        "name_seo": "影片素材",
+        "name_seo_plural": "影片素材"
+    },
+    {
+        "id": "ae",
+        "name": "After Effects",
+        "name_plural": "After Effects",
+        "name_short": "AE",
+        "name_short_plural": "AE",
+        "code": "ae",
+        "name_seo": "After Effects",
+        "name_seo_plural": "After Effects"
+    },
+    {
+        "id": "pr",
+        "name": "Premiere Pro",
+        "name_plural": "Premiere Pro",
+        "name_short": "Premiere",
+        "name_short_plural": "Premiere",
+        "code": "pr",
+        "name_seo": "Premiere Pro",
+        "name_seo_plural": "Premiere Pro"
+    },
+    {
+        "id": "3d",
+        "name": "3D模型",
+        "name_plural": "3D",
+        "name_short": "3D",
+        "name_short_plural": "3D",
+        "code": "3d",
+        "name_seo": "3D模型",
+        "name_seo_plural": "3D模型"
+    },
+    {
+        "id": "fcp",
+        "name": "Motion 模板",
+        "name_plural": "Apple Motion 模板",
+        "name_short": "Apple Motion",
+        "name_short_plural": "Apple Motion",
+        "code": "fcp",
+        "name_seo": "Motion 模板",
+        "name_seo_plural": "Motion 模板"
+    },
+    {
+        "id": 1,
+        "name": "照片素材",
+        "name_short": "相片",
+        "code": "photo",
+        "name_plural": "相片",
+        "name_seo": "照片素材",
+        "name_seo_plural": "照片素材"
+    },
+    {
+        "id": 2,
+        "name": "向量素材",
+        "name_short": "向量",
+        "code": "vector",
+        "name_plural": "向量",
+        "name_seo": "向量素材",
+        "name_seo_plural": "向量素材"
+    },
+    {
+        "id": 3,
+        "name": "動畫素材",
+        "name_short": "動畫",
+        "code": "animation",
+        "name_plural": "動畫",
+        "name_seo": "動畫素材",
+        "name_seo_plural": "動畫素材"
+    },
+    {
+        "id": 4,
+        "name": "影片素材",
+        "name_short": "Live影片",
+        "code": "video_live",
+        "name_plural": "影片",
+        "name_seo": "影片素材",
+        "name_seo_plural": "影片素材"
+    },
+    {
+        "id": 5,
+        "name": "3D模型",
+        "name_short": "3D",
+        "code": "3d_model",
+        "name_plural": "3D模型",
+        "name_seo": "3D模型",
+        "name_seo_plural": "3D模型"
+    },
+    {
+        "id": 6,
+        "name": "背景音樂素材",
+        "name_short": "音樂",
+        "code": "music",
+        "name_plural": "音樂",
+        "name_seo": "背景音樂素材",
+        "name_seo_plural": "背景音樂素材"
+    },
+    {
+        "id": 7,
+        "name": "音效素材",
+        "name_short": "音效",
+        "code": "sfx",
+        "name_plural": "音效",
+        "name_seo": "音效素材",
+        "name_seo_plural": "音效素材"
+    },
+    {
+        "id": 8,
+        "name": "AE模版",
+        "name_short": "AE 模板",
+        "code": "ae_template",
+        "name_plural": "AE模板",
+        "name_seo": "AE模版",
+        "name_seo_plural": "AE模版"
+    },
+    {
+        "id": 9,
+        "name": "Motion 模板",
+        "name_short": "Apple Motion",
+        "code": "motion_template",
+        "name_plural": "Apple Motion 模板",
+        "name_seo": "Motion 模板",
+        "name_seo_plural": "Motion 模板"
+    },
+    {
+        "id": 11,
+        "name": "360° 相片",
+        "name_short": "360° 相片",
+        "code": "photo_vr",
+        "name_plural": "VR 360° 照片",
+        "name_seo": "360° 相片",
+        "name_seo_plural": "360° 相片"
+    },
+    {
+        "id": 12,
+        "name": "360° 影片",
+        "name_short": "360° 影片",
+        "code": "video_vr",
+        "name_plural": "VR 360° 影片",
+        "name_seo": "360° 影片",
+        "name_seo_plural": "360° 影片"
+    },
+    {
+        "id": 14,
+        "name": "GIF 動畫",
+        "name_short": "GIF 動畫",
+        "code": "gif",
+        "name_plural": "GIF 動畫",
+        "name_seo": "GIF 動畫",
+        "name_seo_plural": "GIF 動畫"
+    },
+    {
+        "id": 15,
+        "name": "PR模板",
+        "name_short": "Premiere 模板",
+        "code": "pr_template",
+        "name_plural": "PR模板",
+        "name_seo": "PR模板",
+        "name_seo_plural": "PR模板"
+    },
+    {
+        "id": 16,
+        "name": "動態圖形模板",
+        "name_short": "動態圖型",
+        "code": "mg_template",
+        "name_plural": "動態圖形模板",
+        "name_seo": "動態圖形模板",
+        "name_seo_plural": "動態圖形模板"
+    },
+    {
+        "id": 19,
+        "name": "After Effects 動畫預設模組",
+        "name_short": "AE 預設模組",
+        "code": "ae_preset",
+        "name_plural": "After Effects 預設模組",
+        "name_seo": "After Effects 動畫預設模組",
+        "name_seo_plural": "After Effects 動畫預設模組"
+    },
+    {
+        "id": 20,
+        "name": "Premiere Pro 特效預設模組",
+        "name_short": "Premiere 預設模組",
+        "code": "pr_preset",
+        "name_plural": "Premiere Pro 預設模組",
+        "name_seo": "Premiere Pro 特效預設模組",
+        "name_seo_plural": "Premiere Pro 特效預設模組"
+    },
+    {
+        "id": 21,
+        "name": "Lottie 動畫",
+        "name_short": "Lottie",
+        "code": "lottie",
+        "name_plural": "Lottie",
+        "name_seo": "Lottie 動畫",
+        "name_seo_plural": "Lottie 動畫"
+    }
+]

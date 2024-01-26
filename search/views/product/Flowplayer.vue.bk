@@ -1,0 +1,65 @@
+<template>
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="display-2">Flowplayer Demo</h1>
+        </div>
+        <div class="col-lg-6">
+          <PlayerVideo
+            :previews="{
+              'jpg': {
+                'url': 'https://media-us-west-motionelements.s3.amazonaws.com/m/s/495/4953598/f-136322-0050.jpg',
+              },
+              'webm': {
+                'url': 'https://d3auje5car4oak.cloudfront.net/v/495/4953598_f-136322.webm',
+              },
+              'mp4': {
+                'url': 'https://d3auje5car4oak.cloudfront.net/v/495/4953598_f-136322.mp4',
+              },
+            }"
+          ></PlayerVideo>
+          <!-- <div
+            id="videoplayer"
+            class="fp-full fp-outlined no-volume fp-me is-splash"
+            style="background-image:url(https://d31l02nbp0owar.cloudfront.net/m/t/1131/9121238/a-0192.jpg)"
+          ></div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'flowplayerdemo',
+  components: {
+    PlayerVideo: () => import('@/components/modules/product/preview/players/PlayerVideo.vue'),
+  },
+  mounted() {
+    // eslint-disable-next-line
+    flowplayer("#videoplayer", {
+      splash: true,
+      loop: true,
+      key: process.env.VUE_APP_FLOWPLAYER_KEY,
+      clip: {
+        sources: [
+          {
+            type: 'video/mp4',
+            src:
+              'https://s3-us-west-2.amazonaws.com/v.motionelements.com/v/1131/9121238_a-01.mp4',
+          },
+          {
+            type: 'video/webm',
+            src:
+              'https://s3-us-west-2.amazonaws.com/v.motionelements.com/v/1131/9121238_a-01.webm',
+          },
+        ],
+      },
+    });
+  },
+};
+</script>
+
+<style scoped>
+</style>

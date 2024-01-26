@@ -1,0 +1,215 @@
+[
+    {
+        "id": "image",
+        "name": "Lizenzfreie Bilder ・ GIF",
+        "name_plural": "Bilder ・ GIFs",
+        "name_short": "Bild",
+        "name_short_plural": "Bild",
+        "code": "image",
+        "name_seo": "Lizenzfreie Bilder ・ GIF",
+        "name_seo_plural": "Lizenzfreie Bilder ・ GIF"
+    },
+    {
+        "id": "video",
+        "name": "Lizenzfreie Videos",
+        "name_plural": "Videos",
+        "name_short": "Video",
+        "name_short_plural": "Video",
+        "code": "video",
+        "name_seo": "Lizenzfreie Videos",
+        "name_seo_plural": "Lizenzfreie Videos"
+    },
+    {
+        "id": "ae",
+        "name": "After Effects",
+        "name_plural": "After Effects",
+        "name_short": "AE",
+        "name_short_plural": "AE",
+        "code": "ae",
+        "name_seo": "After Effects",
+        "name_seo_plural": "After Effects"
+    },
+    {
+        "id": "pr",
+        "name": "Premiere Pro",
+        "name_plural": "Premiere Pro",
+        "name_short": "Premiere",
+        "name_short_plural": "Premiere",
+        "code": "pr",
+        "name_seo": "Premiere Pro",
+        "name_seo_plural": "Premiere Pro"
+    },
+    {
+        "id": "3d",
+        "name": "3D Modelle",
+        "name_plural": "3D",
+        "name_short": "3D",
+        "name_short_plural": "3D",
+        "code": "3d",
+        "name_seo": "3D Modelle",
+        "name_seo_plural": "3D Modelle"
+    },
+    {
+        "id": "fcp",
+        "name": "Final Cut Pro \/ Motion Templates",
+        "name_plural": "Final Cut Pro \/ Motion Templates",
+        "name_short": "Apple Motion",
+        "name_short_plural": "Apple Motion",
+        "code": "fcp",
+        "name_seo": "Final Cut Pro \/ Motion Templates",
+        "name_seo_plural": "Final Cut Pro \/ Motion Templates"
+    },
+    {
+        "id": 1,
+        "name": "Stock Fotos",
+        "name_short": "Foto",
+        "code": "photo",
+        "name_plural": "Fotos",
+        "name_seo": "Stock Fotos",
+        "name_seo_plural": "Stock Fotos"
+    },
+    {
+        "id": 2,
+        "name": "Vektorgrafik",
+        "name_short": "Vektorgrafik",
+        "code": "vector",
+        "name_plural": "Vektorgrafiken",
+        "name_seo": "Vektorgrafik",
+        "name_seo_plural": "Vektorgrafik"
+    },
+    {
+        "id": 3,
+        "name": "Video Hintergrund",
+        "name_short": "Animation",
+        "code": "animation",
+        "name_plural": "Animationen",
+        "name_seo": "Video Hintergrund",
+        "name_seo_plural": "Video Hintergrund"
+    },
+    {
+        "id": 4,
+        "name": "Lizenzfreie Videos",
+        "name_short": "Live-Action",
+        "code": "video_live",
+        "name_plural": "Videos",
+        "name_seo": "Lizenzfreie Videos",
+        "name_seo_plural": "Lizenzfreie Videos"
+    },
+    {
+        "id": 5,
+        "name": "3D Modelle",
+        "name_short": "3D",
+        "code": "3d_model",
+        "name_plural": "3D Modelle",
+        "name_seo": "3D Modelle",
+        "name_seo_plural": "3D Modelle"
+    },
+    {
+        "id": 6,
+        "name": "Hintergrundmusik",
+        "name_short": "Musik",
+        "code": "music",
+        "name_plural": "Musik",
+        "name_seo": "Hintergrundmusik",
+        "name_seo_plural": "Hintergrundmusik"
+    },
+    {
+        "id": 7,
+        "name": "Soundeffekte",
+        "name_short": "SFX",
+        "code": "sfx",
+        "name_plural": "Soundeffekte",
+        "name_seo": "Soundeffekte",
+        "name_seo_plural": "Soundeffekte"
+    },
+    {
+        "id": 8,
+        "name": "After Effects Templates",
+        "name_short": "AE Template",
+        "code": "ae_template",
+        "name_plural": "After Effects Templates",
+        "name_seo": "After Effects Templates",
+        "name_seo_plural": "After Effects Templates"
+    },
+    {
+        "id": 9,
+        "name": "Final Cut Pro \/ Motion Templates",
+        "name_short": "Apple Motion",
+        "code": "motion_template",
+        "name_plural": "Final Cut Pro \/ Motion Templates",
+        "name_seo": "Final Cut Pro \/ Motion Templates",
+        "name_seo_plural": "Final Cut Pro \/ Motion Templates"
+    },
+    {
+        "id": 11,
+        "name": "360-Grad-Foto",
+        "name_short": "360-Grad-Foto",
+        "code": "photo_vr",
+        "name_plural": "VR-360-Grad-Fotos",
+        "name_seo": "360-Grad-Foto",
+        "name_seo_plural": "360-Grad-Foto"
+    },
+    {
+        "id": 12,
+        "name": "360-Grad-Video",
+        "name_short": "360-Grad-Video",
+        "code": "video_vr",
+        "name_plural": "VR-360-Grad-Videos",
+        "name_seo": "360-Grad-Video",
+        "name_seo_plural": "360-Grad-Video"
+    },
+    {
+        "id": 14,
+        "name": "GIF",
+        "name_short": "GIF",
+        "code": "gif",
+        "name_plural": "GIFs",
+        "name_seo": "GIF",
+        "name_seo_plural": "GIF"
+    },
+    {
+        "id": 15,
+        "name": "Premiere Pro Template",
+        "name_short": "Premiere-Vorlage",
+        "code": "pr_template",
+        "name_plural": "Premiere Pro Templates",
+        "name_seo": "Premiere Pro Template",
+        "name_seo_plural": "Premiere Pro Template"
+    },
+    {
+        "id": 16,
+        "name": "Animationsvorlage",
+        "name_short": "Motion-Design",
+        "code": "mg_template",
+        "name_plural": "Animationsvorlagen",
+        "name_seo": "Animationsvorlage",
+        "name_seo_plural": "Animationsvorlage"
+    },
+    {
+        "id": 19,
+        "name": "After Effects Animation Preset",
+        "name_short": "AE Preset",
+        "code": "ae_preset",
+        "name_plural": "After Effects Presets",
+        "name_seo": "After Effects Animation Preset",
+        "name_seo_plural": "After Effects Animation Preset"
+    },
+    {
+        "id": 20,
+        "name": "Premiere Pro Effect Preset",
+        "name_short": "Premiere Preset",
+        "code": "pr_preset",
+        "name_plural": "Premiere Pro Presets",
+        "name_seo": "Premiere Pro Effect Preset",
+        "name_seo_plural": "Premiere Pro Effect Preset"
+    },
+    {
+        "id": 21,
+        "name": "Lottie Animation",
+        "name_short": "Lottie",
+        "code": "lottie",
+        "name_plural": "Lottie",
+        "name_seo": "Lottie Animation",
+        "name_seo_plural": "Lottie Animation"
+    }
+]

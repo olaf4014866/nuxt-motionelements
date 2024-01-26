@@ -1,0 +1,62 @@
+{
+  "name": "@motionelements/old-modules",
+  "version": "2.3.7",
+  "scripts": {
+    "build": "rollup -c && npm run copy",
+    "dev": "rollup -c -w",
+    "copy": "cp ./src/components/{NavBar,Footer,NavBarDashboard,AccountSidebar}.vue ./shared && cp ./src/components/modules/common/{NavTheme,MenuLanguage,MenuCurrency,MenuLanguageDropdown,LoaderSpin}.vue ./shared/modules/common/ && cp ./src/components/modules/common/product/{ElementCard,ProductWrapper}*.vue ./shared/modules/common/product/",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/motionelements/frontend-modules"
+  },
+  "private": true,
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.5.5",
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7",
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-plugin-unit-mocha": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "axios": "^0.19.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bootstrap": "^4.3.1",
+    "chai": "^4.2.0",
+    "es6-promise": "^4.2.8",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "jquery": "^3.4.1",
+    "js-cookie": "^2.2.1",
+    "ms": "^2.0.0",
+    "null-loader": "^3.0.0",
+    "rollup": "^1.20.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.1.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
+    "sass": "^1.22.12",
+    "sass-loader": "^7.3.1",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "vue-input-tag": "^2.0.6"
+  }
+}

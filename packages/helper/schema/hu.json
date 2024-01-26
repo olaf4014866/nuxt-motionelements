@@ -1,0 +1,74 @@
+{
+  "home": {
+    "title": "Stockvideók, After Effects sablonok, jogdíjmentes zenék",
+                "description": "4,000,000 letölthető, jogdíjmentes stockvideó, zene, FCP / After Effects sablon US$198-tól. MI-alapú piactér. Heti 30 ingyenes letöltés! [MotionElements]"
+  },
+  "animation": {
+    "title": "A 10 legjobb háttéranimáció, stockanimáció, mozgóképes háttér",
+                "description": "4,000,000 letölthető animált háttérkép, videó-loop, mozgóképes  hátterek US$198-tól. MI-alapú keresés. Ingyenes stockanimáció hetente! [MotionElements]"
+  },
+  "video": {
+    "title": "A 10 legjobb ingyenes HD stockvideó felvétel, háttérvideó, jogdíjmentesen",
+                "description": "4,000,000 letölthető, jogdíjmentes 4K / HD stockfelvétel, háttérvideó US$198-tól. MI-alapú keresés. Heti 30 ingyenes letöltés! [MotionElements]"
+  },
+  "3d": {
+    "title": "3D modellek VR/AR-hez",
+                "description": "3D modellek letöltése, ingyenes 3D modellek letöltése. Jogdíjmentes 3ds Max modellek, Maya modellek, Cinema 3D modellek US$198-tól. [MotionElements]"
+  },
+  "ae": {
+    "title": "A 10 legjobb ingyenes After Effects sablon, CS6/CC sablon",
+                "description": "20,000 After Effects sablon, üzleti, esküvői, stb. témákkal, US$198-tól. Töltsd le, és használd fel korlátlan számú AE projektben. Ingyenes letöltések hetente! [MotionElements]"
+  },
+  "motion": {
+    "title": "A 10 legjobb Apple Motion sablon, Final Cut Pro sablon",
+                "description": "Apple Motion sablonok, Final Cut Pro sablonok, esküvői sablonok US$198-tól. Töltsd le, és használd fel korlátlan számú FCP projektben. [MotionElements]"
+  },
+  "music": {
+    "title": "Az 5 legjobb háttérzene videókhoz, jogdíjmentes zenetár",
+                "description": "4,000,000 letölthető háttérzene videóidhoz US$198-tól. Jogdíjmentes (non-P.R.O.) zeneszámok üzleti célra, háttérzenék, reklámzenék stb. Próbáld ki az AudioSerach funkciót: használj dalokat más dalok kereséséhez! [MotionElements]"
+  },
+  "sfx": {
+    "title": "Az 5 legjobb hanghatás videókhoz, jogdíjmentes hangeffekt-tár",
+                "description": "150,000+ letölthető hangeffekt videóidhoz US$198-tól! [MotionElements]"
+  },
+  "image": {
+    "title": "Stockfotó + Animált GIF munkához",
+                "description": "Fizess elő az online média számára kialakított képtárunkra mindössze US$198-ért. 2,000,000+ letölthető stockkép, animált GIF, Facebook és Instagram kép. [MotionElements]"
+  },
+  "pr": {
+    "title": "A 10 legjobb Premier Pro sablon, Motion Graphics sablon (MOGRT)",
+                "description": "Adobe Premiere Pro preseteket, Motion Graphics (.MOGRT) sablonokat munkáidhoz, intróidhoz, bemutatóidhoz US$198-ért. Töltsd le, és használd fel őket korlátlan számú Premier projektben. [MotionElements]"
+  },
+  "lottie": {
+    "title": "Lottie animációk",
+                "description": "Lottie egy Android, iOS, React Native és Web könyvtár, mely az After Effects-ből exportált SVG animációkat rendereli valós időben mobilra és webre, lehetővé téve a natív appok számára mikrointerakciós animációk használatát JavaScriptben olyan egyszerűen, minta állóképek lennének. [MotionElements]"
+  },
+  "resolve": {
+    "title": "A 10 legjobb DaVinci Resolve sablon, DaVinci Resolve makró",
+                "description": "DaVinci Resolve sablonokat és átmeneteket, esküvői sablonok US$198-tól! Töltsd le, és használd fel őket korlátlan számú DaVinci Resolve projektben. [MotionElements]"
+  },
+  "free-ae": {
+    "title": "100+ ingyenes After Effects sablon",
+                "description": "100+ letölthető, ingyenes After Effects sablon, az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, AE sablon és zene közül. [MotionElements]"
+  },
+  "free-pr": {
+    "title": "Ingyenes Premier Pro sablonok és presetek üzleti célú felhasználásra",
+                "description": "Tölts le ingyenes Motion Graphics sablonokat (.MOGRT), ingyenes Adobe Premiere Pro sablonomat és preseteket az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, sablon és zene közül. [MotionElements]"
+  },
+  "free-fcp": {
+    "title": "Ingyenes FCPX és Motion sablonok, jogdíjmentesen!",
+                "description": "Töltsd le ingyenes Final Cut Pro és Motion 5 sablonjainkat üzleti célú felhasználásra, az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, AE sablon és zene közül. [MotionElements]"
+  },
+  "free-music": {
+    "title": "1500+ ingyenes háttérzene videókhoz, jogdíjmentes zene",
+                "description": "1500+ letölthető, ingyenes háttérzene videóidhoz, az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, AE sablon és zene közül. [MotionElements]"
+  },
+  "free-sfx": {
+    "title": "Ingyenes hanghatások, ingyenes hangeffektek",
+                "description": "Tölts le ingyenes SFX-eket, hangeffekteket az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, sablon és zene közül. [MotionElements]"
+  },
+  "free-gif": {
+    "title": "Ingyenes animált GIF-ek üzleti célú felhasználásra",
+                "description": "Tölts le ingyenes animált GIF-eket hetente az MI-alapú piacterünkön elérhető 4,000,000, jogdíjmentes videó, sablon és zene közül. [MotionElements]"
+  }
+}

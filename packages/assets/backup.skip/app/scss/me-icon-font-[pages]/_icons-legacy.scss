@@ -1,0 +1,217 @@
+@mixin legacy-font-icon($icon, $weight) {
+  @if $weight == "light" {
+    font-family: "me-light";
+    font-weight: 300;
+  } @else if $weight == "regular" {
+    font-family: "me-regular";
+    font-weight: 400;
+  } @else {
+    font-family: "me-solid";
+    font-weight: 900;
+  }
+  &:before {
+    content: $icon;
+  }
+}
+
+.icon-after-effects-o {
+  @include legacy-font-icon($icon-after-effects-square, "solid");
+}
+.icon-pr-template,
+.icon-pr-template-o {
+  @include legacy-font-icon($icon-premiere-pro, "solid");
+}
+.icon-mogrt-o {
+  @include legacy-font-icon($icon-mogrt, "solid");
+}
+.icon-animation2 {
+  @include legacy-font-icon($icon-animation, "solid");
+}
+.icon-vector2 {
+  @include legacy-font-icon($icon-vector, "solid");
+}
+.icon-box-pro {
+  @include legacy-font-icon($icon-pro-rectangle, "light");
+}
+.icon-box-non-pro {
+  @include legacy-font-icon($icon-non-pro-rectangle, "light");
+}
+.icon-file-o {
+  @include legacy-font-icon($icon-file, "light");
+}
+.icon-file-mov-o {
+  @include legacy-font-icon($icon-file-mov, "light");
+}
+.icon-file-mp4-o {
+  @include legacy-font-icon($icon-file-mp4, "light");
+}
+.icon-file-wmv-o {
+  @include legacy-font-icon($icon-file-wmv, "light");
+}
+.icon-file-webm-o {
+  @include legacy-font-icon($icon-file-webm, "light");
+}
+.icon-file-ogg-o {
+  @include legacy-font-icon($icon-file-ogg, "light");
+}
+.icon-file-ogv-o {
+  @include legacy-font-icon($icon-file-ogv, "light");
+}
+.icon-file-wav-o {
+  @include legacy-font-icon($icon-file-wav, "light");
+}
+.icon-file-aiff-o {
+  @include legacy-font-icon($icon-file-aiff, "light");
+}
+.icon-file-mp3-o {
+  @include legacy-font-icon($icon-file-mp3, "light");
+}
+.icon-file-max-o {
+  @include legacy-font-icon($icon-file-max, "light");
+}
+.icon-file-3ds-o {
+  @include legacy-font-icon($icon-file-3ds, "light");
+}
+.icon-file-obj-o {
+  @include legacy-font-icon($icon-file-obj, "light");
+}
+.icon-file-ma-o {
+  @include legacy-font-icon($icon-file-ma, "light");
+}
+.icon-file-lw-o {
+  @include legacy-font-icon($icon-file-lw, "light");
+}
+.icon-file-c4d-o {
+  @include legacy-font-icon($icon-file-c4d, "light");
+}
+.icon-file-fbx-o {
+  @include legacy-font-icon($icon-file-fbx, "light");
+}
+.icon-file-iges-o {
+  @include legacy-font-icon($icon-file-iges, "light");
+}
+.icon-file-aep-o {
+  @include legacy-font-icon($icon-file-aep, "light");
+}
+.icon-file-ffx-o {
+  @include legacy-font-icon($icon-file-ffx, "light");
+}
+.icon-file-mogrt-o {
+  @include legacy-font-icon($icon-file-mogrt, "light");
+}
+.icon-file-prproj-o {
+  @include legacy-font-icon($icon-file-prproj, "light");
+}
+.icon-file-motn-o {
+  @include legacy-font-icon($icon-file-motn, "light");
+}
+.icon-file-png-o {
+  @include legacy-font-icon($icon-file-png, "light");
+}
+.icon-file-jpeg-o {
+  @include legacy-font-icon($icon-file-jpeg, "light");
+}
+.icon-file-bmp-o {
+  @include legacy-font-icon($icon-file-bmp, "light");
+}
+.icon-file-gif-o {
+  @include legacy-font-icon($icon-file-gif, "light");
+}
+.icon-file-json-o {
+  @include legacy-font-icon($icon-file-json, "light");
+}
+.icon-circle-o {
+  @include legacy-font-icon($icon-circle, "light");
+}
+.icon-heart-o {
+  @include legacy-font-icon($icon-heart, "light");
+}
+.icon-lightning-o {
+  @include legacy-font-icon($icon-lightning, "light");
+}
+.icon-storyboard-o {
+  @include legacy-font-icon($icon-storyboard, "light");
+}
+.icon-receipt-o {
+  @include legacy-font-icon($icon-receipt, "light");
+}
+.icon-youtube-o {
+  @include legacy-font-icon($icon-youtube, "light");
+}
+.icon-camera {
+  @include legacy-font-icon($icon-video, "solid");
+}
+.icon-ae-music {
+  @include legacy-font-icon($icon-music, "solid");
+}
+.icon-pr {
+  @include legacy-font-icon($icon-premiere-pro, "solid");
+}
+.icon-video-va {
+  @include legacy-font-icon($icon-images, "solid");
+}
+.icon-ae-sfx {
+  @include legacy-font-icon($icon-sfx, "solid");
+}
+.icon-ae-ban {
+  @include legacy-font-icon($icon-ban, "light");
+}
+.icon-ae-diamond {
+  @include legacy-font-icon($icon-diamond, "light");
+}
+.icon-tutorials,
+.icon-tutorial2,
+.icon-ae-tutorials {
+  @include legacy-font-icon($icon-tutorial, "light");
+}
+.icon-ae-plugin {
+  @include legacy-font-icon($icon-plugin, "light");
+}
+.icon-ae-ver {
+  @include legacy-font-icon($icon-ver, "light");
+}
+.icon-ae-cs3 {
+  @include legacy-font-icon($icon-cs3, "light");
+}
+.icon-ae-cs4 {
+  @include legacy-font-icon($icon-cs4, "light");
+}
+.icon-ae-cs5 {
+  @include legacy-font-icon($icon-cs5, "light");
+}
+.icon-ae-cs5_5 {
+  @include legacy-font-icon($icon-cs5_5, "light");
+}
+.icon-ae-cs6 {
+  @include legacy-font-icon($icon-cs6, "light");
+}
+.icon-ae-cc {
+  @include legacy-font-icon($icon-cc, "light");
+}
+.icon-ae-cc14 {
+  @include legacy-font-icon($icon-cc14, "light");
+}
+.icon-ae-cc15 {
+  @include legacy-font-icon($icon-cc15, "light");
+}
+.icon-ae-cc17 {
+  @include legacy-font-icon($icon-cc17, "light");
+}
+.icon-ae-cc18 {
+  @include legacy-font-icon($icon-cc18, "light");
+}
+.icon-ae-cc19 {
+  @include legacy-font-icon($icon-cc19, "light");
+}
+.icon-ae-cc20 {
+  @include legacy-font-icon($icon-cc20, "light");
+}
+.icon-footage {
+  @include legacy-font-icon($icon-file-footage, "light");
+}
+.icon-powerful {
+  @include legacy-font-icon($icon-rocket, "light");
+}
+.icon-manager-support {
+  @include legacy-font-icon($icon-user-support, "light");
+}
